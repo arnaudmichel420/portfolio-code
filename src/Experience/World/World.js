@@ -1,0 +1,27 @@
+import * as THREE from "three";
+import Experience from "../Experience.js";
+import Environment from "./Environment.js";
+import Mountain from "./Mountain.js";
+import Overlay from "./Overlay.js";
+import Cubes from "./Cubes.js";
+import Grass from "./Grass.js";
+import Smoke from "./Smoke.js";
+
+export default class World {
+  constructor() {
+    this.experience = new Experience();
+    this.scene = this.experience.scene;
+    this.ressources = this.experience.ressources;
+
+    //overlay
+    this.overlay = new Overlay();
+    this.ressources.on("ready", () => {
+      //setup
+      this.mountain = new Mountain();
+      this.cubes = new Cubes();
+      this.grass = new Grass();
+      this.smoke = new Smoke();
+      this.environment = new Environment();
+    });
+  }
+}

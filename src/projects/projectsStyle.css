@@ -1,0 +1,429 @@
+@font-face {
+  font-family: "Brooklyn";
+  src: url("/fonts/Brooklyn/Brooklyn-Normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Brooklyn";
+  src: url("/fonts/Brooklyn/Brooklyn-SemiBold.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vonca";
+  src: url("/fonts/Vonca/Vonca-Bold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vonca";
+  src: url("/fonts/Vonca/Vonca-Semibold.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vonca";
+  src: url("/fonts/Vonca/Vonca-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vonca";
+  src: url("/fonts/Vonca/Vonca-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vonca";
+  src: url("/fonts/Vonca/Vonca-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins/subset-Poppins-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins/subset-Poppins-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+html {
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  color: #f1f1f1;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+body {
+  background-color: #101010;
+}
+
+a,
+a:visited,
+a:focus,
+a:active {
+  color: #f1f1f1;
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+header .menu {
+  display: flex;
+  justify-content: center;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  padding: 1rem 0;
+  background-color: #3569b3;
+}
+header .menu ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  font-family: "Brooklyn";
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+header .menu ul .extend {
+  cursor: pointer;
+}
+header .menu ul li {
+  list-style: none;
+}
+header .menu ul li p {
+  margin-bottom: 1rem;
+}
+header .menu ul li ul {
+  width: 100vw;
+  gap: 0;
+  padding: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+header nav {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
+  height: 5rem;
+  background-color: #3569b3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+}
+header nav .backArrowHeader div {
+  background-color: #f1f1f1;
+  height: 0.4rem;
+  border-radius: 0.4rem;
+  transform-origin: left center;
+}
+header nav .backArrowHeader div:first-child {
+  margin-bottom: -0.4rem;
+}
+header nav .backArrowHeader div:last-child {
+  margin-top: -0.4rem;
+}
+header nav .burger {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 3.5rem;
+}
+header nav .burger div {
+  background-color: #f1f1f1;
+  border-radius: 0.3rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main .section1 {
+  display: flex;
+  margin: 6rem 0;
+  padding: 0 6rem;
+}
+main .section1 .leftPart {
+  width: 40%;
+}
+main .section1 .leftPart h1 {
+  position: relative;
+  z-index: 10;
+  font-family: "Vonca";
+  font-weight: 400;
+  font-size: 6rem;
+  text-wrap: nowrap;
+  margin-bottom: 1rem;
+}
+main .section1 .leftPart ul {
+  padding-right: 2rem;
+}
+main .section1 .leftPart ul li {
+  list-style: none;
+  font-family: "Brooklyn";
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  text-align: justify;
+  line-height: 1.5rem;
+}
+main .section1 .leftPart ul li:nth-child(odd) {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+main .section1 .rightPart {
+  width: 60%;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+}
+main .section2 {
+  display: flex;
+  width: 100%;
+}
+main .section2 .leftPart {
+  width: 50%;
+  min-height: 500px;
+  background-color: #3569b3;
+}
+main .section2 .rightPart {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+main .section2 .rightPart h2,
+main .section2 .rightPart h3 {
+  list-style: none;
+  font-family: "Brooklyn";
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding: 0 6rem 0 2rem;
+  margin-bottom: 0.5rem;
+}
+main .section2 .rightPart p {
+  padding: 0 6rem 0 2rem;
+  text-align: justify;
+  line-height: 1.5rem;
+}
+main .section2 .rightPart ul {
+  padding: 0 6rem 0 4rem;
+}
+main .section3 {
+  display: flex;
+  margin-bottom: 6rem;
+  width: 100%;
+}
+main .section3 .leftPart {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+main .section3 .leftPart h2 {
+  list-style: none;
+  font-family: "Brooklyn";
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding: 0 2rem 0 6rem;
+  margin-bottom: 0.5rem;
+}
+main .section3 .leftPart p {
+  padding: 0 2rem 0 6rem;
+  text-align: justify;
+  line-height: 1.5rem;
+}
+main .section3 .rightPart {
+  width: 50%;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+}
+main .section4 {
+  width: 100%;
+  height: 500px;
+  display: flex;
+}
+main .section4 div {
+  flex: 1;
+  transition: all 300ms ease;
+  background-size: cover;
+  background-position: center;
+}
+main .section4 div:hover, main .section4 div:active {
+  flex: 2;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 1rem 1rem rgba(0, 0, 0, 0.5);
+}
+main .section4 div:nth-child(1) {
+  background-color: #5187d2;
+}
+main .section4 div:nth-child(2) {
+  background-color: #194c94;
+}
+main .section4 div:nth-child(3) {
+  background-color: #4c8de7;
+}
+
+footer {
+  background-color: #3569b3;
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+footer nav {
+  width: 100%;
+  padding: 0 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+footer nav a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+footer nav a .backArrow div {
+  background-color: #f1f1f1;
+  height: 0.4rem;
+  border-radius: 0.4rem;
+  transform-origin: left center;
+}
+footer nav a .backArrow div:first-child {
+  margin-bottom: -0.4rem;
+}
+footer nav a .backArrow div:last-child {
+  margin-top: -0.4rem;
+}
+footer nav a:last-child .backArrow div {
+  transform-origin: right center;
+}
+footer nav a:last-child .backArrow div:first-child {
+  margin-bottom: -0.4rem;
+}
+footer nav a:last-child .backArrow div:last-child {
+  margin-top: -0.4rem;
+}
+footer nav p {
+  line-height: 1;
+  font-family: "Brooklyn";
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07rem;
+}
+
+@media screen and (max-width: 1024px) {
+  main .section1 .leftPart h1 {
+    font-size: 3rem;
+    text-wrap: wrap;
+  }
+}
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 15px;
+  }
+  header nav {
+    padding: 0 2rem;
+  }
+  main .section1 {
+    flex-direction: column;
+    width: 90%;
+    padding: 0;
+    gap: 2rem;
+  }
+  main .section1 .leftPart {
+    width: 100%;
+    padding: 0;
+  }
+  main .section1 .leftPart h1 {
+    text-wrap: wrap;
+    text-align: center;
+  }
+  main .section1 .leftPart ul {
+    padding: 0;
+    width: 100%;
+  }
+  main .section1 .rightPart {
+    width: 100%;
+  }
+  main .section2 {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  main .section2 .leftPart {
+    width: 100%;
+  }
+  main .section2 .rightPart {
+    width: 90%;
+  }
+  main .section2 .rightPart p,
+  main .section2 .rightPart h2 {
+    padding: 0;
+  }
+  main .section2 .rightPart h2 {
+    text-align: center;
+  }
+  main .section3 {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+  }
+  main .section3 .rightPart {
+    width: 100%;
+  }
+  main .section3 .leftPart {
+    width: 90%;
+  }
+  main .section3 .leftPart p,
+  main .section3 .leftPart h2 {
+    padding: 0;
+  }
+  main .section3 .leftPart h2 {
+    text-align: center;
+  }
+  .section4 {
+    flex-direction: column;
+  }
+  footer nav {
+    padding: 0 2rem;
+  }
+  footer nav a:last-child {
+    text-align: end;
+  }
+  footer nav a p {
+    font-size: 1.2rem;
+  }
+}/*# sourceMappingURL=projectsStyle.css.map */

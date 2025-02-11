@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+@font-face {
+  font-family: "Brooklyn";
+  src: url("/fonts/Brooklyn/Brooklyn-SemiBold.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+.loading-bar {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.loading-bar svg path {
+  stroke: white;
+  stroke-width: 15px;
+  stroke-dasharray: 1400px;
+  stroke-dashoffset: 1400px;
+}
+.loading-bar h1 {
+  color: white;
+  position: absolute;
+  font-family: "Brooklyn";
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.scrollUi {
+  width: 50px;
+  height: 75px;
+  margin-bottom: 50px;
+  position: absolute;
+  left: calc(50% - 25px);
+  bottom: 0;
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #ffffff;
+  opacity: 0;
+}
+.scrollUi::after {
+  content: "";
+  position: absolute;
+  background-color: #ffffff;
+  width: 10px;
+  height: 20px;
+  border-radius: 20px;
+  left: calc(50% - 5px);
+  margin-top: 5px;
+}
+.scrollUi div:first-child {
+  width: 25px;
+  height: 4px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  position: absolute;
+  margin: -20px 0 0 3px;
+  transform: rotate(-30deg);
+  opacity: 0;
+}
+.scrollUi div:last-child {
+  width: 25px;
+  height: 4px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  position: absolute;
+  margin: -20px 0 0 22px;
+  transform: rotate(30deg);
+  opacity: 0;
+}
