@@ -6,6 +6,7 @@ import Overlay from "./Overlay.js";
 import Cubes from "./Cubes.js";
 import Grass from "./Grass.js";
 import Smoke from "./Smoke.js";
+import Water from "./Water.js";
 
 export default class World {
   constructor() {
@@ -21,6 +22,7 @@ export default class World {
       this.cubes = new Cubes();
       this.grass = new Grass();
       this.smoke = new Smoke();
+      this.water = new Water();
       this.environment = new Environment();
     });
   }

@@ -29,4 +29,9 @@ export default [
     type: "texture",
     path: "textures/perlin.png",
   },
+  {
+    name: "perlinNoise2",
+    type: "texture",
+    path: "textures/noiseTexture.png",
+  },
 ];
