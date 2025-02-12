@@ -97,10 +97,10 @@ export default class Camera {
     }
   }
   setOrbitControl() {
-    if (this.orbitActive.x) {
-      const controls = new OrbitControls(this.instance, this.canvas);
-      controls.enableDamping = true;
-    }
+    // if (this.orbitActive.x) {
+    const controls = new OrbitControls(this.instance, this.canvas);
+    controls.enableDamping = true;
+    // }
   }
 
   resize() {

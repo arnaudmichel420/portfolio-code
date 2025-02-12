@@ -73,20 +73,20 @@ export default class Mouse extends EventEmitter {
     });
   }
   scrollEasing() {
-    if (!this.experience.world.overlay.active) {
-      this.deltaTime = this.experience.time.delta;
-      this.deltaScroll += this.delta;
-      this.delta = 0;
-      this.deltaScroll +=
-        (this.target - this.deltaScroll) *
-        (1 -
-          (1 - this.deltaTime * this.dampingFactor.x) *
-            (1 - this.deltaTime * this.dampingFactor.x));
-      if (this.deltaScroll > -0.5 && this.deltaScroll < 0.5) {
-        this.deltaScroll = 0;
-      } else {
-        this.trigger("mouseScroll");
-      }
-    }
+    // if (!this.experience.world.overlay.active) {
+    //   this.deltaTime = this.experience.time.delta;
+    //   this.deltaScroll += this.delta;
+    //   this.delta = 0;
+    //   this.deltaScroll +=
+    //     (this.target - this.deltaScroll) *
+    //     (1 -
+    //       (1 - this.deltaTime * this.dampingFactor.x) *
+    //         (1 - this.deltaTime * this.dampingFactor.x));
+    //   if (this.deltaScroll > -0.5 && this.deltaScroll < 0.5) {
+    //     this.deltaScroll = 0;
+    //   } else {
+    //     this.trigger("mouseScroll");
+    //   }
+    // }
   }
 }
