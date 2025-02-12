@@ -103,5 +103,8 @@ export default class Experience {
     if (this.world.grass != null) {
       this.world.grass.elapsedTime();
     }
+    if (this.world.smoke != null) {
+      this.world.smoke.elapsedTime();
+    }
   }
 }

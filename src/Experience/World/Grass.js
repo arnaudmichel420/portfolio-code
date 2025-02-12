@@ -28,7 +28,7 @@ export default class Grass {
     //debug
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("Grass");
-      //   this.debugFolder.close();
+      this.debugFolder.close();
       this.setDebug();
     }
 

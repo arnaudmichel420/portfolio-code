@@ -24,4 +24,9 @@ export default [
     type: "exrLoader",
     path: "textures/grassTest.exr",
   },
+  {
+    name: "perlinNoise",
+    type: "texture",
+    path: "textures/perlin.png",
+  },
 ];
