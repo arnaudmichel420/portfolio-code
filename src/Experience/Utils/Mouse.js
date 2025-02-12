@@ -18,7 +18,7 @@ export default class Mouse extends EventEmitter {
     this.target = 0;
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("Mouse Event");
+      this.debugFolder = this.debug.ui.addFolder("🖱️ Mouse Event");
       this.debugFolder.close();
     }
     this.setDebug();

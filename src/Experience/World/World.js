@@ -7,6 +7,7 @@ import Cubes from "./Cubes.js";
 import Grass from "./Grass.js";
 import Smoke from "./Smoke.js";
 import Water from "./Water.js";
+import Snow from "./Snow.js";
 
 export default class World {
   constructor() {
@@ -23,6 +24,7 @@ export default class World {
       this.grass = new Grass();
       this.smoke = new Smoke();
       this.water = new Water();
+      this.snow = new Snow();
       this.environment = new Environment();
     });
   }

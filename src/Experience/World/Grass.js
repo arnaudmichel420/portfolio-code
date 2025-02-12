@@ -25,14 +25,14 @@ export default class Grass {
     this.parameters.perlinSize = 0.1;
     this.parameters.perlinFrequency = 0.0002;
 
+    this.setGrass();
+
     //debug
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("Grass");
+      this.debugFolder = this.debug.ui.addFolder("🌿 Grass");
       this.debugFolder.close();
       this.setDebug();
     }
-
-    this.setGrass();
   }
   setDebug() {
     this.debugFolder
@@ -64,7 +64,10 @@ export default class Grass {
       .min(0)
       .max(500)
       .step(1)
-      .onFinishChange(this.setGrass.bind(this));
+      .onChange(() => {
+        this.material.uniforms.uHeightMapStrenght.value =
+          this.parameters.heightMapStrenght;
+      });
     this.debugFolder
       .add(this.parameters, "chunkSize")
       .min(0)
@@ -76,7 +79,9 @@ export default class Grass {
       .min(0)
       .max(1)
       .step(0.001)
-      .onFinishChange(this.setGrass.bind(this));
+      .onChange(() => {
+        this.material.uniforms.uColorOffset.value = this.parameters.colorOffset;
+      });
     this.debugFolder
       .addColor(this.parameters, "bladesTopColor")
       .onChange(() => {
@@ -96,13 +101,18 @@ export default class Grass {
       .min(0)
       .max(1)
       .step(0.0001)
-      .onFinishChange(this.setGrass.bind(this));
+      .onChange(() => {
+        this.material.uniforms.uPerlinSize.value = this.parameters.perlinSize;
+      });
     this.debugFolder
       .add(this.parameters, "perlinFrequency")
       .min(0)
       .max(0.001)
       .step(0.00001)
-      .onFinishChange(this.setGrass.bind(this));
+      .onChange(() => {
+        this.material.uniforms.uPerlinFrequency.value =
+          this.parameters.perlinFrequency;
+      });
   }
 
   setGrass() {
@@ -179,8 +189,6 @@ export default class Grass {
       const positionX = (Math.random() - 0.5) * this.parameters.gridSize;
 
       const positionZ = (Math.random() - 0.5) * this.parameters.gridSize;
-      // / 3 +
-      // this.parameters.gridSize / 3;
 
       const positionY = 0;
 

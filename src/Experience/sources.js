@@ -30,8 +30,8 @@ export default [
     path: "textures/perlin.png",
   },
   {
-    name: "perlinNoise2",
+    name: "snowTexture",
     type: "texture",
-    path: "textures/noiseTexture.png",
+    path: "textures/snow.png",
   },
 ];

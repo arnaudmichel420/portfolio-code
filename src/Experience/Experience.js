@@ -109,5 +109,8 @@ export default class Experience {
     if (this.world.water != null) {
       this.world.water.elapsedTime();
     }
+    if (this.world.snow != null) {
+      this.world.snow.elapsedTime();
+    }
   }
 }

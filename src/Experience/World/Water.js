@@ -22,8 +22,8 @@ export default class Smoke {
     this.setWater();
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("Water");
-      //   this.debugFolder.close();
+      this.debugFolder = this.debug.ui.addFolder("💧 Water");
+      this.debugFolder.close();
       this.setDebug();
     }
   }
@@ -52,7 +52,7 @@ export default class Smoke {
       .max(200)
       .step(0.1)
       .onChange(() => {
-        this.setWater();
+        this.material.uniforms.uRippleSize.value = this.parameters.rippleSize;
       });
     this.debugFolder
       .add(this.parameters, "rippleFrequency")
@@ -60,7 +60,8 @@ export default class Smoke {
       .max(0.001)
       .step(0.0001)
       .onChange(() => {
-        this.setWater();
+        this.material.uniforms.uRippleFrequency.value =
+          this.parameters.rippleFrequency;
       });
     this.debugFolder
       .add(this.parameters, "rippleStep")
@@ -68,7 +69,7 @@ export default class Smoke {
       .max(1)
       .step(0.001)
       .onChange(() => {
-        this.setWater();
+        this.material.uniforms.uRippleStep.value = this.parameters.rippleStep;
       });
     this.debugFolder.addColor(this.parameters, "colorWater").onChange(() => {
       this.material.uniforms.uColorWater.value.set(this.parameters.colorWater);

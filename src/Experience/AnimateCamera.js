@@ -29,7 +29,7 @@ export default class AnimateCamera {
     this.scrollY = 0;
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("Camera Animation");
+      this.debugFolder = this.debug.ui.addFolder("🎬 Camera Animation");
       this.debugFolder.close();
     }
     this.setDebug();
