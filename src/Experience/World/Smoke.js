@@ -21,7 +21,7 @@ export default class Smoke {
 
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("Smoke");
-      //   this.debugFolder.close();
+      this.debugFolder.close();
       this.setDebug();
     }
   }

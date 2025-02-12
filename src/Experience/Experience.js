@@ -106,5 +106,8 @@ export default class Experience {
     if (this.world.smoke != null) {
       this.world.smoke.elapsedTime();
     }
+    if (this.world.water != null) {
+      this.world.water.elapsedTime();
+    }
   }
 }
