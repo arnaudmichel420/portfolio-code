@@ -12,16 +12,68 @@ export default class AnimateCamera {
 
     this.cameraLookAt = this.experience.camera.cameraLookAt;
 
+    this.snow = this.experience.world.snow.material.uniforms;
+
     this.transitionDuration = { x: 1.5 };
     this.scrollSensivity = { x: 0.1 };
     this.parallaxSmoothing = { x: 0.1 };
     this.parallaxAmplitude = { x: 2 };
     this.cameraPositions = [
-      { x: 7.5, y: 6, z: 14, a: 7.5, b: 6, c: -20 },
-      { x: -50, y: 21, z: 6, a: -54, b: 21, c: 0 },
-      { x: -137, y: 59, z: -18, a: -158, b: 64, c: -38 },
-      { x: -237, y: 214, z: -117, a: -240, b: 222, c: -71 },
-      { x: -262, y: 311, z: 163, a: -274, b: 324, c: -80 },
+      {
+        x: 97,
+        y: 7,
+        z: 127,
+        lookAtX: -98,
+        lookAtY: -28,
+        lookAtZ: -300,
+        snowDensity: 0,
+        snowSpeed: 0.005,
+        snowSize: 5,
+      },
+      {
+        x: 3.5,
+        y: 26.5,
+        z: 127,
+        lookAtX: -98,
+        lookAtY: -28,
+        lookAtZ: -300,
+        snowDensity: 0,
+        snowSpeed: 0.005,
+        snowSize: 5,
+      },
+      {
+        x: -68,
+        y: 68,
+        z: 111,
+        lookAtX: -262,
+        lookAtY: 68,
+        lookAtZ: -300,
+        snowDensity: 0,
+        snowSpeed: 0.005,
+        snowSize: 5,
+      },
+      {
+        x: -137,
+        y: 219,
+        z: 117,
+        lookAtX: -300,
+        lookAtY: 183,
+        lookAtZ: -300,
+        snowDensity: 0.5,
+        snowSpeed: 0.005,
+        snowSize: 5,
+      },
+      {
+        x: -87,
+        y: 376,
+        z: 242,
+        lookAtX: -300,
+        lookAtY: 313,
+        lookAtZ: -300,
+        snowDensity: 1,
+        snowSpeed: 0.009,
+        snowSize: 10,
+      },
     ];
     this.previousSection = 0;
     this.currentSection = 0;
@@ -56,20 +108,18 @@ export default class AnimateCamera {
     if (this.listen) {
       this.deltaScroll = this.experience.mouse.deltaScroll;
       this.deltaScroll *= this.scrollSensivity.x;
-
       if (this.deltaScroll <= 1 && this.deltaScroll >= -1) {
         this.deltaScroll = 0;
       } else if (
-        (this.camera.position.x <
-          this.cameraPositions[this.cameraPositions.length - 1].x &&
+        (this.camera.position.y >
+          this.cameraPositions[this.cameraPositions.length - 1].y &&
           this.deltaScroll < 0) ||
-        (this.camera.position.x > this.cameraPositions[0].x &&
+        (this.camera.position.y < this.cameraPositions[0].y &&
           this.deltaScroll > 0)
       ) {
         //check if we are at start or end
         this.deltaScroll = 0;
       }
-
       this.scrollY += this.deltaScroll * 0.01;
 
       //calculate trajectory
@@ -79,7 +129,6 @@ export default class AnimateCamera {
           this.deltaScroll > 0 &&
           this.currentSection > 0)
       ) {
-        //going down
         this.deltaX =
           this.cameraPositions[this.currentSection].x -
           this.cameraPositions[this.currentSection - 1].x;
@@ -89,15 +138,15 @@ export default class AnimateCamera {
         this.deltaZ =
           this.cameraPositions[this.currentSection].z -
           this.cameraPositions[this.currentSection - 1].z;
-        this.deltaA =
-          this.cameraPositions[this.currentSection].a -
-          this.cameraPositions[this.currentSection - 1].a;
-        this.deltaB =
-          this.cameraPositions[this.currentSection].b -
-          this.cameraPositions[this.currentSection - 1].b;
-        this.deltaC =
-          this.cameraPositions[this.currentSection].c -
-          this.cameraPositions[this.currentSection - 1].c;
+        this.deltaLookAtX =
+          this.cameraPositions[this.currentSection].lookAtX -
+          this.cameraPositions[this.currentSection - 1].lookAtX;
+        this.deltaLookAtY =
+          this.cameraPositions[this.currentSection].lookAtY -
+          this.cameraPositions[this.currentSection - 1].lookAtY;
+        this.deltaLookAtZ =
+          this.cameraPositions[this.currentSection].lookAtZ -
+          this.cameraPositions[this.currentSection - 1].lookAtZ;
       } else {
         //going up
         this.deltaX =
@@ -109,15 +158,25 @@ export default class AnimateCamera {
         this.deltaZ =
           this.cameraPositions[this.currentSection + 1].z -
           this.cameraPositions[this.currentSection].z;
-        this.deltaA =
-          this.cameraPositions[this.currentSection + 1].a -
-          this.cameraPositions[this.currentSection].a;
-        this.deltaB =
-          this.cameraPositions[this.currentSection + 1].b -
-          this.cameraPositions[this.currentSection].b;
-        this.deltaC =
-          this.cameraPositions[this.currentSection + 1].c -
-          this.cameraPositions[this.currentSection].c;
+        this.deltaLookAtX =
+          this.cameraPositions[this.currentSection + 1].lookAtX -
+          this.cameraPositions[this.currentSection].lookAtX;
+        this.deltaLookAtY =
+          this.cameraPositions[this.currentSection + 1].lookAtY -
+          this.cameraPositions[this.currentSection].lookAtY;
+        this.deltaLookAtZ =
+          this.cameraPositions[this.currentSection + 1].lookAtZ -
+          this.cameraPositions[this.currentSection].lookAtZ;
+        //both way
+        this.deltaSnowDensity =
+          this.cameraPositions[this.currentSection + 1].snowDensity -
+          this.cameraPositions[this.currentSection].snowDensity;
+        this.deltaSnowSpeed =
+          this.cameraPositions[this.currentSection + 1].snowSpeed -
+          this.cameraPositions[this.currentSection].snowSpeed;
+        this.deltaSnowSize =
+          this.cameraPositions[this.currentSection + 1].snowSize -
+          this.cameraPositions[this.currentSection].snowSize;
       }
 
       //animate
@@ -129,15 +188,23 @@ export default class AnimateCamera {
       );
 
       this.camera.lookAt(
-        this.cameraLookAt.x - this.deltaScroll * 0.0001 * this.deltaA,
-        this.cameraLookAt.y - this.deltaScroll * 0.0001 * this.deltaB,
-        this.cameraLookAt.z - this.deltaScroll * 0.0001 * this.deltaC
+        this.cameraLookAt.x - this.deltaScroll * 0.0001 * this.deltaLookAtX,
+        this.cameraLookAt.y - this.deltaScroll * 0.0001 * this.deltaLookAtY,
+        this.cameraLookAt.z - this.deltaScroll * 0.0001 * this.deltaLookAtZ
       );
 
       //update lookat values
-      this.cameraLookAt.x -= this.deltaScroll * 0.0001 * this.deltaA;
-      this.cameraLookAt.y -= this.deltaScroll * 0.0001 * this.deltaB;
-      this.cameraLookAt.z -= this.deltaScroll * 0.0001 * this.deltaC;
+      this.cameraLookAt.x -= this.deltaScroll * 0.0001 * this.deltaLookAtX;
+      this.cameraLookAt.y -= this.deltaScroll * 0.0001 * this.deltaLookAtY;
+      this.cameraLookAt.z -= this.deltaScroll * 0.0001 * this.deltaLookAtZ;
+
+      // //snow
+
+      this.snow.uSnowDensity.value -=
+        this.deltaScroll * 0.0001 * this.deltaSnowDensity;
+      this.snow.uSnowSpeed.value -=
+        this.deltaScroll * 0.0001 * this.deltaSnowSpeed;
+      this.snow.uSize.value -= this.deltaScroll * 0.0001 * this.deltaSnowSize;
 
       //handle section ++
       if (
@@ -176,9 +243,9 @@ export default class AnimateCamera {
         gsap.to(this.cameraLookAt, {
           duration: this.transitionDuration.x,
           ease: "power4.out",
-          x: this.cameraPositions[this.currentSection].a,
-          y: this.cameraPositions[this.currentSection].b,
-          z: this.cameraPositions[this.currentSection].c,
+          x: this.cameraPositions[this.currentSection].lookAtX,
+          y: this.cameraPositions[this.currentSection].lookAtY,
+          z: this.cameraPositions[this.currentSection].lookAtZ,
           onUpdate: () => {
             this.camera.lookAt(
               this.cameraLookAt.x,
@@ -186,6 +253,22 @@ export default class AnimateCamera {
               this.cameraLookAt.z
             );
           },
+        });
+        //snow
+        gsap.to(this.snow.uSnowDensity, {
+          duration: this.transitionDuration.x,
+          ease: "power4.out",
+          value: this.cameraPositions[this.currentSection].snowDensity,
+        });
+        gsap.to(this.snow.uSnowSpeed, {
+          duration: this.transitionDuration.x,
+          ease: "power4.out",
+          value: this.cameraPositions[this.currentSection].snowSpeed,
+        });
+        gsap.to(this.snow.uSize, {
+          duration: this.transitionDuration.x,
+          ease: "power4.out",
+          value: this.cameraPositions[this.currentSection].snowSize,
         });
       }
     }

@@ -263,7 +263,7 @@ export default class Grass {
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);
 
-    this.scene.add(this.mesh);
+    // this.scene.add(this.mesh);
 
     const box = new THREE.Box3().setFromObject(this.mesh); // Get bounding box from the mesh
     const helper = new THREE.Box3Helper(box, 0xffff00); // Create box helper with yellow color

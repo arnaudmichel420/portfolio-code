@@ -15,7 +15,6 @@ export default class Camera {
     this.orbitActive = { x: false };
 
     this.FOV = 35;
-    // this.cameraLookAt = { x: 7.5, y: 6, z: -20 };
     this.cameraLookAt = { x: -235, y: -28, z: -300 };
 
     //Phone
@@ -45,9 +44,7 @@ export default class Camera {
       0.1,
       1000
     );
-
-    // this.instance.position.set(7.5, 6, 14);
-    this.instance.position.set(105, 7, 106);
+    this.instance.position.set(97, 7, 127);
     this.instance.lookAt(
       this.cameraLookAt.x,
       this.cameraLookAt.y,
@@ -97,10 +94,10 @@ export default class Camera {
     }
   }
   setOrbitControl() {
-    // if (this.orbitActive.x) {
-    const controls = new OrbitControls(this.instance, this.canvas);
-    controls.enableDamping = true;
-    // }
+    if (this.orbitActive.x) {
+      const controls = new OrbitControls(this.instance, this.canvas);
+      controls.enableDamping = true;
+    }
   }
 
   resize() {

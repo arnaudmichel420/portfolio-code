@@ -13,11 +13,15 @@ export default class Snow {
 
     this.parameters = {};
     this.parameters.snow = 10000;
-    this.parameters.size = 10;
+    this.parameters.size = 5;
     this.parameters.snowSpeed = 0.005;
-    this.parameters.snowHeightY = 200;
-    this.parameters.snowOffsetY = 100;
-    this.parameters.snowDensity = 0.1;
+    this.parameters.snowRangeX = 150;
+    this.parameters.snowRangeY = 70;
+    this.parameters.snowRangeZ = 100;
+    this.parameters.snowOffsetX = -75;
+    this.parameters.snowOffsetY = -40;
+    this.parameters.snowOffsetZ = -75;
+    this.parameters.snowDensity = 0;
 
     this.setSnow();
 
@@ -28,24 +32,6 @@ export default class Snow {
     }
   }
   setDebug() {
-    this.debugFolder
-      .add(this.mesh.position, "x")
-      .min(-500)
-      .max(500)
-      .step(1)
-      .name("positionX");
-    this.debugFolder
-      .add(this.mesh.position, "y")
-      .min(-500)
-      .max(500)
-      .step(0.1)
-      .name("positionY");
-    this.debugFolder
-      .add(this.mesh.position, "z")
-      .min(-500)
-      .max(500)
-      .step(1)
-      .name("positionZ");
     this.debugFolder
       .add(this.parameters, "snow")
       .min(0)
@@ -71,20 +57,52 @@ export default class Snow {
         this.material.uniforms.uSnowSpeed.value = this.parameters.snowSpeed;
       });
     this.debugFolder
-      .add(this.parameters, "snowHeightY")
+      .add(this.parameters, "snowRangeX")
       .min(0)
       .max(300)
       .step(1)
       .onChange(() => {
-        this.material.uniforms.uSnowHeightY.value = this.parameters.snowHeightY;
+        this.material.uniforms.uSnowRangeX.value = this.parameters.snowRangeX;
+      });
+    this.debugFolder
+      .add(this.parameters, "snowRangeY")
+      .min(0)
+      .max(300)
+      .step(1)
+      .onChange(() => {
+        this.material.uniforms.uSnowRangeY.value = this.parameters.snowRangeY;
+      });
+    this.debugFolder
+      .add(this.parameters, "snowRangeZ")
+      .min(0)
+      .max(300)
+      .step(1)
+      .onChange(() => {
+        this.material.uniforms.uSnowRangeZ.value = this.parameters.snowRangeZ;
+      });
+    this.debugFolder
+      .add(this.parameters, "snowOffsetX")
+      .min(-100)
+      .max(200)
+      .step(1)
+      .onChange(() => {
+        this.material.uniforms.uSnowOffsetX.value = this.parameters.snowOffsetX;
       });
     this.debugFolder
       .add(this.parameters, "snowOffsetY")
-      .min(0)
+      .min(-100)
       .max(200)
       .step(1)
       .onChange(() => {
         this.material.uniforms.uSnowOffsetY.value = this.parameters.snowOffsetY;
+      });
+    this.debugFolder
+      .add(this.parameters, "snowOffsetZ")
+      .min(-100)
+      .max(200)
+      .step(1)
+      .onChange(() => {
+        this.material.uniforms.uSnowOffsetZ.value = this.parameters.snowOffsetZ;
       });
     this.debugFolder
       .add(this.parameters, "snowDensity")
@@ -107,9 +125,9 @@ export default class Snow {
     const sizes = new Float32Array(this.parameters.snow);
 
     for (let i = 0; i < this.parameters.snow; i++) {
-      const positionX = (Math.random() - 0.5) * 100 + 80;
+      const positionX = (Math.random() - 0.5) * 150;
       const positionY = (Math.random() - 0) * 300;
-      const positionZ = (Math.random() - 0.5) * 100 + 80;
+      const positionZ = (Math.random() - 0.5) * 150 - 75;
 
       const i3 = i * 3;
 
@@ -145,8 +163,12 @@ export default class Snow {
         uSnowTexture: new THREE.Uniform(this.snowTexture),
         uSnow: { value: this.parameters.snow },
         uSnowSpeed: { value: this.parameters.snowSpeed },
-        uSnowHeightY: { value: this.parameters.snowHeightY },
+        uSnowRangeX: { value: this.parameters.snowRangeX },
+        uSnowRangeY: { value: this.parameters.snowRangeY },
+        uSnowRangeZ: { value: this.parameters.snowRangeZ },
+        uSnowOffsetX: { value: this.parameters.snowOffsetX },
         uSnowOffsetY: { value: this.parameters.snowOffsetY },
+        uSnowOffsetZ: { value: this.parameters.snowOffsetZ },
         uSnowDensity: { value: this.parameters.snowDensity },
       },
       fragmentShader: snowFragmentShader,

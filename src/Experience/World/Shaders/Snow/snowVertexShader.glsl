@@ -4,8 +4,12 @@ uniform float uTime;
 uniform float uSize;
 uniform float uSnow;
 uniform float uSnowSpeed;
-uniform float uSnowHeightY;
+uniform float uSnowRangeX;
+uniform float uSnowRangeY;
+uniform float uSnowRangeZ;
+uniform float uSnowOffsetX;
 uniform float uSnowOffsetY;
+uniform float uSnowOffsetZ;
 uniform float uSnowDensity;
 
 
@@ -18,20 +22,21 @@ void main()
     
     vec3 newPosition = position;
 
-    // newPosition.xz += cameraPosition.xz;
     
     //fall
     newPosition.y -= uTime * uSnowSpeed;
 
     //wind
-    newPosition.x += sin(uTime * 0.0005) + sin(uTime * 0.0015) + cos(uTime * 0.00025) + cos(uTime * 0.0000625);
-    newPosition.z += cos(uTime * 0.0005) + cos(uTime * 0.0015) + sin(uTime * 0.00025) + sin(uTime * 0.0000625);
+    newPosition.x += sin(uTime * 0.0005) + sin(uTime * 0.0015) + cos(uTime * 0.00025) + cos(uTime * 0.0000625) + uTime * 0.005;
+    newPosition.z += cos(uTime * 0.0005) + cos(uTime * 0.0015) + sin(uTime * 0.00025) + sin(uTime * 0.0000625) + uTime * 0.001;
 
     //loop back
-    newPosition.y = mod(newPosition.y, uSnowHeightY) + uSnowOffsetY;
+    newPosition.x = mod(newPosition.x, uSnowRangeX) +  cameraPosition.x + uSnowOffsetX;
+    newPosition.z = mod(newPosition.z, uSnowRangeZ) +  cameraPosition.z + uSnowOffsetZ;
+    newPosition.y = mod(newPosition.y, uSnowRangeY) + (uSnowOffsetY + cameraPosition.y);
     
-    float stepValue = step( float(gl_VertexID) / uSnow, uSnowDensity);
-    newPosition.y += stepValue * uSnowHeightY * 2.0;
+    float stepValue = step( float(gl_VertexID) / uSnow, 1.0 - uSnowDensity);
+    newPosition.y += stepValue * uSnowRangeY * 2.0;
 
     //smooth transition
     vElevation = newPosition.y;

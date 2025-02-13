@@ -37,7 +37,10 @@ export default class Experience {
     this.world = new World();
     this.mouse = new Mouse();
     this.raycaster = new Raycaster();
-    this.animateCamera = new AnimateCamera();
+
+    this.ressources.on("ready", () => {
+      this.animateCamera = new AnimateCamera();
+    });
 
     this.overlay = new THREE.Mesh(this.overlayGeometry, this.overlayMaterial);
     this.scene.add(this.overlay);
@@ -94,7 +97,9 @@ export default class Experience {
     this.raycaster.raycasterClick();
   }
   parallax() {
-    this.animateCamera.parallax();
+    this.ressources.on("ready", () => {
+      this.animateCamera.parallax();
+    });
   }
   scrollEasing() {
     this.mouse.scrollEasing();
