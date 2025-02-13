@@ -17,7 +17,7 @@ export default class Overlay {
     this.parameters.offset = 0.5;
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("Overlay");
+      this.debugFolder = this.debug.ui.addFolder("⛔️ Overlay");
       this.debugFolder.close();
       this.setDebug();
     }

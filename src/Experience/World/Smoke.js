@@ -20,7 +20,7 @@ export default class Smoke {
     this.setSmoke();
 
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("Smoke");
+      this.debugFolder = this.debug.ui.addFolder("💨 Smoke");
       this.debugFolder.close();
       this.setDebug();
     }
@@ -35,7 +35,7 @@ export default class Smoke {
       .max(1)
       .step(0.001)
       .onChange(() => {
-        this.setSmoke();
+        this.material.uniforms.uPerlinSizeX.value = this.parameters.perlinSizeX;
       });
     this.debugFolder
       .add(this.parameters, "perlinSizeY")
@@ -43,7 +43,7 @@ export default class Smoke {
       .max(1)
       .step(0.001)
       .onChange(() => {
-        this.setSmoke();
+        this.material.uniforms.uPerlinSizeY.value = this.parameters.perlinSizeY;
       });
     this.debugFolder
       .add(this.parameters, "twistFrequency")
@@ -51,7 +51,8 @@ export default class Smoke {
       .max(0.5)
       .step(0.001)
       .onChange(() => {
-        this.setSmoke();
+        this.material.uniforms.uTwistFrequency.value =
+          this.parameters.twistFrequency;
       });
     this.debugFolder
       .add(this.mesh.position, "x")

@@ -10,14 +10,11 @@ uniform float uWaterTransparency;
 
 varying vec2 vUv;
 
-#include ../Partials/perlin2dNoise.glsl;
-
 void main()
 {
     float ripple = texture(uPerlinNoise, vUv).r;
     ripple = sin(ripple * uRippleSize + uTime * uRippleFrequency);
     ripple = step(uRippleStep, ripple );
-    // float ripple = cnoise(vUv*10.0);
 
     vec3 colorMix = mix(uColorWater, uColorRipple, ripple);
 

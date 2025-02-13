@@ -10,7 +10,7 @@ export default class Mountain {
 
     //debug
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("mountain");
+      this.debugFolder = this.debug.ui.addFolder("🏔️ mountain");
       this.debugFolder.close();
     }
 
