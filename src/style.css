@@ -1,3 +1,57 @@
+@font-face {
+  font-family: "Brooklyn";
+  src: url("/fonts/Brooklyn/Brooklyn-Normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Brooklyn";
+  src: url("/fonts/Brooklyn/Brooklyn-SemiBold.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vonca";
+  src: url("/fonts/Vonca/Vonca-Bold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vonca";
+  src: url("/fonts/Vonca/Vonca-Semibold.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vonca";
+  src: url("/fonts/Vonca/Vonca-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vonca";
+  src: url("/fonts/Vonca/Vonca-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vonca";
+  src: url("/fonts/Vonca/Vonca-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins/subset-Poppins-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins/subset-Poppins-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
 * {
   margin: 0;
   padding: 0;
@@ -14,12 +68,7 @@ body {
   left: 0;
   outline: none;
 }
-@font-face {
-  font-family: "Brooklyn";
-  src: url("/fonts/Brooklyn/Brooklyn-SemiBold.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-}
+
 .loading-bar {
   position: absolute;
   display: flex;
@@ -42,6 +91,7 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
 }
+
 .scrollUi {
   width: 50px;
   height: 75px;
@@ -85,3 +135,273 @@ body {
   transform: rotate(30deg);
   opacity: 0;
 }
+
+.mainDiv {
+  color: #f1f1f1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mainDiv .top {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainDiv .top .box1 {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: "Vonca";
+  font-weight: 600;
+}
+.mainDiv .top .box1 h1 {
+  font-size: 96px;
+  line-height: 80px;
+  align-self: flex-end;
+  padding-right: 100px;
+  opacity: 0;
+}
+.mainDiv .top .box1 h2 {
+  font-size: 128px;
+  line-height: 110px;
+  opacity: 0;
+}
+.mainDiv .top .box1 h3 {
+  font-size: 40px;
+  align-self: flex-start;
+  padding-left: 100px;
+  line-height: 30px;
+  position: relative;
+  opacity: 0;
+}
+.mainDiv .top .box1 h3 img {
+  position: absolute;
+  right: -50px;
+  bottom: -3px;
+}
+.mainDiv .top .box2 {
+  height: 25%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: 2px solid #f1f1f1;
+  opacity: 0;
+}
+.mainDiv .top .box2 div {
+  width: 50%;
+  padding: 0 100px;
+}
+.mainDiv .top .box2 div:first-child {
+  text-align: justify;
+  font-size: 16px;
+  font-family: "Brooklyn";
+  font-weight: 400;
+}
+.mainDiv .top .box2 div:last-child {
+  font-size: 24px;
+  font-family: "Brooklyn";
+  font-weight: 500;
+}
+.mainDiv .top .box2 div:last-child div {
+  margin: 10px 0 0 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 0;
+}
+.mainDiv .top .box2 div:last-child div a {
+  pointer-events: auto;
+  height: -moz-fit-content;
+  height: fit-content;
+  transition: transform 300ms ease 100ms;
+  will-change: transform;
+}
+.mainDiv .top .box2 div:last-child div a:hover {
+  transform: scale(1.1);
+}
+.mainDiv .top .box3 {
+  height: 25%;
+  width: 100%;
+  display: flex;
+  border-top: 2px solid #f1f1f1;
+  opacity: 0;
+}
+.mainDiv .top .box3 div {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  padding: 0 100px;
+  font-size: 24px;
+  font-family: "Brooklyn";
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+.mainDiv .top .box3 div p {
+  font-size: 20px;
+  margin-left: 10px;
+}
+.mainDiv .bottom {
+  height: 30%;
+  width: 100%;
+  border-top: 2px solid #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 0;
+}
+.mainDiv .bottom p {
+  font-size: 24px;
+  font-family: "Brooklyn";
+  font-weight: 400;
+}
+.mainDiv .bottom a {
+  color: #101010;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-family: "Brooklyn";
+  font-weight: 400;
+  text-decoration: none;
+  transition: transform 300ms ease 100ms;
+  will-change: transform;
+  pointer-events: auto;
+}
+.mainDiv .bottom a:visited {
+  color: #101010;
+}
+.mainDiv .bottom a:hover {
+  transform: scale(1.1);
+}
+
+.topDiv {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  opacity: 0;
+}
+.topDiv p {
+  font-family: "Brooklyn";
+  font-weight: 400;
+  font-size: 36px;
+  color: #f1f1f1;
+  text-align: center;
+}
+.topDiv img {
+  position: absolute;
+  margin-bottom: 80px;
+}
+
+@media screen and (max-width: 1024px) {
+  .mainDiv .top .box2 div,
+  .mainDiv .top .box3 div {
+    padding: 0 50px;
+  }
+  .mainDiv .top .box1 h1 {
+    font-size: 76px;
+    line-height: normal;
+    padding-right: 50px;
+  }
+  .mainDiv .top .box1 h2 {
+    font-size: 100px;
+    line-height: normal;
+  }
+  .mainDiv .top .box1 h3 {
+    font-size: 30px;
+    line-height: normal;
+    padding-left: 50px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .mainDiv {
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .mainDiv .top,
+  .mainDiv .bottom {
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .mainDiv .top .box1 h1 {
+    font-size: 30px;
+    line-height: normal;
+    padding-right: 20px;
+  }
+  .mainDiv .top .box1 h2 {
+    font-size: 40px;
+    line-height: normal;
+  }
+  .mainDiv .top .box1 h3 {
+    font-size: 20px;
+    line-height: normal;
+    padding-left: 20px;
+  }
+  .mainDiv .top .box1 h3 img {
+    width: 30px;
+  }
+  .mainDiv .top .box2 div:last-child p {
+    font-size: 20px;
+  }
+  .mainDiv .top .box2 div:last-child div {
+    gap: 100px;
+    justify-content: center;
+  }
+  .mainDiv .top .box2 div:last-child div a img {
+    width: 50px;
+  }
+  .mainDiv .top .box3 div p {
+    font-size: 16px;
+  }
+  .mainDiv .top .box3 div span {
+    font-size: 20px;
+  }
+  .mainDiv .top .box2,
+  .mainDiv .top .box3 {
+    flex-direction: column;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 20px 0;
+    gap: 20px;
+  }
+  .mainDiv .top .box2 div,
+  .mainDiv .top .box3 div {
+    padding: 0 20px;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+  }
+  .mainDiv .bottom {
+    padding: 20px 0;
+  }
+  .mainDiv .bottom p {
+    font-size: 20px;
+  }
+  .topDiv p {
+    font-size: 20px;
+    padding: 0 20px;
+  }
+  .topDiv img {
+    margin-bottom: 150px;
+  }
+}/*# sourceMappingURL=style.css.map */

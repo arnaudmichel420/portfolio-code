@@ -27,7 +27,7 @@ export default class Snow {
 
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("❄️ Snow");
-      //   this.debugFolder.close();
+      this.debugFolder.close();
       this.setDebug();
     }
   }

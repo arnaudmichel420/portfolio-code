@@ -3,7 +3,7 @@ import Experience from "../Experience.js";
 import waterVertexShader from "./Shaders/Water/waterVertexShader.glsl";
 import waterFragmentShader from "./Shaders/Water/waterFragmentShader.glsl";
 
-export default class Smoke {
+export default class Water {
   constructor() {
     this.experience = new Experience();
     this.time = this.experience.time;
