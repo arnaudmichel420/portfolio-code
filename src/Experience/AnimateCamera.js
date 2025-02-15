@@ -64,15 +64,37 @@ export default class AnimateCamera {
         snowSize: 5,
       },
       {
-        x: -87,
-        y: 376,
-        z: 242,
-        lookAtX: -300,
-        lookAtY: 313,
-        lookAtZ: -300,
+        x: -192,
+        y: 332,
+        z: 210,
+        lookAtX: -192,
+        lookAtY: 332,
+        lookAtZ: 0,
         snowDensity: 1,
-        snowSpeed: 0.009,
+        snowSpeed: 0.01,
         snowSize: 10,
+      },
+      {
+        x: -192,
+        y: 400,
+        z: 210,
+        lookAtX: -192,
+        lookAtY: 400,
+        lookAtZ: 0,
+        snowDensity: 0.5,
+        snowSpeed: 0.009,
+        snowSize: 1,
+      },
+      {
+        x: -192,
+        y: 410,
+        z: 210,
+        lookAtX: -192,
+        lookAtY: 410,
+        lookAtZ: 0,
+        snowDensity: 0,
+        snowSpeed: 0.009,
+        snowSize: 1,
       },
     ];
     this.previousSection = 0;
@@ -213,6 +235,7 @@ export default class AnimateCamera {
       ) {
         this.listen = false;
         this.currentSection++;
+        console.log(this.currentSection);
 
         setTimeout(() => {
           this.listen = true;
@@ -270,6 +293,11 @@ export default class AnimateCamera {
           ease: "power4.out",
           value: this.cameraPositions[this.currentSection].snowSize,
         });
+
+        //launch text animation
+        if (this.currentSection > 4) {
+          this.experience.world.text.setAnimation(this.currentSection);
+        }
       }
     }
   }

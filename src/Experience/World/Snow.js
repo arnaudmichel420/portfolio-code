@@ -27,7 +27,7 @@ export default class Snow {
 
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("❄️ Snow");
-      //   this.debugFolder.close();
+      this.debugFolder.close();
       this.setDebug();
     }
   }
@@ -51,7 +51,7 @@ export default class Snow {
     this.debugFolder
       .add(this.parameters, "snowSpeed")
       .min(0.00001)
-      .max(0.009)
+      .max(0.05)
       .step(0.0001)
       .onChange(() => {
         this.material.uniforms.uSnowSpeed.value = this.parameters.snowSpeed;
