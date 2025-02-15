@@ -9,6 +9,9 @@ uniform float uHeightMapStrenght;
 uniform vec2 uHeightMapSize;
 uniform float uGridSize;
 uniform float uLenght;
+uniform float uChunkSize;
+uniform float uGrassOffsetX;
+uniform float uGrassOffsetZ;
 
 
 
@@ -26,17 +29,57 @@ varying vec2 vUv;
 
 void main()
 {
-    vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+    vec3 newPosition = position;
 
     //follow camera 
-    // vec2 gridMin = vec2(-uGridSize / 2.0, -uGridSize / 2.0);
+    newPosition.x = mod(newPosition.x - cameraPosition.x, uChunkSize) +  cameraPosition.x + uGrassOffsetX;
+    newPosition.z = mod(newPosition.z - cameraPosition.z, uChunkSize) +  cameraPosition.z + uGrassOffsetZ;
+
+    vec2 newCenter = center;
+
+    newCenter.x = mod(newCenter.x - cameraPosition.x, uChunkSize) +  cameraPosition.x + uGrassOffsetX;
+    newCenter.y = mod(newCenter.y - cameraPosition.z, uChunkSize) +  cameraPosition.z + uGrassOffsetZ;
+
+    
+
+    // rotate blades to camera
+    float angle = atan(newCenter.x - cameraPosition.x, newCenter.y - cameraPosition.z);
+    newPosition.xz = getRotatePivot2d(newPosition.xz, angle, newCenter.xy);
+
+    //wind
+    float topVertice = step(uLenght, newPosition.y);
+    newPosition.xz += topVertice * cnoise(vec3(newPosition.xz * uPerlinSize ,uTime * uPerlinFrequency));
+
+    vElevation = newPosition.y;
+
+    
+    vec2 uvScale = (newPosition.xz - -uGridSize / 2.0) / (uGridSize / 2.0 - -uGridSize / 2.0);
+    
+    //grass patch 
+    float grassHeight = texture2D(uGrassMap, uvScale).r;
+    newPosition.y += topVertice * grassHeight ;
+
+    //follow mesh
+    float height = texture2D(uHeightMap, uvScale).r;
+    newPosition.y += height * uHeightMapStrenght;
+
+
+    vec4 modelPosition = modelMatrix * vec4(newPosition, 1.0);
+    vec4 viewPosition = viewMatrix * modelPosition;
+    vec4 projectedPosition = projectionMatrix * viewPosition;
+    gl_Position = projectedPosition;
+
+    vUv = uv;
+}
+// vec2 scaledUV = vec2(uv.x, uv.y * (uHeightMapSize.x / uHeightMapSize.y));
+// vec2 gridMin = vec2(-uGridSize / 2.0, -uGridSize / 2.0);
     // vec2 gridMax = vec2(uGridSize / 2.0, uGridSize / 2.0);
 
 
-    // modelPosition.xz += cameraPosition.xz;
+    // newPosition.xz += cameraPosition.xz;
 
-    // modelPosition.x = clamp(modelPosition.x, gridMin.x, gridMax.x);
-    // modelPosition.z = clamp(modelPosition.z, gridMin.y, gridMax.y);
+    // newPosition.x = clamp(newPosition.x, gridMin.x, gridMax.x);
+    // newPosition.z = clamp(newPosition.z, gridMin.y, gridMax.y);
 
 
     // vec2 newCenter = center + cameraPosition.xz;
@@ -44,30 +87,3 @@ void main()
     // newCenter.x = clamp(newCenter.x, gridMin.x, gridMax.x);
     // newCenter.y = clamp(newCenter.y, gridMin.y, gridMax.y);
 // gl_VertexID;
-    
-
-    // rotate blades to camera
-    float angle = atan(center.x - cameraPosition.x, center.y - cameraPosition.z);
-    modelPosition.xz = getRotatePivot2d(modelPosition.xz, angle, center.xy);
-
-    // //wind
-    float topVertice = step(uLenght, modelPosition.y);
-    modelPosition.xz += topVertice * cnoise(vec3(modelPosition.xz * uPerlinSize ,uTime * uPerlinFrequency));
-
-    vElevation = modelPosition.y;
-
-    //grass patch 
-    float grassHeight = texture2D(uGrassMap, uv).r;
-    modelPosition.y += topVertice * grassHeight ;
-
-    //follow mesh
-    vec2 scaledUV = vec2(uv.x, uv.y * (uHeightMapSize.x / uHeightMapSize.y));
-    float height = texture2D(uHeightMap, uv).r;
-    modelPosition.y += height * uHeightMapStrenght;
-
-    vec4 viewPosition = viewMatrix * modelPosition;
-    vec4 projectedPosition = projectionMatrix * viewPosition;
-    gl_Position = projectedPosition;
-
-    vUv = uv;
-}
