@@ -13,14 +13,14 @@ export default class Grass {
     this.geometry = null;
 
     this.parameters = {};
-    this.parameters.blades = 50000;
+    this.parameters.blades = 500000;
     this.parameters.offset = 0.2;
     this.parameters.lenght = 1;
     this.parameters.chunkSize = 100;
     this.parameters.grassOffsetX = -80;
     this.parameters.grassOffsetZ = -95;
     this.parameters.gridSize = 250;
-    this.parameters.heightMapStrenght = 73;
+    this.parameters.heightMapStrenght = 72.5;
     this.parameters.bladesTopColor1 = "#54ce12";
     this.parameters.bladesTopColor2 = "#212f13";
     this.parameters.bladesBottomColor = "#0b2d06";
@@ -66,7 +66,7 @@ export default class Grass {
       .add(this.parameters, "heightMapStrenght")
       .min(0)
       .max(500)
-      .step(1)
+      .step(0.1)
       .onChange(() => {
         this.material.uniforms.uHeightMapStrenght.value =
           this.parameters.heightMapStrenght;
@@ -148,8 +148,8 @@ export default class Grass {
     this.heightMap.flipY = false;
 
     this.grassMap = this.experience.ressources.item.grassMap;
-    this.grassMap.wrapS = THREE.RepeatWrapping;
-    this.grassMap.wrapT = THREE.RepeatWrapping;
+    // this.grassMap.wrapS = THREE.RepeatWrapping;
+    // this.grassMap.wrapT = THREE.RepeatWrapping;
     this.grassMap.flipY = false;
 
     this.perlinNoise = this.experience.ressources.item.perlinNoise;
@@ -161,7 +161,7 @@ export default class Grass {
       new THREE.MeshBasicMaterial({ map: this.grassMap })
     );
     plane.rotation.x = -Math.PI / 2;
-    // this.scene.add(plane);
+    this.scene.add(plane);
 
     if (this.geometry != null) {
       this.geometry.dispose();

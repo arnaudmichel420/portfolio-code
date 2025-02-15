@@ -21,8 +21,8 @@ export default [
   },
   {
     name: "grassMap",
-    type: "exrLoader",
-    path: "textures/grassTest.exr",
+    type: "texture",
+    path: "textures/grassTest.png",
   },
   {
     name: "perlinNoise",
