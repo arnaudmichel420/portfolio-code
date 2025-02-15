@@ -13,9 +13,9 @@ export default class Grass {
     this.geometry = null;
 
     this.parameters = {};
-    this.parameters.blades = 500000;
+    this.parameters.blades = 50000;
     this.parameters.offset = 0.2;
-    this.parameters.lenght = 1;
+    this.parameters.length = 1;
     this.parameters.chunkSize = 100;
     this.parameters.grassOffsetX = -80;
     this.parameters.grassOffsetZ = -95;
@@ -49,13 +49,17 @@ export default class Grass {
       .min(0)
       .max(1)
       .step(0.0001)
-      .onFinishChange(this.setGrass.bind(this));
+      .onChange(() => {
+        this.material.uniforms.uOffset.value = this.parameters.offset;
+      });
     this.debugFolder
-      .add(this.parameters, "lenght")
+      .add(this.parameters, "length")
       .min(0)
       .max(3)
       .step(0.001)
-      .onFinishChange(this.setGrass.bind(this));
+      .onChange(() => {
+        this.material.uniforms.uLength.value = this.parameters.length;
+      });
     this.debugFolder
       .add(this.parameters, "gridSize")
       .min(0)
@@ -148,8 +152,6 @@ export default class Grass {
     this.heightMap.flipY = false;
 
     this.grassMap = this.experience.ressources.item.grassMap;
-    // this.grassMap.wrapS = THREE.RepeatWrapping;
-    // this.grassMap.wrapT = THREE.RepeatWrapping;
     this.grassMap.flipY = false;
 
     this.perlinNoise = this.experience.ressources.item.perlinNoise;
@@ -170,8 +172,6 @@ export default class Grass {
     }
 
     const positions = new Float32Array(this.parameters.blades * 3 * 3);
-    const centers = new Float32Array(this.parameters.blades * 3 * 2);
-    const uvs = new Float32Array(this.parameters.blades * 3 * 2);
 
     for (let i = 0; i < this.parameters.blades; i++) {
       const positionX = (Math.random() - 0.5) * this.parameters.chunkSize;
@@ -184,29 +184,12 @@ export default class Grass {
       positions[i9 + 0] = positionX;
       positions[i9 + 1] = positionY;
       positions[i9 + 2] = positionZ;
-      positions[i9 + 3] = positionX + this.parameters.offset / 2;
-      positions[i9 + 4] = positionY + this.parameters.lenght;
-      positions[i9 + 5] = positionZ + this.parameters.offset / 2;
-      positions[i9 + 6] = positionX + this.parameters.offset;
+      positions[i9 + 3] = positionX;
+      positions[i9 + 4] = positionY;
+      positions[i9 + 5] = positionZ;
+      positions[i9 + 6] = positionX;
       positions[i9 + 7] = positionY;
-      positions[i9 + 8] = positionZ + this.parameters.offset;
-
-      const i6 = i * 6;
-      centers[i6 + 0] = positionX + this.parameters.offset / 2;
-      centers[i6 + 1] = positionZ + this.parameters.offset / 2;
-      centers[i6 + 2] = positionX + this.parameters.offset / 2;
-      centers[i6 + 3] = positionZ + this.parameters.offset / 2;
-      centers[i6 + 4] = positionX + this.parameters.offset / 2;
-      centers[i6 + 5] = positionZ + this.parameters.offset / 2;
-
-      uvs[i6 + 0] =
-        (positionX + this.parameters.chunkSize / 2) / this.parameters.chunkSize;
-      uvs[i6 + 1] =
-        (positionZ + this.parameters.chunkSize / 2) / this.parameters.chunkSize;
-      uvs[i6 + 2] = uvs[i6 + 0];
-      uvs[i6 + 3] = uvs[i6 + 1];
-      uvs[i6 + 4] = uvs[i6 + 0];
-      uvs[i6 + 5] = uvs[i6 + 1];
+      positions[i9 + 8] = positionZ;
     }
 
     this.geometry = new THREE.BufferGeometry();
@@ -215,19 +198,15 @@ export default class Grass {
       "position",
       new THREE.Float32BufferAttribute(positions, 3)
     );
-    this.geometry.setAttribute(
-      "center",
-      new THREE.Float32BufferAttribute(centers, 2)
-    );
-    this.geometry.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
 
     this.material = new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0 },
+        uOffset: { value: this.parameters.offset },
+        uLength: { value: this.parameters.length },
         uHeightMap: { value: this.heightMap },
         uGrassMap: { value: this.grassMap },
         uPerlinSize: { value: this.parameters.perlinSize },
-        uLenght: { value: this.parameters.lenght },
         uPerlinFrequency: { value: this.parameters.perlinFrequency },
         ubladesTopColor1: {
           value: new THREE.Color(this.parameters.bladesTopColor1),
