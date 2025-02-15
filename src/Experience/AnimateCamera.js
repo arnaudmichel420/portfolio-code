@@ -71,7 +71,7 @@ export default class AnimateCamera {
         lookAtY: 332,
         lookAtZ: 0,
         snowDensity: 1,
-        snowSpeed: 0.009,
+        snowSpeed: 0.01,
         snowSize: 10,
       },
       {
@@ -83,7 +83,7 @@ export default class AnimateCamera {
         lookAtZ: 0,
         snowDensity: 0.5,
         snowSpeed: 0.009,
-        snowSize: 5,
+        snowSize: 1,
       },
       {
         x: -192,

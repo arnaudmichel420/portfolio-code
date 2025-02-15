@@ -16,14 +16,8 @@ export default class Text {
     this.parameters = {};
 
     this.setText();
-
-    if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("💬 Text");
-      // this.debugFolder.close();
-      this.setDebug();
-    }
   }
-  setDebug() {}
+
   setText() {
     const topDiv = document.createElement("div");
     topDiv.classList.add("topDiv");

@@ -15,13 +15,13 @@ export default class Grass {
     this.parameters = {};
     this.parameters.blades = 500000;
     this.parameters.offset = 0.2;
-    this.parameters.lenght = 0.5;
+    this.parameters.lenght = 1;
     this.parameters.chunkSize = 50;
     this.parameters.gridSize = 250;
     this.parameters.heightMapStrenght = 73;
     this.parameters.bladesTopColor = "#5cc62f";
     this.parameters.bladesBottomColor = "#0b2d06";
-    this.parameters.colorOffset = 0.3;
+    this.parameters.colorOffset = 0.5;
     this.parameters.perlinSize = 0.1;
     this.parameters.perlinFrequency = 0.0002;
 
@@ -263,7 +263,7 @@ export default class Grass {
 
     this.mesh = new THREE.Mesh(this.geometry, this.material);
 
-    // this.scene.add(this.mesh);
+    this.scene.add(this.mesh);
 
     const box = new THREE.Box3().setFromObject(this.mesh); // Get bounding box from the mesh
     const helper = new THREE.Box3Helper(box, 0xffff00); // Create box helper with yellow color

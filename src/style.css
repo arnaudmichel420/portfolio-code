@@ -83,7 +83,7 @@ body {
   stroke-dasharray: 1400px;
   stroke-dashoffset: 1400px;
 }
-.loading-bar h1 {
+.loading-bar h2 {
   color: white;
   position: absolute;
   font-family: "Brooklyn";
@@ -310,7 +310,7 @@ body {
 }
 .topDiv img {
   position: absolute;
-  margin-bottom: 80px;
+  margin-bottom: 150px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -334,6 +334,13 @@ body {
   }
 }
 @media screen and (max-width: 767px) {
+  .loading-bar svg {
+    width: 300px;
+    height: 125px;
+  }
+  .loading-bar svg h2 {
+    font-size: 16px;
+  }
   .mainDiv {
     height: -moz-fit-content;
     height: fit-content;

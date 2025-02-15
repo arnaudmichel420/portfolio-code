@@ -8,7 +8,9 @@ export default class Overlay {
     this.scene = this.experience.scene;
     this.ressources = this.experience.ressources;
     this.camera = this.experience.camera.instance;
+
     this.debug = this.experience.debug;
+    this.phone = this.experience.phone;
     this.active = true;
 
     this.ui = gsap.timeline();
@@ -79,6 +81,12 @@ export default class Overlay {
   setLoadingBar() {
     const loadingBar = document.querySelector(".loading-bar");
     const path = document.querySelector(".loading-bar svg path");
+
+    //phone path
+    if (this.phone.active) {
+      path.setAttribute("d", "M0 0 H300 V125 H0 Z");
+    }
+
     const pathLenght = path.getTotalLength();
     let loadingProgress = null;
     let loadingAnimation = gsap.to(path, {
@@ -95,7 +103,7 @@ export default class Overlay {
       loadingAnimation.invalidate().restart();
     });
     this.ressources.on("ready", () => {
-      const h1 = document.querySelector(".loading-bar h1");
+      const h1 = document.querySelector(".loading-bar h2");
       loadingBar.style.cursor = "pointer";
       loadingBar.addEventListener("click", () => {
         gsap.to(this.overlayMaterial.uniforms.uAlpha, {
