@@ -1,18 +1,22 @@
-uniform vec3 ubladesTopColor;
+uniform vec3 ubladesTopColor1;
+uniform vec3 ubladesTopColor2;
 uniform vec3 ubladesBottomColor;
 uniform float uColorOffset;
-uniform sampler2D uHeightMap;
-
-
+uniform float uLength;
+uniform sampler2D uPerlinNoise;
 
 varying float vElevation;
 varying vec2 vUv;
 
 void main()
 {
-    float mixStrengh = vElevation + uColorOffset;
+    //color patch 
+    float colorNoise = texture(uPerlinNoise, vUv * 2.0).r;
+    vec3 colorTop = mix(ubladesTopColor1, ubladesTopColor2, colorNoise);
     
-    vec3 color = mix(ubladesBottomColor, ubladesTopColor, mixStrengh);
+    //blades elevation
+    float mixStrengh = vElevation + uColorOffset * uLength;
+    vec3 color = mix(ubladesBottomColor, colorTop, mixStrengh);
 
     gl_FragColor = vec4(color, 1.0);
 

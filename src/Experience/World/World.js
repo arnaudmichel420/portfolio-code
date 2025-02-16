@@ -10,6 +10,8 @@ import Water from "./Water.js";
 import Snow from "./Snow.js";
 import Text from "./Text.js";
 import Fireflies from "./Fireflies.js";
+import NightSky from "./NightSky.js";
+
 
 export default class World {
   constructor() {
@@ -22,10 +24,11 @@ export default class World {
     this.ressources.on("ready", () => {
       //setup
       this.mountain = new Mountain();
+      this.nightSky = new NightSky();
       this.cubes = new Cubes();
       this.grass = new Grass();
-      this.smoke = new Smoke();
       this.water = new Water();
+      this.smoke = new Smoke();
       this.snow = new Snow();
       this.text = new Text();
       this.environment = new Environment();
