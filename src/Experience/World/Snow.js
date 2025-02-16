@@ -177,9 +177,7 @@ export default class Snow {
       //   wireframe: true,
     });
     this.mesh = new THREE.Points(this.geometry, this.material);
-    // this.mesh.position.set(100, 17, 100);
     this.scene.add(this.mesh);
-    console.log(this.mesh);
   }
   elapsedTime() {
     if (this.material.uniforms.uTime != null) {
