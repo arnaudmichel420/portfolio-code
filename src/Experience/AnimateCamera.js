@@ -11,13 +11,14 @@ export default class AnimateCamera {
     this.debug = this.experience.debug;
 
     this.cameraLookAt = this.experience.camera.cameraLookAt;
-
     this.snow = this.experience.world.snow.material.uniforms;
 
-    this.transitionDuration = { x: 1.5 };
-    this.scrollSensivity = { x: 0.1 };
-    this.parallaxSmoothing = { x: 0.1 };
-    this.parallaxAmplitude = { x: 2 };
+    this.parameters = {};
+    this.parameters.transitionDuration = 1.5;
+    this.parameters.scrollSensivity = 0.1;
+    this.parameters.parallaxSmoothing = 0.1;
+    this.parameters.parallaxAmplitude = 2;
+
     this.cameraPositions = [
       {
         x: 97,
@@ -105,31 +106,21 @@ export default class AnimateCamera {
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("🎬 Camera Animation");
       this.debugFolder.close();
+      this.setDebug();
     }
-    this.setDebug();
+
     this.animateScroll();
   }
   setDebug() {
-    //debug
-    if (this.debug.active) {
-      this.debugFolder
-        .add(this.transitionDuration, "x", 0, 5, 0.1)
-        .name("transitionDuration");
-      this.debugFolder
-        .add(this.scrollSensivity, "x", 0, 0.5, 0.001)
-        .name("scrollSensivity");
-      this.debugFolder
-        .add(this.parallaxAmplitude, "x", 0, 5, 0.1)
-        .name("parallaxAmplitude");
-      this.debugFolder
-        .add(this.parallaxSmoothing, "x", 0, 0.2, 0.001)
-        .name("parallaxSmoothing");
-    }
+    this.debugFolder.add(this.parameters, "transitionDuration", 0, 5, 0.1);
+    this.debugFolder.add(this.parameters, "scrollSensivity", 0, 0.5, 0.001);
+    this.debugFolder.add(this.parameters, "parallaxAmplitude", 0, 5, 0.1);
+    this.debugFolder.add(this.parameters, "parallaxSmoothing", 0, 0.2, 0.001);
   }
   animateScroll() {
     if (this.listen) {
       this.deltaScroll = this.experience.mouse.deltaScroll;
-      this.deltaScroll *= this.scrollSensivity.x;
+      this.deltaScroll *= this.parameters.scrollSensivity;
       if (this.deltaScroll <= 1 && this.deltaScroll >= -1) {
         this.deltaScroll = 0;
       } else if (
@@ -239,7 +230,7 @@ export default class AnimateCamera {
 
         setTimeout(() => {
           this.listen = true;
-        }, this.transitionDuration.x * 1000);
+        }, this.parameters.transitionDuration * 1000);
       } else if (
         this.scrollY > -(this.currentSection - 1) * 50 - 30 &&
         this.currentSection == this.previousSection &&
@@ -250,21 +241,21 @@ export default class AnimateCamera {
 
         setTimeout(() => {
           this.listen = true;
-        }, this.transitionDuration.x * 1000);
+        }, this.parameters.transitionDuration * 1000);
       }
 
       //launch animation
       if (this.currentSection !== this.previousSection) {
         this.previousSection = this.currentSection;
         gsap.to(this.camera.position, {
-          duration: this.transitionDuration.x,
+          duration: this.parameters.transitionDuration,
           ease: "power4.out",
           x: this.cameraPositions[this.currentSection].x,
           y: this.cameraPositions[this.currentSection].y,
           z: this.cameraPositions[this.currentSection].z,
         });
         gsap.to(this.cameraLookAt, {
-          duration: this.transitionDuration.x,
+          duration: this.parameters.transitionDuration,
           ease: "power4.out",
           x: this.cameraPositions[this.currentSection].lookAtX,
           y: this.cameraPositions[this.currentSection].lookAtY,
@@ -279,17 +270,17 @@ export default class AnimateCamera {
         });
         //snow
         gsap.to(this.snow.uSnowDensity, {
-          duration: this.transitionDuration.x,
+          duration: this.parameters.transitionDuration,
           ease: "power4.out",
           value: this.cameraPositions[this.currentSection].snowDensity,
         });
         gsap.to(this.snow.uSnowSpeed, {
-          duration: this.transitionDuration.x,
+          duration: this.parameters.transitionDuration,
           ease: "power4.out",
           value: this.cameraPositions[this.currentSection].snowSpeed,
         });
         gsap.to(this.snow.uSize, {
-          duration: this.transitionDuration.x,
+          duration: this.parameters.transitionDuration,
           ease: "power4.out",
           value: this.cameraPositions[this.currentSection].snowSize,
         });
@@ -298,6 +289,8 @@ export default class AnimateCamera {
         if (this.currentSection > 4) {
           this.experience.world.text.setAnimation(this.currentSection);
         }
+        //launch sky animation
+        this.experience.world.nightSky.setAnimation(this.currentSection);
       }
     }
   }
@@ -305,14 +298,14 @@ export default class AnimateCamera {
     // this.mouseXY = this.experience.mouse.mouseXY;
     // this.deltaTime = this.experience.time.delta;
     // this.cameraGroup.position.x +=
-    //   (this.mouseXY.x * this.parallaxAmplitude.x -
+    //   (this.mouseXY.x * this.parameters.parallaxAmplitude -
     //     this.cameraGroup.position.x) *
-    //   this.parallaxSmoothing.x;
+    //   this.parameters.parallaxSmoothing;
     // this.deltaTime;
     // this.cameraGroup.position.y +=
-    //   (this.mouseXY.y * this.parallaxAmplitude.x -
+    //   (this.mouseXY.y * this.parameters.parallaxAmplitude -
     //     this.cameraGroup.position.y) *
-    //   this.parallaxSmoothing.x;
+    //   this.parameters.parallaxSmoothing;
     // this.deltaTime;
   }
 }
