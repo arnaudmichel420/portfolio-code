@@ -13,13 +13,16 @@ export default class Grass {
     this.geometry = null;
 
     this.parameters = {};
-    this.parameters.blades = 500000;
+    this.parameters.blades = 50000;
     this.parameters.offset = 0.2;
-    this.parameters.lenght = 1;
-    this.parameters.chunkSize = 50;
+    this.parameters.length = 1;
+    this.parameters.chunkSize = 100;
+    this.parameters.grassOffsetX = -80;
+    this.parameters.grassOffsetZ = -95;
     this.parameters.gridSize = 250;
-    this.parameters.heightMapStrenght = 73;
-    this.parameters.bladesTopColor = "#5cc62f";
+    this.parameters.heightMapStrenght = 72.5;
+    this.parameters.bladesTopColor1 = "#54ce12";
+    this.parameters.bladesTopColor2 = "#212f13";
     this.parameters.bladesBottomColor = "#0b2d06";
     this.parameters.colorOffset = 0.5;
     this.parameters.perlinSize = 0.1;
@@ -30,7 +33,7 @@ export default class Grass {
     //debug
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("🌿 Grass");
-      this.debugFolder.close();
+      // this.debugFolder.close();
       this.setDebug();
     }
   }
@@ -46,13 +49,17 @@ export default class Grass {
       .min(0)
       .max(1)
       .step(0.0001)
-      .onFinishChange(this.setGrass.bind(this));
+      .onChange(() => {
+        this.material.uniforms.uOffset.value = this.parameters.offset;
+      });
     this.debugFolder
-      .add(this.parameters, "lenght")
+      .add(this.parameters, "length")
       .min(0)
       .max(3)
       .step(0.001)
-      .onFinishChange(this.setGrass.bind(this));
+      .onChange(() => {
+        this.material.uniforms.uLength.value = this.parameters.length;
+      });
     this.debugFolder
       .add(this.parameters, "gridSize")
       .min(0)
@@ -63,7 +70,7 @@ export default class Grass {
       .add(this.parameters, "heightMapStrenght")
       .min(0)
       .max(500)
-      .step(1)
+      .step(0.1)
       .onChange(() => {
         this.material.uniforms.uHeightMapStrenght.value =
           this.parameters.heightMapStrenght;
@@ -75,6 +82,24 @@ export default class Grass {
       .step(1)
       .onFinishChange(this.setGrass.bind(this));
     this.debugFolder
+      .add(this.parameters, "grassOffsetX")
+      .min(-250)
+      .max(250)
+      .step(1)
+      .onChange(() => {
+        this.material.uniforms.uGrassOffsetX.value =
+          this.parameters.grassOffsetX;
+      });
+    this.debugFolder
+      .add(this.parameters, "grassOffsetZ")
+      .min(-250)
+      .max(250)
+      .step(1)
+      .onChange(() => {
+        this.material.uniforms.uGrassOffsetZ.value =
+          this.parameters.grassOffsetZ;
+      });
+    this.debugFolder
       .add(this.parameters, "colorOffset")
       .min(0)
       .max(1)
@@ -83,10 +108,17 @@ export default class Grass {
         this.material.uniforms.uColorOffset.value = this.parameters.colorOffset;
       });
     this.debugFolder
-      .addColor(this.parameters, "bladesTopColor")
+      .addColor(this.parameters, "bladesTopColor1")
       .onChange(() => {
-        this.material.uniforms.ubladesTopColor.value.set(
-          this.parameters.bladesTopColor
+        this.material.uniforms.ubladesTopColor1.value.set(
+          this.parameters.bladesTopColor1
+        );
+      });
+    this.debugFolder
+      .addColor(this.parameters, "bladesTopColor2")
+      .onChange(() => {
+        this.material.uniforms.ubladesTopColor2.value.set(
+          this.parameters.bladesTopColor2
         );
       });
     this.debugFolder
@@ -117,14 +149,14 @@ export default class Grass {
 
   setGrass() {
     this.heightMap = this.experience.ressources.item.heightMap;
-    this.heightMap.wrapS = THREE.RepeatWrapping;
-    this.heightMap.wrapT = THREE.RepeatWrapping;
     this.heightMap.flipY = false;
 
     this.grassMap = this.experience.ressources.item.grassMap;
-    this.grassMap.wrapS = THREE.RepeatWrapping;
-    this.grassMap.wrapT = THREE.RepeatWrapping;
     this.grassMap.flipY = false;
+
+    this.perlinNoise = this.experience.ressources.item.perlinNoise;
+    this.perlinNoise.wrapS = THREE.RepeatWrapping;
+    this.perlinNoise.wrapT = THREE.RepeatWrapping;
 
     const plane = new THREE.Mesh(
       new THREE.PlaneGeometry(250, 250),
@@ -140,55 +172,11 @@ export default class Grass {
     }
 
     const positions = new Float32Array(this.parameters.blades * 3 * 3);
-    const centers = new Float32Array(this.parameters.blades * 3 * 2);
-    const uvs = new Float32Array(this.parameters.blades * 3 * 2);
-
-    const coordFix = [
-      { x: this.parameters.gridSize / 2, y: -this.parameters.gridSize / 2 },
-      { x: this.parameters.gridSize / 2, y: this.parameters.gridSize / 2 },
-      { x: -this.parameters.gridSize / 2, y: this.parameters.gridSize / 2 },
-      { x: -this.parameters.gridSize / 2, y: -this.parameters.gridSize / 2 },
-    ];
-
-    for (let y = 0; y < 4; y++) {
-      const i9 = y * 9;
-      //1
-      positions[i9 + 0] = coordFix[y].x;
-      positions[i9 + 1] = 0;
-      positions[i9 + 2] = coordFix[y].y;
-      //2
-      positions[i9 + 3] = coordFix[y].x;
-      positions[i9 + 4] = 0;
-      positions[i9 + 5] = coordFix[y].y;
-      //3
-      positions[i9 + 6] = coordFix[y].x;
-      positions[i9 + 7] = 0;
-      positions[i9 + 8] = coordFix[y].y;
-
-      const i6 = y * 6;
-      centers[i6 + 0] = coordFix[y].x;
-      centers[i6 + 1] = coordFix[y].y;
-      centers[i6 + 2] = coordFix[y].x;
-      centers[i6 + 3] = coordFix[y].y;
-      centers[i6 + 4] = coordFix[y].x;
-      centers[i6 + 5] = coordFix[y].y;
-
-      uvs[i6 + 0] =
-        (coordFix[y].x + this.parameters.gridSize / 2) /
-        this.parameters.gridSize;
-      uvs[i6 + 1] =
-        (coordFix[y].y + this.parameters.gridSize / 2) /
-        this.parameters.gridSize;
-      uvs[i6 + 2] = uvs[i6 + 0];
-      uvs[i6 + 3] = uvs[i6 + 1];
-      uvs[i6 + 4] = uvs[i6 + 0];
-      uvs[i6 + 5] = uvs[i6 + 1];
-    }
 
     for (let i = 0; i < this.parameters.blades; i++) {
-      const positionX = (Math.random() - 0.5) * this.parameters.gridSize;
+      const positionX = (Math.random() - 0.5) * this.parameters.chunkSize;
 
-      const positionZ = (Math.random() - 0.5) * this.parameters.gridSize;
+      const positionZ = (Math.random() - 0.5) * this.parameters.chunkSize;
 
       const positionY = 0;
 
@@ -196,29 +184,12 @@ export default class Grass {
       positions[i9 + 0] = positionX;
       positions[i9 + 1] = positionY;
       positions[i9 + 2] = positionZ;
-      positions[i9 + 3] = positionX + this.parameters.offset / 2;
-      positions[i9 + 4] = positionY + this.parameters.lenght;
-      positions[i9 + 5] = positionZ + this.parameters.offset / 2;
-      positions[i9 + 6] = positionX + this.parameters.offset;
+      positions[i9 + 3] = positionX;
+      positions[i9 + 4] = positionY;
+      positions[i9 + 5] = positionZ;
+      positions[i9 + 6] = positionX;
       positions[i9 + 7] = positionY;
-      positions[i9 + 8] = positionZ + this.parameters.offset;
-
-      const i6 = i * 6;
-      centers[i6 + 0] = positionX + this.parameters.offset / 2;
-      centers[i6 + 1] = positionZ + this.parameters.offset / 2;
-      centers[i6 + 2] = positionX + this.parameters.offset / 2;
-      centers[i6 + 3] = positionZ + this.parameters.offset / 2;
-      centers[i6 + 4] = positionX + this.parameters.offset / 2;
-      centers[i6 + 5] = positionZ + this.parameters.offset / 2;
-
-      uvs[i6 + 0] =
-        (positionX + this.parameters.gridSize / 2) / this.parameters.gridSize;
-      uvs[i6 + 1] =
-        (positionZ + this.parameters.gridSize / 2) / this.parameters.gridSize;
-      uvs[i6 + 2] = uvs[i6 + 0];
-      uvs[i6 + 3] = uvs[i6 + 1];
-      uvs[i6 + 4] = uvs[i6 + 0];
-      uvs[i6 + 5] = uvs[i6 + 1];
+      positions[i9 + 8] = positionZ;
     }
 
     this.geometry = new THREE.BufferGeometry();
@@ -227,22 +198,21 @@ export default class Grass {
       "position",
       new THREE.Float32BufferAttribute(positions, 3)
     );
-    this.geometry.setAttribute(
-      "center",
-      new THREE.Float32BufferAttribute(centers, 2)
-    );
-    this.geometry.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
 
     this.material = new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0 },
+        uOffset: { value: this.parameters.offset },
+        uLength: { value: this.parameters.length },
         uHeightMap: { value: this.heightMap },
         uGrassMap: { value: this.grassMap },
         uPerlinSize: { value: this.parameters.perlinSize },
-        uLenght: { value: this.parameters.lenght },
         uPerlinFrequency: { value: this.parameters.perlinFrequency },
-        ubladesTopColor: {
-          value: new THREE.Color(this.parameters.bladesTopColor),
+        ubladesTopColor1: {
+          value: new THREE.Color(this.parameters.bladesTopColor1),
+        },
+        ubladesTopColor2: {
+          value: new THREE.Color(this.parameters.bladesTopColor2),
         },
         ubladesBottomColor: {
           value: new THREE.Color(this.parameters.bladesBottomColor),
@@ -256,6 +226,16 @@ export default class Grass {
         uGridSize: {
           value: this.parameters.gridSize,
         },
+        uChunkSize: {
+          value: this.parameters.chunkSize,
+        },
+        uGrassOffsetX: {
+          value: this.parameters.grassOffsetX,
+        },
+        uGrassOffsetZ: {
+          value: this.parameters.grassOffsetZ,
+        },
+        uPerlinNoise: new THREE.Uniform(this.perlinNoise),
       },
       vertexShader: grassVertexShader,
       fragmentShader: grassFragmentShader,
@@ -264,10 +244,6 @@ export default class Grass {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
 
     this.scene.add(this.mesh);
-
-    const box = new THREE.Box3().setFromObject(this.mesh); // Get bounding box from the mesh
-    const helper = new THREE.Box3Helper(box, 0xffff00); // Create box helper with yellow color
-    this.scene.add(helper);
   }
   elapsedTime() {
     if (this.material.uniforms.uTime != null) {

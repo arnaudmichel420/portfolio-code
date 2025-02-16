@@ -1,73 +1,73 @@
 attribute vec2 center;
 
 uniform float uTime;
-uniform sampler2D uHeightMap;
-uniform sampler2D uGrassMap;
+uniform float uOffset;
+uniform float uLength;
 uniform float uPerlinSize;
 uniform float uPerlinFrequency;
 uniform float uHeightMapStrenght;
-uniform vec2 uHeightMapSize;
 uniform float uGridSize;
-uniform float uLenght;
-
-
-
+uniform float uChunkSize;
+uniform float uGrassOffsetX;
+uniform float uGrassOffsetZ;
+uniform sampler2D uHeightMap;
+uniform sampler2D uGrassMap;
+uniform sampler2D uPerlinNoise;
 
 varying vec3 vColor;
 varying float vElevation;
 varying vec2 vUv;
 
-
 #include ../Partials/getRotatePivot2d.glsl;
 #include ../Partials/perlin3dNoise.glsl;
 
-
-
-
 void main()
 {
-    vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+    vec3 newPosition = position;
 
-    //follow camera 
-    // vec2 gridMin = vec2(-uGridSize / 2.0, -uGridSize / 2.0);
-    // vec2 gridMax = vec2(uGridSize / 2.0, uGridSize / 2.0);
+    //define vertex position in the blade
+    bool isFirstVertex = mod(float(gl_VertexID), 3.0) == 0.0;
+    bool isSecondVertex = mod(float(gl_VertexID), 3.0) == 1.0;
+    bool isThirdVertex = mod(float(gl_VertexID), 3.0) == 2.0;
 
+    //move with camera
+    newPosition.x = mod(newPosition.x - cameraPosition.x, uChunkSize) +  cameraPosition.x + uGrassOffsetX;
+    newPosition.z = mod(newPosition.z - cameraPosition.z, uChunkSize) +  cameraPosition.z + uGrassOffsetZ;
 
-    // modelPosition.xz += cameraPosition.xz;
-
-    // modelPosition.x = clamp(modelPosition.x, gridMin.x, gridMax.x);
-    // modelPosition.z = clamp(modelPosition.z, gridMin.y, gridMax.y);
-
-
-    // vec2 newCenter = center + cameraPosition.xz;
-
-    // newCenter.x = clamp(newCenter.x, gridMin.x, gridMax.x);
-    // newCenter.y = clamp(newCenter.y, gridMin.y, gridMax.y);
-// gl_VertexID;
+    //store center before offset
+    vec2 newCenter = mix(mix(newPosition.xz, newPosition.xz, float(isSecondVertex)), newPosition.xz, float(isThirdVertex));
     
+    //offset
+    newPosition.x += float(isFirstVertex) * uOffset;
+    newPosition.x -= float(isSecondVertex) * uOffset;
+    newPosition.y += float(isThirdVertex) * uLength;
+
+    //store elevation before offset
+    vElevation = newPosition.y;
 
     // rotate blades to camera
-    float angle = atan(center.x - cameraPosition.x, center.y - cameraPosition.z);
-    modelPosition.xz = getRotatePivot2d(modelPosition.xz, angle, center.xy);
+    float angle = atan(newCenter.x - cameraPosition.x, newCenter.y - cameraPosition.z);
+    newPosition.xz = getRotatePivot2d(newPosition.xz, angle, newCenter.xy);
 
-    // //wind
-    float topVertice = step(uLenght, modelPosition.y);
-    modelPosition.xz += topVertice * cnoise(vec3(modelPosition.xz * uPerlinSize ,uTime * uPerlinFrequency));
-
-    vElevation = modelPosition.y;
+    //corrected Uvs
+    vec2 uvScale = (newPosition.xz - -uGridSize / 2.0) / (uGridSize / 2.0 - -uGridSize / 2.0);
 
     //grass patch 
-    float grassHeight = texture2D(uGrassMap, uv).r;
-    modelPosition.y += topVertice * grassHeight ;
+    float grassHeight = texture2D(uGrassMap, uvScale).r;
+    newPosition.y += float(isThirdVertex) * (step(0.45, grassHeight) * uLength - uLength);
+
+    //wind
+    float topVertice = step(uLength, newPosition.y);
+    newPosition.xz += topVertice * cnoise(vec3(newPosition.xz * uPerlinSize ,uTime * uPerlinFrequency)) * 0.5;
 
     //follow mesh
-    vec2 scaledUV = vec2(uv.x, uv.y * (uHeightMapSize.x / uHeightMapSize.y));
-    float height = texture2D(uHeightMap, uv).r;
-    modelPosition.y += height * uHeightMapStrenght;
+    float height = texture2D(uHeightMap, uvScale).r;
+    newPosition.y += height * uHeightMapStrenght;
 
+    vec4 modelPosition = modelMatrix * vec4(newPosition, 1.0);
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;
     gl_Position = projectedPosition;
 
-    vUv = uv;
+    vUv = uvScale;
 }
