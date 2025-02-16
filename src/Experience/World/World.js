@@ -9,6 +9,7 @@ import Smoke from "./Smoke.js";
 import Water from "./Water.js";
 import Snow from "./Snow.js";
 import Text from "./Text.js";
+import Fireflies from "./Fireflies.js";
 
 export default class World {
   constructor() {
@@ -28,6 +29,7 @@ export default class World {
       this.snow = new Snow();
       this.text = new Text();
       this.environment = new Environment();
+      this.fireflies = new Fireflies();
     });
   }
 }

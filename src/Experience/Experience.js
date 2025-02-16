@@ -117,5 +117,8 @@ export default class Experience {
     if (this.world.snow != null) {
       this.world.snow.elapsedTime();
     }
+    if (this.world.fireflies != null) {
+      this.world.fireflies.elapsedTime();
+    }
   }
 }
