@@ -57,7 +57,7 @@ arrowHeaderT
     duration: 0.5,
     ease: "power2.inOut",
     rotate: "-40deg",
-    marginBottom: "-0.6rem",
+    marginBottom: "-0.4rem",
   })
   .to(
     ".backArrowHeader div:last-child",
@@ -65,7 +65,7 @@ arrowHeaderT
       duration: 0.5,
       ease: "power2.inOut",
       rotate: "40deg",
-      marginTop: "-0.6rem",
+      marginTop: "-0.4rem",
     },
     "<"
   );
@@ -81,7 +81,7 @@ burgerT
     {
       duration: 0.5,
       ease: "power2.inOut",
-      height: "0.4rem",
+      height: "0.3rem",
     },
     "<"
   )
@@ -331,7 +331,7 @@ footerT
     duration: 0.5,
     ease: "power2.inOut",
     rotate: "-40deg",
-    marginBottom: "-0.6rem",
+    marginBottom: "-0.5rem",
   })
   .to(
     ".backArrowFooterLeft div:last-child",
@@ -339,7 +339,7 @@ footerT
       duration: 0.5,
       ease: "power2.inOut",
       rotate: "40deg",
-      marginTop: "-0.6rem",
+      marginTop: "-0.5rem",
     },
     "<"
   )
@@ -349,7 +349,7 @@ footerT
       duration: 0.5,
       ease: "power2.inOut",
       rotate: "40deg",
-      marginBottom: "-0.6rem",
+      marginBottom: "-0.5rem",
     },
     "<"
   )
@@ -359,7 +359,7 @@ footerT
       duration: 0.5,
       ease: "power2.inOut",
       rotate: "-40deg",
-      marginTop: "-0.6rem",
+      marginTop: "-0.5rem",
     },
     "<"
   );

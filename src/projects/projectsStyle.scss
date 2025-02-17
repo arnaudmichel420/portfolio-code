@@ -111,6 +111,7 @@ header {
       }
       li {
         list-style: none;
+
         p {
           margin-bottom: 1rem;
         }
@@ -121,7 +122,14 @@ header {
           visibility: hidden;
           opacity: 0;
           box-shadow: 0;
+          li:hover a {
+            color: $blackColor;
+          }
         }
+      }
+      li:hover p,
+      li:hover .hover {
+        color: $blackColor;
       }
     }
   }
@@ -138,8 +146,8 @@ header {
     .backArrowHeader {
       div {
         background-color: $whiteColor;
-        height: 0.4rem;
-        border-radius: 0.4rem;
+        height: 0.3rem;
+        border-radius: 0.3rem;
         transform-origin: left center;
         &:first-child {
           margin-bottom: -0.4rem;
@@ -213,7 +221,8 @@ main {
     .leftPart {
       width: 50%;
       min-height: 500px;
-      background-color: $mainColor;
+      background-size: cover;
+      background-position: center;
     }
     .rightPart {
       width: 50%;
@@ -322,7 +331,7 @@ footer {
       .backArrow {
         div {
           background-color: $whiteColor;
-          height: 0.4rem;
+          height: 0.3rem;
           border-radius: 0.4rem;
           transform-origin: left center;
           &:first-child {
