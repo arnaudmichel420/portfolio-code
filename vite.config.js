@@ -16,7 +16,8 @@ export default {
     rollupOptions: {
       input: {
         home: "src/index.html",
-        project1: "src/projects/project-1.html",
+        project1: "src/projects/massage-sportif-annecy.html",
+        project2: "src/projects/gamejam.html",
       },
     },
   },

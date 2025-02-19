@@ -73,7 +73,7 @@ export default class Text {
       </div>
       <div class="bottom">
         <p>Did you miss some of the projects ?</p>
-        <a href="">Discover all projects</a>
+        <a href="./projects/massage-sportif-annecy.html">Discover all projects</a>
       </div>`;
 
     const topDiv3D = new CSS2DObject(topDiv);

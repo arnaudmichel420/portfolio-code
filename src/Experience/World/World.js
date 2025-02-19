@@ -12,7 +12,6 @@ import Text from "./Text.js";
 import Fireflies from "./Fireflies.js";
 import NightSky from "./NightSky.js";
 
-
 export default class World {
   constructor() {
     this.experience = new Experience();
@@ -28,11 +27,11 @@ export default class World {
       this.cubes = new Cubes();
       this.grass = new Grass();
       this.water = new Water();
+      this.fireflies = new Fireflies();
       this.smoke = new Smoke();
       this.snow = new Snow();
       this.text = new Text();
       this.environment = new Environment();
-      this.fireflies = new Fireflies();
     });
   }
 }

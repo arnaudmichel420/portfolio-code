@@ -107,6 +107,7 @@ header .menu ul .extend {
 }
 header .menu ul li {
   list-style: none;
+  cursor: pointer;
 }
 header .menu ul li p {
   margin-bottom: 1rem;
@@ -118,6 +119,13 @@ header .menu ul li ul {
   visibility: hidden;
   opacity: 0;
   box-shadow: 0;
+}
+header .menu ul li ul li:hover a {
+  color: #101010;
+}
+header .menu ul li:hover p,
+header .menu ul li:hover .hover {
+  color: #101010;
 }
 header nav {
   position: relative;
@@ -132,8 +140,8 @@ header nav {
 }
 header nav .backArrowHeader div {
   background-color: #f1f1f1;
-  height: 0.4rem;
-  border-radius: 0.4rem;
+  height: 0.3rem;
+  border-radius: 0.3rem;
   transform-origin: left center;
 }
 header nav .backArrowHeader div:first-child {
@@ -206,7 +214,8 @@ main .section2 {
 main .section2 .leftPart {
   width: 50%;
   min-height: 500px;
-  background-color: #3569b3;
+  background-size: cover;
+  background-position: center;
 }
 main .section2 .rightPart {
   width: 50%;
@@ -314,7 +323,7 @@ footer nav a {
 }
 footer nav a .backArrow div {
   background-color: #f1f1f1;
-  height: 0.4rem;
+  height: 0.3rem;
   border-radius: 0.4rem;
   transform-origin: left center;
 }
