@@ -107,6 +107,7 @@ header .menu ul .extend {
 }
 header .menu ul li {
   list-style: none;
+  cursor: pointer;
 }
 header .menu ul li p {
   margin-bottom: 1rem;
