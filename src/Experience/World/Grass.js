@@ -13,20 +13,22 @@ export default class Grass {
     this.geometry = null;
 
     this.parameters = {};
-    this.parameters.blades = 50000;
-    this.parameters.offset = 0.2;
-    this.parameters.length = 1;
-    this.parameters.chunkSize = 100;
-    this.parameters.grassOffsetX = -80;
-    this.parameters.grassOffsetZ = -95;
-    this.parameters.gridSize = 250;
-    this.parameters.heightMapStrenght = 72.5;
-    this.parameters.bladesTopColor1 = "#54ce12";
-    this.parameters.bladesTopColor2 = "#212f13";
-    this.parameters.bladesBottomColor = "#0b2d06";
-    this.parameters.colorOffset = 0.5;
-    this.parameters.perlinSize = 0.1;
-    this.parameters.perlinFrequency = 0.0002;
+    this.parameters.blades = 200000;
+    this.parameters.uOffset = 0.2;
+    this.parameters.uLength = 1;
+    this.parameters.uChunkSize = 100;
+    this.parameters.uGrassOffsetX = -80;
+    this.parameters.uGrassOffsetZ = -95;
+    this.parameters.uGridSize = 250;
+    this.parameters.uHeightMapStrenght = 72.5;
+    this.parameters.uBladesTopColor1 = "#54ce12";
+    this.parameters.uBladesTopColor2 = "#212f13";
+    this.parameters.uBladesBottomColor = "#0b2d06";
+    this.parameters.uColorOffset = 0.5;
+    this.parameters.uPerlinSize = 0.1;
+    this.parameters.uPerlinFrequency = 0.0002;
+    this.parameters.uGrassMapOffsetX = -0.0001;
+    this.parameters.uGrassMapOffsetZ = 0.0032;
 
     this.setGrass();
 
@@ -41,129 +43,143 @@ export default class Grass {
     this.debugFolder
       .add(this.parameters, "blades")
       .min(0)
-      .max(100000)
+      .max(300000)
       .step(10)
       .onFinishChange(this.setGrass.bind(this));
     this.debugFolder
-      .add(this.parameters, "offset")
+      .add(this.parameters, "uOffset")
       .min(0)
       .max(1)
       .step(0.0001)
       .onChange(() => {
-        this.material.uniforms.uOffset.value = this.parameters.offset;
+        this.material.uniforms.uOffset.value = this.parameters.uOffset;
       });
     this.debugFolder
-      .add(this.parameters, "length")
+      .add(this.parameters, "uLength")
       .min(0)
       .max(3)
       .step(0.001)
       .onChange(() => {
-        this.material.uniforms.uLength.value = this.parameters.length;
+        this.material.uniforms.uLength.value = this.parameters.uLength;
       });
     this.debugFolder
-      .add(this.parameters, "gridSize")
+      .add(this.parameters, "uGridSize")
       .min(0)
       .max(500)
       .step(0.1)
-      .onFinishChange(this.setGrass.bind(this));
+      .onChange(() => {
+        this.material.uniforms.uGridSize.value = this.parameters.uGridSize;
+      });
     this.debugFolder
-      .add(this.parameters, "heightMapStrenght")
+      .add(this.parameters, "uHeightMapStrenght")
       .min(0)
       .max(500)
       .step(0.1)
       .onChange(() => {
         this.material.uniforms.uHeightMapStrenght.value =
-          this.parameters.heightMapStrenght;
+          this.parameters.uHeightMapStrenght;
       });
     this.debugFolder
-      .add(this.parameters, "chunkSize")
+      .add(this.parameters, "uChunkSize")
       .min(0)
       .max(100)
       .step(1)
       .onFinishChange(this.setGrass.bind(this));
     this.debugFolder
-      .add(this.parameters, "grassOffsetX")
+      .add(this.parameters, "uGrassOffsetX")
       .min(-250)
       .max(250)
       .step(1)
       .onChange(() => {
         this.material.uniforms.uGrassOffsetX.value =
-          this.parameters.grassOffsetX;
+          this.parameters.uGrassOffsetX;
       });
     this.debugFolder
-      .add(this.parameters, "grassOffsetZ")
+      .add(this.parameters, "uGrassOffsetZ")
       .min(-250)
       .max(250)
       .step(1)
       .onChange(() => {
         this.material.uniforms.uGrassOffsetZ.value =
-          this.parameters.grassOffsetZ;
+          this.parameters.uGrassOffsetZ;
       });
     this.debugFolder
-      .add(this.parameters, "colorOffset")
+      .add(this.parameters, "uGrassMapOffsetX")
+      .min(-0.1)
+      .max(1)
+      .step(0.0001)
+      .onChange(() => {
+        this.material.uniforms.uGrassMapOffsetX.value =
+          this.parameters.uGrassMapOffsetX;
+      });
+    this.debugFolder
+      .add(this.parameters, "uGrassMapOffsetZ")
+      .min(-0.1)
+      .max(1)
+      .step(0.0001)
+      .onChange(() => {
+        this.material.uniforms.uGrassMapOffsetZ.value =
+          this.parameters.uGrassMapOffsetZ;
+      });
+    this.debugFolder
+      .add(this.parameters, "uColorOffset")
       .min(0)
       .max(1)
       .step(0.001)
       .onChange(() => {
-        this.material.uniforms.uColorOffset.value = this.parameters.colorOffset;
+        this.material.uniforms.uColorOffset.value =
+          this.parameters.uColorOffset;
       });
     this.debugFolder
-      .addColor(this.parameters, "bladesTopColor1")
+      .addColor(this.parameters, "uBladesTopColor1")
       .onChange(() => {
-        this.material.uniforms.ubladesTopColor1.value.set(
-          this.parameters.bladesTopColor1
+        this.material.uniforms.uBladesTopColor1.value.set(
+          this.parameters.uBladesTopColor1
         );
       });
     this.debugFolder
-      .addColor(this.parameters, "bladesTopColor2")
+      .addColor(this.parameters, "uBladesTopColor2")
       .onChange(() => {
-        this.material.uniforms.ubladesTopColor2.value.set(
-          this.parameters.bladesTopColor2
+        this.material.uniforms.uBladesTopColor2.value.set(
+          this.parameters.uBladesTopColor2
         );
       });
     this.debugFolder
-      .addColor(this.parameters, "bladesBottomColor")
+      .addColor(this.parameters, "uBladesBottomColor")
       .onChange(() => {
-        this.material.uniforms.ubladesBottomColor.value.set(
-          this.parameters.bladesBottomColor
+        this.material.uniforms.uBladesBottomColor.value.set(
+          this.parameters.uBladesBottomColor
         );
       });
     this.debugFolder
-      .add(this.parameters, "perlinSize")
+      .add(this.parameters, "uPerlinSize")
       .min(0)
       .max(1)
       .step(0.0001)
       .onChange(() => {
-        this.material.uniforms.uPerlinSize.value = this.parameters.perlinSize;
+        this.material.uniforms.uPerlinSize.value = this.parameters.uPerlinSize;
       });
     this.debugFolder
-      .add(this.parameters, "perlinFrequency")
+      .add(this.parameters, "uPerlinFrequency")
       .min(0)
       .max(0.001)
       .step(0.00001)
       .onChange(() => {
         this.material.uniforms.uPerlinFrequency.value =
-          this.parameters.perlinFrequency;
+          this.parameters.uPerlinFrequency;
       });
   }
 
   setGrass() {
-    this.heightMap = this.experience.ressources.item.heightMap;
-    this.heightMap.flipY = false;
+    this.uHeightMap = this.experience.ressources.item.heightMap;
+    this.uHeightMap.flipY = false;
 
-    this.grassMap = this.experience.ressources.item.grassMap;
-    this.grassMap.flipY = false;
+    this.uGrassMap = this.experience.ressources.item.grassMap;
+    this.uGrassMap.flipY = false;
 
-    this.perlinNoise = this.experience.ressources.item.perlinNoise;
-    this.perlinNoise.wrapS = THREE.RepeatWrapping;
-    this.perlinNoise.wrapT = THREE.RepeatWrapping;
-
-    const plane = new THREE.Mesh(
-      new THREE.PlaneGeometry(250, 250),
-      new THREE.MeshBasicMaterial({ map: this.grassMap })
-    );
-    plane.rotation.x = -Math.PI / 2;
-    this.scene.add(plane);
+    this.uPerlinNoise = this.experience.ressources.item.perlinNoise;
+    this.uPerlinNoise.wrapS = THREE.RepeatWrapping;
+    this.uPerlinNoise.wrapT = THREE.RepeatWrapping;
 
     if (this.geometry != null) {
       this.geometry.dispose();
@@ -174,9 +190,9 @@ export default class Grass {
     const positions = new Float32Array(this.parameters.blades * 3 * 3);
 
     for (let i = 0; i < this.parameters.blades; i++) {
-      const positionX = (Math.random() - 0.5) * this.parameters.chunkSize;
+      const positionX = (Math.random() - 0.5) * this.parameters.uChunkSize;
 
-      const positionZ = (Math.random() - 0.5) * this.parameters.chunkSize;
+      const positionZ = (Math.random() - 0.5) * this.parameters.uChunkSize;
 
       const positionY = 0;
 
@@ -201,41 +217,33 @@ export default class Grass {
 
     this.material = new THREE.ShaderMaterial({
       uniforms: {
-        uTime: { value: 0 },
-        uOffset: { value: this.parameters.offset },
-        uLength: { value: this.parameters.length },
-        uHeightMap: { value: this.heightMap },
-        uGrassMap: { value: this.grassMap },
-        uPerlinSize: { value: this.parameters.perlinSize },
-        uPerlinFrequency: { value: this.parameters.perlinFrequency },
+        uTime: new THREE.Uniform(0),
+        uOffset: { value: this.parameters.uOffset },
+        uLength: { value: this.parameters.uLength },
+        uHeightMap: { value: this.uHeightMap },
+        uGrassMap: { value: this.uGrassMap },
+        uPerlinSize: { value: this.parameters.uPerlinSize },
+        uPerlinFrequency: { value: this.parameters.uPerlinFrequency },
         ubladesTopColor1: {
-          value: new THREE.Color(this.parameters.bladesTopColor1),
+          value: new THREE.Color(this.parameters.uBladesTopColor1),
         },
         ubladesTopColor2: {
-          value: new THREE.Color(this.parameters.bladesTopColor2),
+          value: new THREE.Color(this.parameters.uBladesTopColor2),
         },
         ubladesBottomColor: {
-          value: new THREE.Color(this.parameters.bladesBottomColor),
+          value: new THREE.Color(this.parameters.uBladesBottomColor),
         },
-        uColorOffset: {
-          value: this.parameters.colorOffset,
-        },
-        uHeightMapStrenght: {
-          value: this.parameters.heightMapStrenght,
-        },
-        uGridSize: {
-          value: this.parameters.gridSize,
-        },
-        uChunkSize: {
-          value: this.parameters.chunkSize,
-        },
-        uGrassOffsetX: {
-          value: this.parameters.grassOffsetX,
-        },
-        uGrassOffsetZ: {
-          value: this.parameters.grassOffsetZ,
-        },
-        uPerlinNoise: new THREE.Uniform(this.perlinNoise),
+        uColorOffset: new THREE.Uniform(this.parameters.uColorOffset),
+        uHeightMapStrenght: new THREE.Uniform(
+          this.parameters.uHeightMapStrenght
+        ),
+        uGridSize: new THREE.Uniform(this.parameters.uGridSize),
+        uChunkSize: new THREE.Uniform(this.parameters.uChunkSize),
+        uGrassOffsetX: new THREE.Uniform(this.parameters.uGrassOffsetX),
+        uGrassOffsetZ: new THREE.Uniform(this.parameters.uGrassOffsetZ),
+        uGrassMapOffsetX: new THREE.Uniform(this.parameters.uGrassMapOffsetX),
+        uGrassMapOffsetZ: new THREE.Uniform(this.parameters.uGrassMapOffsetZ),
+        uPerlinNoise: new THREE.Uniform(this.uPerlinNoise),
       },
       vertexShader: grassVertexShader,
       fragmentShader: grassFragmentShader,

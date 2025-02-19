@@ -10,6 +10,8 @@ uniform float uGridSize;
 uniform float uChunkSize;
 uniform float uGrassOffsetX;
 uniform float uGrassOffsetZ;
+uniform float uGrassMapOffsetX;
+uniform float uGrassMapOffsetZ;
 uniform sampler2D uHeightMap;
 uniform sampler2D uGrassMap;
 uniform sampler2D uPerlinNoise;
@@ -52,6 +54,8 @@ void main()
     //corrected Uvs
     vec2 uvScale = (newPosition.xz - -uGridSize / 2.0) / (uGridSize / 2.0 - -uGridSize / 2.0);
 
+    uvScale.x += uGrassMapOffsetX;
+    uvScale.y += uGrassMapOffsetZ;
     //grass patch 
     float grassHeight = texture2D(uGrassMap, uvScale).r;
     newPosition.y += float(isThirdVertex) * (step(0.45, grassHeight) * uLength - uLength);
