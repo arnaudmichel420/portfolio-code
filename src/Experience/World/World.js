@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import Experience from "../Experience.js";
 import Environment from "./Environment.js";
-import Mountain from "./Mountain.js";
+import Models from "./Models.js";
 import Overlay from "./Overlay.js";
 import Cubes from "./Cubes.js";
 import Grass from "./Grass.js";
@@ -22,7 +22,7 @@ export default class World {
     this.overlay = new Overlay();
     this.ressources.on("ready", () => {
       //setup
-      this.mountain = new Mountain();
+      this.models = new Models();
       this.nightSky = new NightSky();
       this.cubes = new Cubes();
       this.grass = new Grass();

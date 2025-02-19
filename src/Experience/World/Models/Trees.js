@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import Experience from "../Experience.js";
+import Experience from "../../Experience.js";
 
-export default class Mountain {
+export default class Trees {
   constructor() {
     this.experience = new Experience();
     this.scene = this.experience.scene;
@@ -10,24 +10,22 @@ export default class Mountain {
 
     //debug
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("🏔️ mountain");
+      this.debugModels = this.experience.world.models.debugFolder;
+
+      this.debugFolder = this.debugModels.addFolder("🌲 Trees");
       this.debugFolder.close();
     }
 
     //setup
-    this.ressource = this.ressources.item.mountainModel;
-    this.texture = this.ressources.item.mountainTexture;
-    // this.ressource = this.ressources.item.grassSlopes;
-    this.texture.flipY = false;
-    this.texture.colorSpace = THREE.SRGBColorSpace;
-
+    this.ressource = this.ressources.item.treesModel;
+    // this.texture = this.ressources.item.treesTexture;
+    // this.texture.flipY = false;
+    // this.texture.colorSpace = THREE.SRGBColorSpace;
     this.setModel();
   }
   setModel() {
     this.model = this.ressource.scene;
-    this.scene.add(this.model);
     this.material = new THREE.MeshBasicMaterial({ map: this.texture });
-    console.log();
 
     this.model.traverse((child) => {
       if (child instanceof THREE.Mesh) {
@@ -36,7 +34,8 @@ export default class Mountain {
     });
 
     this.model.position.set(75, 2.3, 126);
-    // this.model.children[0].rotation.y = -Math.PI;
+
+    this.scene.add(this.model);
     if (this.debug.active) {
       this.debugFolder.add(this.model.position, "x", -500, 500, 0.1);
       this.debugFolder.add(this.model.position, "y", -500, 500, 0.1);

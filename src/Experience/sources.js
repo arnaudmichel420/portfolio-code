@@ -2,17 +2,27 @@ export default [
   {
     name: "mountainModel",
     type: "gltfModel",
-    path: "models/portfolioTest.glb",
+    path: "models/mountain.glb",
+  },
+  {
+    name: "treesModel",
+    type: "gltfModel",
+    path: "models/arbre.glb",
+  },
+  {
+    name: "refugeModel",
+    type: "gltfModel",
+    path: "models/refuge.glb",
+  },
+  {
+    name: "propsModel",
+    type: "gltfModel",
+    path: "models/props.glb",
   },
   {
     name: "mountainTexture",
     type: "texture",
-    path: "textures/bakedMountain.jpg",
-  },
-  {
-    name: "grassSlopes",
-    type: "gltfModel",
-    path: "models/grassSlopes.glb",
+    path: "textures/mountain.webp",
   },
   {
     name: "heightMap",
