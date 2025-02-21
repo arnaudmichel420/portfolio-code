@@ -18,13 +18,15 @@ export default class Refuge {
 
     //setup
     this.ressource = this.ressources.item.refugeModel;
-    // this.texture = this.ressources.item.refugeTexture;
-    // this.texture.flipY = false;
-    // this.texture.colorSpace = THREE.SRGBColorSpace;
+    this.texture = this.ressources.item.refugeTexture;
+    this.texture.flipY = false;
+    this.texture.colorSpace = THREE.SRGBColorSpace;
     this.setModel();
   }
   setModel() {
     this.model = this.ressource.scene;
+    console.log(this.model.children[0]);
+
     this.material = new THREE.MeshBasicMaterial({ map: this.texture });
 
     this.model.traverse((child) => {

@@ -12,10 +12,10 @@ export default class Smoke {
     this.time = this.experience.time;
 
     this.parameters = {};
-    this.parameters.color = "#FFFFFF";
+    this.parameters.color = "#ffbf66";
     this.parameters.perlinSizeX = 0.5;
-    this.parameters.perlinSizeY = 0.3;
-    this.parameters.twistFrequency = 0.2;
+    this.parameters.perlinSizeY = 0.25;
+    this.parameters.twistFrequency = 0.125;
 
     this.setSmoke();
 
@@ -101,16 +101,16 @@ export default class Smoke {
       },
       vertexShader: smokeVertexShader,
       fragmentShader: smokeFragmentShader,
-      side: THREE.DoubleSide,
+      // side: THREE.DoubleSide,
       transparent: true,
       depthWrite: false,
     });
 
     this.geometry = new THREE.PlaneGeometry(1, 1, 16, 64);
     this.geometry.translate(0, 0.5, 0);
-    this.geometry.scale(1.5, 6, 1.5);
+    this.geometry.scale(2, 12, 2);
     this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.position.set(108, 8, 125);
+    this.mesh.position.set(-109.5, 78, 58);
     this.scene.add(this.mesh);
   }
   elapsedTime() {

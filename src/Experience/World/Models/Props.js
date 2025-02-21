@@ -18,9 +18,9 @@ export default class Props {
 
     //setup
     this.ressource = this.ressources.item.propsModel;
-    // this.texture = this.ressources.item.propsTexture;
-    // this.texture.flipY = false;
-    // this.texture.colorSpace = THREE.SRGBColorSpace;
+    this.texture = this.ressources.item.propsTexture;
+    this.texture.flipY = false;
+    this.texture.colorSpace = THREE.SRGBColorSpace;
     this.setModel();
   }
   setModel() {

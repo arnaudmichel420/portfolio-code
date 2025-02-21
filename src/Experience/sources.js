@@ -20,9 +20,29 @@ export default [
     path: "models/props.glb",
   },
   {
+    name: "glowModel",
+    type: "gltfModel",
+    path: "models/glow.glb",
+  },
+  {
     name: "mountainTexture",
     type: "texture",
     path: "textures/mountain.webp",
+  },
+  {
+    name: "refugeTexture",
+    type: "texture",
+    path: "textures/refuge.webp",
+  },
+  {
+    name: "treesTexture",
+    type: "texture",
+    path: "textures/arbre.webp",
+  },
+  {
+    name: "propsTexture",
+    type: "texture",
+    path: "textures/props.webp",
   },
   {
     name: "heightMap",

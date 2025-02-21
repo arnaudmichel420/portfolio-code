@@ -5,4 +5,6 @@ void main(){
     float strength = 0.05 / distanceToCenter - 0.1;
 
     gl_FragColor = vec4(uColor, strength);
+    #include <tonemapping_fragment>
+    #include <colorspace_fragment>
 }

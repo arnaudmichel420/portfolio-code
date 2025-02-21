@@ -18,9 +18,9 @@ export default class Trees {
 
     //setup
     this.ressource = this.ressources.item.treesModel;
-    // this.texture = this.ressources.item.treesTexture;
-    // this.texture.flipY = false;
-    // this.texture.colorSpace = THREE.SRGBColorSpace;
+    this.texture = this.ressources.item.treesTexture;
+    this.texture.flipY = false;
+    this.texture.colorSpace = THREE.SRGBColorSpace;
     this.setModel();
   }
   setModel() {

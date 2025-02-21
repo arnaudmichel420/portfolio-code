@@ -21,11 +21,11 @@ export default class AnimateCamera {
 
     this.cameraPositions = [
       {
-        x: 97,
-        y: 7,
-        z: 127,
-        lookAtX: -98,
-        lookAtY: -28,
+        x: 93,
+        y: 7.7,
+        z: 131,
+        lookAtX: -131,
+        lookAtY: -20.7,
         lookAtZ: -300,
         snowDensity: 0,
         snowSpeed: 0.005,
@@ -33,10 +33,10 @@ export default class AnimateCamera {
       },
       {
         x: 3.5,
-        y: 26.5,
-        z: 127,
-        lookAtX: -98,
-        lookAtY: -28,
+        y: 22.3,
+        z: 119,
+        lookAtX: -66.5,
+        lookAtY: -41.3,
         lookAtZ: -300,
         snowDensity: 0,
         snowSpeed: 0.005,

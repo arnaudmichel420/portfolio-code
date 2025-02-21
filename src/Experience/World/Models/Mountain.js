@@ -25,6 +25,7 @@ export default class Mountain {
   }
   setModel() {
     this.model = this.ressource.scene;
+    console.log(this.model.children[0]);
     this.material = new THREE.MeshBasicMaterial({ map: this.texture });
 
     this.model.traverse((child) => {
