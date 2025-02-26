@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import EventEmitter from "./EventEmitter.js";
-import { DRACOLoader } from "three/examples/jsm/Addons.js";
+import { DRACOLoader, LUTCubeLoader } from "three/examples/jsm/Addons.js";
 import { EXRLoader } from "three/examples/jsm/loaders/EXRLoader.js";
 
 export default class Ressources extends EventEmitter {
@@ -28,6 +28,7 @@ export default class Ressources extends EventEmitter {
     this.loaders.dracoLoader.setDecoderPath("/draco/");
     this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader);
     this.loaders.exrLoader = new EXRLoader();
+    this.loaders.lutLoader = new LUTCubeLoader();
   }
   startLoading() {
     for (const source of this.sources) {
@@ -41,6 +42,10 @@ export default class Ressources extends EventEmitter {
         });
       } else if (source.type === "exrLoader") {
         this.loaders.exrLoader.load(source.path, (file) => {
+          this.sourceLoaded(source, file);
+        });
+      } else if (source.type === "lut") {
+        this.loaders.lutLoader.load(source.path, (file) => {
           this.sourceLoaded(source, file);
         });
       }

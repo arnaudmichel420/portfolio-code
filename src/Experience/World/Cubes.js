@@ -47,5 +47,6 @@ export default class Cubes {
         this.debugFolder.add(this.cube.position, "z", -500, 500, 1);
       }
     }
+    this.experience.renderer.outlineEffect.selection.set(this.cubeArray);
   }
 }

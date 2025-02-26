@@ -64,4 +64,9 @@ export default [
     type: "texture",
     path: "textures/snow.png",
   },
+  {
+    name: "lut1",
+    type: "lut",
+    path: "lut/standard.cube",
+  },
 ];
