@@ -120,8 +120,5 @@ export default class Experience {
     if (this.world.fireflies != null) {
       this.world.fireflies.elapsedTime();
     }
-    if (this.world.cubes != null) {
-      this.world.cubes.elapsedTime();
-    }
   }
 }
