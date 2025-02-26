@@ -15,8 +15,7 @@ export default class Camera {
     this.orbitActive = { x: false };
 
     this.FOV = 35;
-    this.cameraLookAt = { x: -235, y: -28, z: -300 };
-
+    this.cameraLookAt = { x: -131, y: -20.7, z: -300 };
     //Phone
     if (this.phone.active) {
       this.FOV = 45;
@@ -44,7 +43,7 @@ export default class Camera {
       0.1,
       1000
     );
-    this.instance.position.set(97, 7, 127);
+    this.instance.position.set(97, 7.7, 131);
     this.instance.lookAt(
       this.cameraLookAt.x,
       this.cameraLookAt.y,

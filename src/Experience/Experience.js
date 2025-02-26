@@ -77,7 +77,7 @@ export default class Experience {
       this.setRaycaster();
     });
     this.mouse.on("mouseClick", () => {
-      this.raycasterClick();
+      // this.raycasterClick();
     });
   }
   resize() {
@@ -119,6 +119,9 @@ export default class Experience {
     }
     if (this.world.fireflies != null) {
       this.world.fireflies.elapsedTime();
+    }
+    if (this.world.cubes != null) {
+      this.world.cubes.elapsedTime();
     }
   }
 }

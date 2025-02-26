@@ -22,12 +22,13 @@ export default class Fireflies {
     this.parameters.offsetY = 2;
     this.parameters.offsetZ = 101;
     this.parameters.uColor = "#fff7c2";
+    this.parameters.uDotRange = 0.0161;
 
     this.setFireflies();
 
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("🪰 Fireflies");
-      // this.debugFolder.close();
+      this.debugFolder.close();
       this.setDebug();
     }
   }
@@ -93,6 +94,14 @@ export default class Fireflies {
     this.debugFolder.addColor(this.parameters, "uColor").onChange(() => {
       this.material.uniforms.uColor.value.set(this.parameters.uColor);
     });
+    this.debugFolder
+      .add(this.parameters, "uDotRange")
+      .min(0)
+      .max(0.5)
+      .step(0.0001)
+      .onChange(() => {
+        this.material.uniforms.uDotRange.value = this.parameters.uDotRange;
+      });
   }
   setFireflies() {
     if (this.geometry != null) {
@@ -129,14 +138,14 @@ export default class Fireflies {
       blending: THREE.AdditiveBlending,
       depthWrite: false,
       uniforms: {
-        uTime: { value: 0 },
-        uSize: {
-          value:
-            this.parameters.uSize *
-            this.experience.renderer.instance.getPixelRatio(),
-        },
+        uTime: new THREE.Uniform(0),
+        uSize: new THREE.Uniform(
+          this.parameters.uSize *
+            this.experience.renderer.instance.getPixelRatio()
+        ),
         uColor: { value: new THREE.Color(this.parameters.uColor) },
-        uSpeed: { value: this.parameters.uSpeed },
+        uSpeed: new THREE.Uniform(this.parameters.uSpeed),
+        uDotRange: new THREE.Uniform(this.parameters.uDotRange),
       },
       vertexShader: firefliesVertexShader,
       fragmentShader: firefliesFragmentShader,
