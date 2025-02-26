@@ -15,7 +15,6 @@ import {
   ToneMappingEffect,
   ToneMappingMode,
   LUT3DEffect,
-  LUT3dlLoader,
 } from "postprocessing";
 import Experience from "./Experience.js";
 
@@ -266,7 +265,7 @@ export default class Renderer {
       maxLuminance: this.parameters.toneMappingMaxLuminance,
     });
 
-    const toneMappingPass = new EffectPass(
+    this.toneMappingPass = new EffectPass(
       this.camera.instance,
       this.toneMappingEffect
     );
@@ -277,14 +276,14 @@ export default class Renderer {
       brightness: this.parameters.colorBrightness,
       contrast: this.parameters.colorContrast,
     });
-    const colorPass = new EffectPass(this.camera.instance, this.colorEffect);
+    this.colorPass = new EffectPass(this.camera.instance, this.colorEffect);
 
     this.hueSaturationEffect = new HueSaturationEffect({
       blendFunction: this.parameters.hueBlendFunction,
       hue: this.parameters.colorHue,
       saturation: this.parameters.colorSaturation,
     });
-    const huePass = new EffectPass(
+    this.huePass = new EffectPass(
       this.camera.instance,
       this.hueSaturationEffect
     );
@@ -297,8 +296,7 @@ export default class Renderer {
       this.lut.generateMipmaps = false;
 
       this.lutEffect = new LUT3DEffect(this.lut.texture3D);
-      const lutPass = new EffectPass(this.camera.instance, this.lutEffect);
-      this.composer.addPass(lutPass);
+      this.lutPass = new EffectPass(this.camera.instance, this.lutEffect);
     });
 
     //Anti-aliasing
@@ -306,7 +304,7 @@ export default class Renderer {
       preset: SMAAPreset.HIGH,
       edgeDetectionMode: SMAAEffect.EDGES_LUMA,
     });
-    const smaaPass = new EffectPass(this.camera.instance, smaaEffect);
+    this.smaaPass = new EffectPass(this.camera.instance, smaaEffect);
 
     //Bloom effect
     this.bloomEffect = new BloomEffect({
@@ -317,7 +315,7 @@ export default class Renderer {
       luminanceSmoothing: this.parameters.bloomLuminanceSmoothing,
       mipmapBlur: true,
     });
-    const bloomPass = new EffectPass(this.camera.instance, this.bloomEffect);
+    this.bloomPass = new EffectPass(this.camera.instance, this.bloomEffect);
 
     //Outline effect
     this.outlineEffect = new OutlineEffect(this.scene, this.camera.instance, {
@@ -331,24 +329,25 @@ export default class Renderer {
       blur: true,
       xRay: true,
     });
-    const outlinePass = new EffectPass(
-      this.camera.instance,
-      this.outlineEffect
-    );
+    this.outlinePass = new EffectPass(this.camera.instance, this.outlineEffect);
 
-    //Adding pass
+    //Adding base pass
     this.composer.addPass(renderPass);
-    this.composer.addPass(bloomPass);
-    this.composer.addPass(outlinePass);
-    this.composer.addPass(colorPass);
-    this.composer.addPass(huePass);
-    this.composer.addPass(toneMappingPass);
-    this.composer.addPass(smaaPass);
+  }
+  addPass() {
+    this.composer.addPass(this.bloomPass);
+    this.composer.addPass(this.outlinePass);
+    this.composer.addPass(this.colorPass);
+    this.composer.addPass(this.huePass);
+    this.composer.addPass(this.toneMappingPass);
+    this.composer.addPass(this.lutPass);
+    this.composer.addPass(this.smaaPass);
   }
   resize() {
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(this.sizes.pixelRatio);
     this.textRenderer.setSize(this.sizes.width, this.sizes.height);
+    this.composer.setSize(this.sizes.width, this.sizes.height);
   }
   update() {
     // this.instance.render(this.scene, this.camera.instance);
