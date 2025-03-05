@@ -69,4 +69,39 @@ export default [
     type: "lut",
     path: "lut/standard.cube",
   },
+  {
+    name: "bouquetinModel",
+    type: "gltfModel",
+    path: "models/bouquetin.glb",
+  },
+  {
+    name: "bouquetinTexture",
+    type: "texture",
+    path: "textures/bouquetin.webp",
+  },
+  {
+    name: "alienModel",
+    type: "gltfModel",
+    path: "models/alien.glb",
+  },
+  {
+    name: "alienTexture",
+    type: "texture",
+    path: "textures/alien.webp",
+  },
+  {
+    name: "foxModel",
+    type: "gltfModel",
+    path: "models/fox.glb",
+  },
+  {
+    name: "panelModel",
+    type: "gltfModel",
+    path: "models/panel.glb",
+  },
+  {
+    name: "lightModel",
+    type: "gltfModel",
+    path: "models/light.glb",
+  },
 ];

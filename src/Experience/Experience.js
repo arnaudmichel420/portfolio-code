@@ -42,8 +42,6 @@ export default class Experience {
       this.animateCamera = new AnimateCamera();
     });
 
-    this.overlay = new THREE.Mesh(this.overlayGeometry, this.overlayMaterial);
-    this.scene.add(this.overlay);
     //restore old position
     if (localStorage.getItem("savedCamera") && localStorage.getItem("scroll")) {
       console.log(localStorage);
@@ -66,7 +64,7 @@ export default class Experience {
     });
     this.time.on("tick", () => {
       this.update();
-      this.parallax();
+      // this.parallax();
       this.scrollEasing();
       this.elapsedTime();
     });
@@ -97,28 +95,21 @@ export default class Experience {
     this.raycaster.raycasterClick();
   }
   parallax() {
-    this.ressources.on("ready", () => {
+    if (this.world.overlay.active == false) {
       this.animateCamera.parallax();
-    });
+    }
   }
   scrollEasing() {
     this.mouse.scrollEasing();
   }
   elapsedTime() {
-    if (this.world.grass != null) {
-      this.world.grass.elapsedTime();
-    }
-    if (this.world.smoke != null) {
-      this.world.smoke.elapsedTime();
-    }
-    if (this.world.water != null) {
-      this.world.water.elapsedTime();
-    }
-    if (this.world.snow != null) {
-      this.world.snow.elapsedTime();
-    }
-    if (this.world.fireflies != null) {
-      this.world.fireflies.elapsedTime();
+    ["grass", "smoke", "water", "snow", "fireflies"].forEach((key) => {
+      this.world[key]?.elapsedTime();
+    });
+    if (this.world.models) {
+      ["bouquetin", "alien", "fox"].forEach((key) => {
+        this.world.models[key]?.elapsedTime();
+      });
     }
   }
 }

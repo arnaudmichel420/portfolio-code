@@ -31,8 +31,8 @@ export default class Renderer {
     this.parameters = {};
     this.parameters.bloomBlendFunction = BlendFunction.ADD;
     this.parameters.bloomIntensity = 0.1;
-    this.parameters.bloomRadius = 1;
-    this.parameters.bloomLuminanceThreshold = 0;
+    this.parameters.bloomRadius = 0.9;
+    this.parameters.bloomLuminanceThreshold = 1.1;
     this.parameters.bloomLuminanceSmoothing = 0.1;
     this.parameters.outlineBlendFunction = BlendFunction.ADD;
     this.parameters.outlineEdgeStrength = 10;
