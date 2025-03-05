@@ -178,7 +178,7 @@ menuOpenT
       ease: "power2.inOut",
       y: 0,
       autoAlpha: 1,
-      stagger: 0.2,
+      stagger: 0.1,
       delay: 0.5,
     },
     "<"
@@ -263,7 +263,7 @@ extendOpenT
       y: 0,
       opacity: 1,
 
-      stagger: 0.2,
+      stagger: 0.1,
       delay: 0.5,
     },
     "<"
