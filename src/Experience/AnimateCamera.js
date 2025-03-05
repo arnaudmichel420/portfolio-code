@@ -10,6 +10,8 @@ export default class AnimateCamera {
     this.canvas = this.experience.canvas;
     this.debug = this.experience.debug;
 
+    this.worker = new Worker("Experience/worker.js");
+
     this.cameraLookAt = this.experience.camera.cameraLookAt;
     this.snow = this.experience.world.snow.material.uniforms;
 
@@ -295,14 +297,28 @@ export default class AnimateCamera {
     }
   }
   parallax() {
+    let data = [];
     this.mouseXY = this.experience.mouse.mouseXY;
-    this.cameraGroup.position.x +=
-      (this.mouseXY.x * this.parameters.parallaxAmplitude -
-        this.cameraGroup.position.x) *
-      this.parameters.parallaxSmoothing;
-    this.cameraGroup.position.y +=
-      (this.mouseXY.y * this.parameters.parallaxAmplitude -
-        this.cameraGroup.position.y) *
-      this.parameters.parallaxSmoothing;
+    data.push(this.mouseXY);
+    data.push(this.cameraGroup.position);
+    data.push(this.parameters.parallaxAmplitude);
+    data.push(this.parameters.parallaxSmoothing);
+
+    this.worker.postMessage(data);
+    this.worker.onmessage = (e) => {
+      const receivedData = e.data;
+      this.cameraGroup.position.x = receivedData.x;
+      this.cameraGroup.position.y = receivedData.y;
+    };
+
+    // this.mouseXY = this.experience.mouse.mouseXY;
+    // this.cameraGroup.position.x +=
+    //   (this.mouseXY.x * this.parameters.parallaxAmplitude -
+    //     this.cameraGroup.position.x) *
+    //   this.parameters.parallaxSmoothing;
+    // this.cameraGroup.position.y +=
+    //   (this.mouseXY.y * this.parameters.parallaxAmplitude -
+    //     this.cameraGroup.position.y) *
+    //   this.parameters.parallaxSmoothing;
   }
 }
