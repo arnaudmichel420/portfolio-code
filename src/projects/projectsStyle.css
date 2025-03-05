@@ -138,6 +138,13 @@ header nav {
   align-items: center;
   padding: 0 3rem;
 }
+header nav a {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 header nav .backArrowHeader div {
   background-color: #f1f1f1;
   height: 0.3rem;
@@ -184,6 +191,9 @@ main .section1 .leftPart h1 {
   font-size: 6rem;
   text-wrap: nowrap;
   margin-bottom: 1rem;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 10px;
 }
 main .section1 .leftPart ul {
   padding-right: 2rem;
