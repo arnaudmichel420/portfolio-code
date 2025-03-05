@@ -295,17 +295,14 @@ export default class AnimateCamera {
     }
   }
   parallax() {
-    // this.mouseXY = this.experience.mouse.mouseXY;
-    // this.deltaTime = this.experience.time.delta;
-    // this.cameraGroup.position.x +=
-    //   (this.mouseXY.x * this.parameters.parallaxAmplitude -
-    //     this.cameraGroup.position.x) *
-    //   this.parameters.parallaxSmoothing;
-    // this.deltaTime;
-    // this.cameraGroup.position.y +=
-    //   (this.mouseXY.y * this.parameters.parallaxAmplitude -
-    //     this.cameraGroup.position.y) *
-    //   this.parameters.parallaxSmoothing;
-    // this.deltaTime;
+    this.mouseXY = this.experience.mouse.mouseXY;
+    this.cameraGroup.position.x +=
+      (this.mouseXY.x * this.parameters.parallaxAmplitude -
+        this.cameraGroup.position.x) *
+      this.parameters.parallaxSmoothing;
+    this.cameraGroup.position.y +=
+      (this.mouseXY.y * this.parameters.parallaxAmplitude -
+        this.cameraGroup.position.y) *
+      this.parameters.parallaxSmoothing;
   }
 }
