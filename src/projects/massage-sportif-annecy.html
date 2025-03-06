@@ -9,7 +9,7 @@
   <body>
     <header>
       <nav>
-        <a href="javascript:history.back()">
+        <a onclick="navBack()">
           <div class="backArrowHeader">
             <div></div>
             <div></div>
@@ -24,7 +24,7 @@
       <div class="menu">
         <ul>
           <li class="li-first">
-            <a href="./../index.html" class="hover">Home</a>
+            <a onclick="navHome()" class="hover">Home</a>
           </li>
           <li class="li-first extend">
             <p>Projects ✚</p>
@@ -163,5 +163,17 @@
       </nav>
     </footer>
     <script type="module" src="./scriptProject.js"></script>
+    <script>
+      function navBack() {
+        const navigateHome = { navigate: true };
+        sessionStorage.setItem("home", JSON.stringify(navigateHome));
+        window.location.assign("./../index.html");
+      }
+      function navHome() {
+        const navigateHome = { navigate: false };
+        sessionStorage.setItem("home", JSON.stringify(navigateHome));
+        window.location.assign("./../index.html");
+      }
+    </script>
   </body>
 </html>

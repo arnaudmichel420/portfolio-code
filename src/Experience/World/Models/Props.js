@@ -8,6 +8,8 @@ export default class Props {
     this.ressources = this.experience.ressources;
     this.debug = this.experience.debug;
     this.hightlight = this.experience.world.models.hightlight;
+    this.objectToTestUUID = this.experience.world.objectToTestUUID;
+    this.objectToTest = this.experience.world.objectToTest;
 
     //debug
     if (this.debug.active) {
@@ -59,5 +61,14 @@ export default class Props {
 
     this.hightlight.push(this.highlightModel.children[0]);
     this.experience.renderer.outlineEffect.selection.set(this.hightlight);
+
+    this.setRaycaster();
+  }
+  setRaycaster() {
+    this.objectToTest.push(this.highlightModel);
+    this.objectToTestUUID.push({
+      uuid: this.highlightModel.children[0].uuid,
+      name: "panel",
+    });
   }
 }

@@ -17,6 +17,9 @@ export default class World {
     this.scene = this.experience.scene;
     this.ressources = this.experience.ressources;
 
+    this.objectToTestUUID = [];
+    this.objectToTest = [];
+
     //overlay
     this.overlay = new Overlay();
     this.ressources.on("ready", () => {

@@ -14,14 +14,15 @@ export default class Raycaster extends EventEmitter {
     this.raycaster = new THREE.Raycaster();
     this.currentIntersect = null;
 
-    //object
-    this.objectToTest = [];
-    this.objectToTestUUID = [];
-    //mettre un event trigger de world est fini
-    this.ressources.on("ready", () => {
-      this.objectToTest = this.world.cubes.cubeArray;
-      this.objectToTestUUID = this.world.cubes.cubeArrayUUID;
-    });
+    this.objectToTestUUID = this.experience.world.objectToTestUUID;
+    this.objectToTest = this.experience.world.objectToTest;
+
+    this.pages = [
+      { name: "panel", url: "./projects/massage-sportif-annecy.html" },
+      { name: "fox", url: "./projects/gamejam.html" },
+      { name: "bouquetin", url: "./projects/project-3.html" },
+      { name: "alien", url: "./projects/project-4.html" },
+    ];
   }
   setRaycaster() {
     this.raycaster.setFromCamera(this.mouse.mouseXY, this.camera);
@@ -30,47 +31,26 @@ export default class Raycaster extends EventEmitter {
     if (this.intersects.length) {
       if (!this.currentIntersect) {
         this.currentIntersect = this.intersects[0];
-        this.trigger("mouseEnter");
       }
     } else {
-      if (this.currentIntersect) {
-        this.trigger("mouseLeave");
-      }
       this.currentIntersect = null;
     }
   }
   raycasterClick() {
+    console.log(this.currentIntersect);
+
     if (this.currentIntersect) {
-      console.log("click on object id: " + this.currentIntersect.object.uuid);
-
-      for (let i = 0; i < this.objectToTestUUID.length; i++) {
-        if (this.currentIntersect.object.uuid === this.objectToTestUUID[i]) {
-          //save camera position
-          this.savedCamera = {};
-          console.log(this.experience.scene);
-
-          this.experience.scene.traverse((child) => {
-            if (child.type == "PerspectiveCamera") {
-              this.savedCamera.x = child.position.x;
-              this.savedCamera.y = child.position.y;
-              this.savedCamera.z = child.position.z;
-            }
-          });
-          this.savedCameraConverted = JSON.stringify(this.savedCamera);
-          localStorage.setItem("savedCamera", this.savedCameraConverted);
-
-          //scroll
-          this.savedScroll = {};
-          this.savedScroll.scrollY = this.experience.mouse.scrollY;
-          this.savedScroll.currentSection =
-            this.experience.mouse.currentSection;
-          this.savedScrollConverted = JSON.stringify(this.savedScroll);
-          localStorage.setItem("scroll", this.savedScrollConverted);
-
-          //   //go to page project
-          window.location.assign(`./projects/project-${i + 1}.html`);
-        }
-      }
+      const result = this.objectToTestUUID.find(
+        (item) => item.uuid == this.currentIntersect.object.uuid
+      );
+      const page = this.pages.find((item) => item.name == result.name);
+      //scroll
+      const savedScroll = {};
+      savedScroll.scrollY = this.experience.animateCamera.scrollY;
+      savedScroll.currentSection = this.experience.animateCamera.currentSection;
+      sessionStorage.setItem("scroll", JSON.stringify(savedScroll));
+      // go to page project
+      window.location.assign(page.url);
     }
   }
 }

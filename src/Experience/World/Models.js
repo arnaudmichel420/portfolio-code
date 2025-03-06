@@ -22,12 +22,10 @@ export default class Models {
       this.debugFolder.close();
 
       //wait for folder to create
-      setTimeout(() => {
-        this.setModels();
-      }, 100);
-    } else {
-      this.setModels();
     }
+    setTimeout(() => {
+      this.setModels();
+    }, 0);
   }
   setModels() {
     this.mountain = new Mountain();

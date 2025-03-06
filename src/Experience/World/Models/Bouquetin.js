@@ -9,6 +9,8 @@ export default class Bouquetin {
     this.debug = this.experience.debug;
     this.time = this.experience.time;
     this.hightlight = this.experience.world.models.hightlight;
+    this.objectToTestUUID = this.experience.world.objectToTestUUID;
+    this.objectToTest = this.experience.world.objectToTest;
 
     //debug
     if (this.debug.active) {
@@ -50,6 +52,16 @@ export default class Bouquetin {
     this.mixer.timeScale = 0.0005;
     this.animation = this.mixer.clipAction(this.ressource.animations[0]);
     this.animation.play();
+
+    this.setRaycaster();
+  }
+
+  setRaycaster() {
+    this.objectToTest.push(this.model);
+    this.objectToTestUUID.push({
+      uuid: this.model.children[0].children[0].uuid,
+      name: "bouquetin",
+    });
   }
   elapsedTime() {
     if (this.mixer != null) {

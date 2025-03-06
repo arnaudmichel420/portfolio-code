@@ -11,6 +11,7 @@ import Mouse from "./Utils/Mouse.js";
 import Raycaster from "./Utils/Raycaster.js";
 import Phone from "./Utils/Phone.js";
 import AnimateCamera from "./AnimateCamera.js";
+import Restore from "./Restore.js";
 
 let instance = null;
 
@@ -40,23 +41,11 @@ export default class Experience {
 
     this.ressources.on("ready", () => {
       this.animateCamera = new AnimateCamera();
+      //restore old position
+      if (sessionStorage.getItem("scroll")) {
+        this.restore = new Restore();
+      }
     });
-
-    //restore old position
-    if (localStorage.getItem("savedCamera") && localStorage.getItem("scroll")) {
-      console.log(localStorage);
-
-      this.cameraDeconverted = JSON.parse(localStorage.getItem("savedCamera"));
-      this.camera.instance.position.set(
-        this.cameraDeconverted.x,
-        this.cameraDeconverted.y,
-        this.cameraDeconverted.z
-      );
-
-      this.scrollDeconverted = JSON.parse(localStorage.getItem("scroll"));
-      this.mouse.scrollY = this.scrollDeconverted.scrollY;
-      this.mouse.currentSection = this.scrollDeconverted.currentSection;
-    }
 
     //Event listener
     this.sizes.on("resize", () => {
@@ -64,7 +53,7 @@ export default class Experience {
     });
     this.time.on("tick", () => {
       this.update();
-      // this.parallax();
+      this.parallax();
       this.scrollEasing();
       this.elapsedTime();
     });
@@ -75,7 +64,7 @@ export default class Experience {
       this.setRaycaster();
     });
     this.mouse.on("mouseClick", () => {
-      // this.raycasterClick();
+      this.raycasterClick();
     });
   }
   resize() {

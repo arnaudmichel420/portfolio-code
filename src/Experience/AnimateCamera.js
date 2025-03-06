@@ -301,11 +301,9 @@ export default class AnimateCamera {
     //   (this.mouseXY.x * this.parameters.parallaxAmplitude -
     //     this.cameraGroup.position.x) *
     //   this.parameters.parallaxSmoothing;
-    // this.deltaTime;
     // this.cameraGroup.position.y +=
     //   (this.mouseXY.y * this.parameters.parallaxAmplitude -
     //     this.cameraGroup.position.y) *
     //   this.parameters.parallaxSmoothing;
-    // this.deltaTime;
   }
 }
