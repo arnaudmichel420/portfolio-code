@@ -1,7 +1,11 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import EventEmitter from "./EventEmitter.js";
-import { DRACOLoader, LUTCubeLoader } from "three/examples/jsm/Addons.js";
+import {
+  DRACOLoader,
+  KTX2Loader,
+  LUTCubeLoader,
+} from "three/examples/jsm/Addons.js";
 import { EXRLoader } from "three/examples/jsm/loaders/EXRLoader.js";
 
 export default class Ressources extends EventEmitter {
@@ -29,25 +33,39 @@ export default class Ressources extends EventEmitter {
     this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader);
     this.loaders.exrLoader = new EXRLoader();
     this.loaders.lutLoader = new LUTCubeLoader();
+    this.loaders.ktx2Loader = new KTX2Loader();
   }
   startLoading() {
     for (const source of this.sources) {
-      if (source.type === "gltfModel") {
-        this.loaders.gltfLoader.load(source.path, (file) => {
-          this.sourceLoaded(source, file);
-        });
-      } else if (source.type === "texture") {
-        this.loaders.textureLoader.load(source.path, (file) => {
-          this.sourceLoaded(source, file);
-        });
-      } else if (source.type === "exrLoader") {
-        this.loaders.exrLoader.load(source.path, (file) => {
-          this.sourceLoaded(source, file);
-        });
-      } else if (source.type === "lut") {
-        this.loaders.lutLoader.load(source.path, (file) => {
-          this.sourceLoaded(source, file);
-        });
+      switch (source.type) {
+        case "gltfModel":
+          this.loaders.gltfLoader.load(source.path, (file) => {
+            this.sourceLoaded(source, file);
+          });
+          break;
+        case "texture":
+          this.loaders.textureLoader.load(source.path, (file) => {
+            this.sourceLoaded(source, file);
+          });
+          break;
+        case "exrLoader":
+          this.loaders.exrLoader.load(source.path, (file) => {
+            this.sourceLoaded(source, file);
+          });
+          break;
+        case "lut":
+          this.loaders.lutLoader.load(source.path, (file) => {
+            this.sourceLoaded(source, file);
+          });
+          break;
+        case "ktx2":
+          this.loaders.ktx2Loader.load(source.path, (file) => {
+            this.sourceLoaded(source, file);
+          });
+          break;
+
+        default:
+          break;
       }
     }
   }
