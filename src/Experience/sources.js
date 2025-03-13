@@ -1,3 +1,10 @@
+/**
+ * Compress image to ktx2 :
+ *
+ *  toktx --t2 --genmipmap --upper_left_maps_to_s0t0 --uastc 4 --uastc_rdo_l static/textures/arbre-preCompress-png-4.0.ktx2 static/textures/arbre.png
+ 
+
+ */
 export default [
   {
     name: "mountainModel",
@@ -18,11 +25,6 @@ export default [
     name: "propsModel",
     type: "gltfModel",
     path: "models/props.glb",
-  },
-  {
-    name: "glowModel",
-    type: "gltfModel",
-    path: "models/glow.glb",
   },
   {
     name: "mountainTexture",
@@ -68,5 +70,35 @@ export default [
     name: "lut1",
     type: "lut",
     path: "lut/standard.cube",
+  },
+  {
+    name: "bouquetinModel",
+    type: "gltfModel",
+    path: "models/bouquetin.glb",
+  },
+  {
+    name: "alienModel",
+    type: "gltfModel",
+    path: "models/alien.glb",
+  },
+  {
+    name: "animalsTexture",
+    type: "texture",
+    path: "textures/animals.webp",
+  },
+  {
+    name: "foxModel",
+    type: "gltfModel",
+    path: "models/fox.glb",
+  },
+  {
+    name: "panelModel",
+    type: "gltfModel",
+    path: "models/panel.glb",
+  },
+  {
+    name: "lightModel",
+    type: "gltfModel",
+    path: "models/light.glb",
   },
 ];

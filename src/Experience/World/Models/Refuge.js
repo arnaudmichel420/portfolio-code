@@ -25,7 +25,6 @@ export default class Refuge {
   }
   setModel() {
     this.model = this.ressource.scene;
-    console.log(this.model.children[0]);
 
     this.material = new THREE.MeshBasicMaterial({ map: this.texture });
 

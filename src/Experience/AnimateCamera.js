@@ -33,31 +33,31 @@ export default class AnimateCamera {
       },
       {
         x: 3.5,
-        y: 22.3,
-        z: 119,
+        y: 20,
+        z: 124,
         lookAtX: -66.5,
-        lookAtY: -41.3,
+        lookAtY: 16,
         lookAtZ: -300,
         snowDensity: 0,
         snowSpeed: 0.005,
         snowSize: 5,
       },
       {
-        x: -68,
-        y: 68,
-        z: 111,
-        lookAtX: -262,
-        lookAtY: 68,
+        x: -88,
+        y: 66,
+        z: 97,
+        lookAtX: -200,
+        lookAtY: 105,
         lookAtZ: -300,
         snowDensity: 0,
         snowSpeed: 0.005,
         snowSize: 5,
       },
       {
-        x: -137,
+        x: -172,
         y: 219,
         z: 117,
-        lookAtX: -300,
+        lookAtX: -110,
         lookAtY: 183,
         lookAtZ: -300,
         snowDensity: 0.5,
@@ -301,11 +301,9 @@ export default class AnimateCamera {
     //   (this.mouseXY.x * this.parameters.parallaxAmplitude -
     //     this.cameraGroup.position.x) *
     //   this.parameters.parallaxSmoothing;
-    // this.deltaTime;
     // this.cameraGroup.position.y +=
     //   (this.mouseXY.y * this.parameters.parallaxAmplitude -
     //     this.cameraGroup.position.y) *
     //   this.parameters.parallaxSmoothing;
-    // this.deltaTime;
   }
 }

@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import Experience from "../Experience.js";
-import Environment from "./Environment.js";
 import Models from "./Models.js";
 import Overlay from "./Overlay.js";
 import Cubes from "./Cubes.js";
@@ -18,6 +17,9 @@ export default class World {
     this.scene = this.experience.scene;
     this.ressources = this.experience.ressources;
 
+    this.objectToTestUUID = [];
+    this.objectToTest = [];
+
     //overlay
     this.overlay = new Overlay();
     this.ressources.on("ready", () => {
@@ -31,7 +33,6 @@ export default class World {
       this.smoke = new Smoke();
       this.snow = new Snow();
       this.text = new Text();
-      this.environment = new Environment();
     });
   }
 }
