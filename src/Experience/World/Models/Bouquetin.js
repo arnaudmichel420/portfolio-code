@@ -22,7 +22,7 @@ export default class Bouquetin {
 
     //setup
     this.ressource = this.ressources.item.bouquetinModel;
-    this.texture = this.ressources.item.bouquetinTexture;
+    this.texture = this.ressources.item.animalsTexture;
     this.texture.flipY = false;
     this.texture.colorSpace = THREE.SRGBColorSpace;
     this.setModel();

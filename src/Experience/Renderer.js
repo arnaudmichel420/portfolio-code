@@ -324,7 +324,7 @@ export default class Renderer {
       edgeStrength: this.parameters.outlineEdgeStrength,
       pulseSpeed: this.parameters.outlinePulseSpeed,
       visibleEdgeColor: this.parameters.outlineVisibleEdgeColor,
-      hiddenEdgeColor: this.parameters.outlineHiddenEdgeColor,
+      hiddenEdgeColor: new THREE.Color(0, 0, 0, 0),
       height: 480,
       blur: true,
       xRay: true,

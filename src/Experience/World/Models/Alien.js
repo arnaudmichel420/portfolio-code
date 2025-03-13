@@ -22,7 +22,7 @@ export default class Alien {
 
     //setup
     this.ressource = this.ressources.item.alienModel;
-    this.texture = this.ressources.item.alienTexture;
+    this.texture = this.ressources.item.animalsTexture;
     this.texture.flipY = false;
     this.texture.colorSpace = THREE.SRGBColorSpace;
     this.setModel();

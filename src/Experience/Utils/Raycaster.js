@@ -37,8 +37,6 @@ export default class Raycaster extends EventEmitter {
     }
   }
   raycasterClick() {
-    console.log(this.currentIntersect);
-
     if (this.currentIntersect) {
       const result = this.objectToTestUUID.find(
         (item) => item.uuid == this.currentIntersect.object.uuid

@@ -22,20 +22,21 @@ export default class Fox {
 
     //setup
     this.ressource = this.ressources.item.foxModel;
-    // this.texture = this.ressources.item.alienTexture;
-    // this.texture.flipY = false;
-    // this.texture.colorSpace = THREE.SRGBColorSpace;
+    this.texture = this.ressources.item.animalsTexture;
+    this.texture.flipY = false;
+    this.texture.colorSpace = THREE.SRGBColorSpace;
     this.setModel();
   }
   setModel() {
     this.model = this.ressource.scene;
-    // this.material = new THREE.MeshBasicMaterial({ map: this.texture });
 
-    // this.model.traverse((child) => {
-    //   if (child instanceof THREE.Mesh) {
-    //     child.material = this.material;
-    //   }
-    // });
+    this.material = new THREE.MeshBasicMaterial({ map: this.texture });
+
+    this.model.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.material = this.material;
+      }
+    });
 
     this.model.position.set(75, 2.3, 126);
 

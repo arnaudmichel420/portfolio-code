@@ -5,8 +5,6 @@ export default class Restore {
   constructor() {
     this.experience = new Experience();
     this.data = JSON.parse(sessionStorage.getItem("scroll"));
-    console.log(this.data);
-
     this.restore();
   }
   restore() {
