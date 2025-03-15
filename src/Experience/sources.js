@@ -37,7 +37,7 @@ export default [
   {
     name: "treesTexture",
     type: "texture",
-    path: "textures/arbre.webp",
+    path: "textures/arbre-95.webp",
   },
   {
     name: "propsTexture",
@@ -52,7 +52,7 @@ export default [
   {
     name: "grassMap",
     type: "texture",
-    path: "textures/grassTest.png",
+    path: "textures/RGBmap.png",
   },
   {
     name: "perlinNoise",
