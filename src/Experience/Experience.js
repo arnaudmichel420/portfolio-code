@@ -32,9 +32,9 @@ export default class Experience {
     this.phone = new Phone();
     this.time = new Time();
     this.scene = new THREE.Scene();
-    this.ressources = new Ressources(sources);
     this.camera = new Camera();
     this.renderer = new Renderer();
+    this.ressources = new Ressources(sources);
     this.world = new World();
     this.mouse = new Mouse();
     this.raycaster = new Raycaster();

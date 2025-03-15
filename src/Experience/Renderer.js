@@ -15,6 +15,7 @@ import {
   ToneMappingEffect,
   ToneMappingMode,
   LUT3DEffect,
+  LookupTexture,
 } from "postprocessing";
 import Experience from "./Experience.js";
 
@@ -288,17 +289,6 @@ export default class Renderer {
       this.hueSaturationEffect
     );
 
-    // LUT wait for texture to load
-    this.ressources.on("ready", () => {
-      this.lut = this.experience.ressources.item.lut1;
-      this.lut.minFilter = THREE.LinearFilter;
-      this.lut.magFilter = THREE.LinearFilter;
-      this.lut.generateMipmaps = false;
-
-      this.lutEffect = new LUT3DEffect(this.lut.texture3D);
-      this.lutPass = new EffectPass(this.camera.instance, this.lutEffect);
-    });
-
     //Anti-aliasing
     const smaaEffect = new SMAAEffect({
       preset: SMAAPreset.HIGH,
@@ -333,6 +323,12 @@ export default class Renderer {
 
     //Adding base pass
     this.composer.addPass(renderPass);
+  }
+  addLutPass() {
+    this.lut = LookupTexture.from(this.experience.ressources.item.lut1);
+    this.lutEffect = new LUT3DEffect(this.lut);
+    this.lutPass = new EffectPass(this.camera.instance, this.lutEffect);
+    this.addPass();
   }
   addPass() {
     this.composer.addPass(this.bloomPass);
