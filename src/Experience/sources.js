@@ -2,8 +2,6 @@
  * Compress image to ktx2 :
  *
  *  toktx --t2 --genmipmap --upper_left_maps_to_s0t0 --uastc 4 --uastc_rdo_l static/textures/arbre-preCompress-png-4.0.ktx2 static/textures/arbre.png
- 
-
  */
 export default [
   {
@@ -68,8 +66,8 @@ export default [
   },
   {
     name: "lut1",
-    type: "lut",
-    path: "lut/standard.cube",
+    type: "ktx2",
+    path: "lut/standard.ktx2",
   },
   {
     name: "bouquetinModel",

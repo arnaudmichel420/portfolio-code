@@ -7,10 +7,13 @@ import {
   LUTCubeLoader,
 } from "three/examples/jsm/Addons.js";
 import { EXRLoader } from "three/examples/jsm/loaders/EXRLoader.js";
+import Experience from "../Experience.js";
 
 export default class Ressources extends EventEmitter {
   constructor(sources) {
     super();
+    this.experience = new Experience();
+    this.renderer = this.experience.renderer.instance;
 
     //options
     this.sources = sources;
@@ -34,6 +37,8 @@ export default class Ressources extends EventEmitter {
     this.loaders.exrLoader = new EXRLoader();
     this.loaders.lutLoader = new LUTCubeLoader();
     this.loaders.ktx2Loader = new KTX2Loader();
+    this.loaders.ktx2Loader.setTranscoderPath("/basis/");
+    this.loaders.ktx2Loader.detectSupport(this.renderer);
   }
   startLoading() {
     for (const source of this.sources) {

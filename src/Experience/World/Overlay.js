@@ -156,7 +156,7 @@ export default class Overlay {
               this.active = false;
               this.loadingBar.remove();
               this.setScrollUi();
-              this.experience.renderer.addPass();
+              this.experience.renderer.addLutPass();
             },
           },
           "<"
