@@ -24,6 +24,10 @@ export default class Grass {
     this.parameters.uBladesTopColor1 = "#54ce12";
     this.parameters.uBladesTopColor2 = "#212f13";
     this.parameters.uBladesBottomColor = "#0b2d06";
+    this.parameters.uBladesShadowColor = "#000000";
+    this.parameters.uBladesLightColor = "#FF0000";
+    this.parameters.uShadowOpacity = 0.25;
+    this.parameters.uLightOpacity = 0.35;
     this.parameters.uColorOffset = 0.5;
     this.parameters.uPerlinSize = 0.1;
     this.parameters.uPerlinFrequency = 0.0002;
@@ -35,7 +39,7 @@ export default class Grass {
     //debug
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("🌿 Grass");
-      this.debugFolder.close();
+      // this.debugFolder.close();
       this.setDebug();
     }
   }
@@ -152,6 +156,38 @@ export default class Grass {
         );
       });
     this.debugFolder
+      .addColor(this.parameters, "uBladesShadowColor")
+      .onChange(() => {
+        this.material.uniforms.uBladesShadowColor.value.set(
+          this.parameters.uBladesShadowColor
+        );
+      });
+    this.debugFolder
+      .addColor(this.parameters, "uBladesLightColor")
+      .onChange(() => {
+        this.material.uniforms.uBladesLightColor.value.set(
+          this.parameters.uBladesLightColor
+        );
+      });
+    this.debugFolder
+      .add(this.parameters, "uShadowOpacity")
+      .min(0)
+      .max(1)
+      .step(0.001)
+      .onChange(() => {
+        this.material.uniforms.uShadowOpacity.value =
+          this.parameters.uShadowOpacity;
+      });
+    this.debugFolder
+      .add(this.parameters, "uLightOpacity")
+      .min(0)
+      .max(1)
+      .step(0.001)
+      .onChange(() => {
+        this.material.uniforms.uLightOpacity.value =
+          this.parameters.uLightOpacity;
+      });
+    this.debugFolder
       .add(this.parameters, "uPerlinSize")
       .min(0)
       .max(1)
@@ -218,21 +254,29 @@ export default class Grass {
     this.material = new THREE.ShaderMaterial({
       uniforms: {
         uTime: new THREE.Uniform(0),
-        uOffset: { value: this.parameters.uOffset },
-        uLength: { value: this.parameters.uLength },
-        uHeightMap: { value: this.uHeightMap },
-        uGrassMap: { value: this.uGrassMap },
-        uPerlinSize: { value: this.parameters.uPerlinSize },
-        uPerlinFrequency: { value: this.parameters.uPerlinFrequency },
-        ubladesTopColor1: {
+        uOffset: new THREE.Uniform(this.parameters.uOffset),
+        uLength: new THREE.Uniform(this.parameters.uLength),
+        uHeightMap: new THREE.Uniform(this.uHeightMap),
+        uGrassMap: new THREE.Uniform(this.uGrassMap),
+        uPerlinSize: new THREE.Uniform(this.parameters.uPerlinSize),
+        uPerlinFrequency: new THREE.Uniform(this.parameters.uPerlinFrequency),
+        uBladesTopColor1: {
           value: new THREE.Color(this.parameters.uBladesTopColor1),
         },
-        ubladesTopColor2: {
+        uBladesTopColor2: {
           value: new THREE.Color(this.parameters.uBladesTopColor2),
         },
-        ubladesBottomColor: {
+        uBladesBottomColor: {
           value: new THREE.Color(this.parameters.uBladesBottomColor),
         },
+        uBladesShadowColor: {
+          value: new THREE.Color(this.parameters.uBladesShadowColor),
+        },
+        uBladesLightColor: {
+          value: new THREE.Color(this.parameters.uBladesLightColor),
+        },
+        uShadowOpacity: new THREE.Uniform(this.parameters.uShadowOpacity),
+        uLightOpacity: new THREE.Uniform(this.parameters.uLightOpacity),
         uColorOffset: new THREE.Uniform(this.parameters.uColorOffset),
         uHeightMapStrenght: new THREE.Uniform(
           this.parameters.uHeightMapStrenght

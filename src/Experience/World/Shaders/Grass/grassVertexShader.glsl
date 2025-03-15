@@ -38,11 +38,20 @@ void main()
 
     //store center before offset
     vec2 newCenter = mix(mix(newPosition.xz, newPosition.xz, float(isSecondVertex)), newPosition.xz, float(isThirdVertex));
+
+    //corrected Uvs
+    vec2 uvScale = (newPosition.xz - -uGridSize / 2.0) / (uGridSize / 2.0 - -uGridSize / 2.0);
+    vec2 uvScaleWithOffset = uvScale;
+    uvScaleWithOffset.x += uGrassMapOffsetX;
+    uvScaleWithOffset.y += uGrassMapOffsetZ;
     
     //offset
     newPosition.x += float(isFirstVertex) * uOffset;
     newPosition.x -= float(isSecondVertex) * uOffset;
-    newPosition.y += float(isThirdVertex) * uLength;
+
+    //perlin for length
+    float noise = texture(uPerlinNoise, uvScaleWithOffset * 2.0).r;
+    newPosition.y += float(isThirdVertex) * (uLength * 2.0) * noise;
 
     //store elevation before offset
     vElevation = newPosition.y;
@@ -51,18 +60,14 @@ void main()
     float angle = atan(newCenter.x - cameraPosition.x, newCenter.y - cameraPosition.z);
     newPosition.xz = getRotatePivot2d(newPosition.xz, angle, newCenter.xy);
 
-    //corrected Uvs
-    vec2 uvScale = (newPosition.xz - -uGridSize / 2.0) / (uGridSize / 2.0 - -uGridSize / 2.0);
-
-    uvScale.x += uGrassMapOffsetX;
-    uvScale.y += uGrassMapOffsetZ;
+    
     //grass patch 
-    float grassHeight = texture2D(uGrassMap, uvScale).r;
-    newPosition.y += float(isThirdVertex) * (step(0.45, grassHeight) * uLength - uLength);
+    float grassHeight = texture2D(uGrassMap, uvScaleWithOffset).r;
+    newPosition.y += float(isThirdVertex) * (grassHeight * - uLength);
+    newPosition.y += float(isThirdVertex) * (step(0.9, grassHeight) * - uLength);
 
     //wind
-    float topVertice = step(uLength, newPosition.y);
-    newPosition.xz += topVertice * cnoise(vec3(newPosition.xz * uPerlinSize ,uTime * uPerlinFrequency)) * 0.5;
+    newPosition.xz += float(isThirdVertex) * cnoise(vec3(newPosition.xz * uPerlinSize ,uTime * uPerlinFrequency)) * 0.5;
 
     //follow mesh
     float height = texture2D(uHeightMap, uvScale).r;
@@ -73,5 +78,16 @@ void main()
     vec4 projectedPosition = projectionMatrix * viewPosition;
     gl_Position = projectedPosition;
 
-    vUv = uvScale;
+    vUv = uvScaleWithOffset;
 }
+
+// -74.9296 m
+// 126.808 m
+// 200.01 m
+
+// 250.0
+
+
+// -88.1168 m
+// 139.223 m
+// 413.659 m
