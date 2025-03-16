@@ -29,7 +29,6 @@ export default class Restore {
         transitionDuration;
     }, 500);
 
-    //message scene en restoration
     this.experience.world.overlay.removeLoading();
     this.experience.world.overlay.loadingBar.click();
 
