@@ -50,7 +50,7 @@ export default class AnimateCamera {
         lookAtY: 105,
         lookAtZ: -300,
         snowDensity: 0,
-        snowSpeed: 0.005,
+        snowSpeed: 0.008,
         snowSize: 5,
       },
       {
@@ -61,7 +61,7 @@ export default class AnimateCamera {
         lookAtY: 183,
         lookAtZ: -300,
         snowDensity: 0.5,
-        snowSpeed: 0.005,
+        snowSpeed: 0.008,
         snowSize: 5,
       },
       {
@@ -69,7 +69,7 @@ export default class AnimateCamera {
         y: 332,
         z: 210,
         lookAtX: -192,
-        lookAtY: 332,
+        lookAtY: 344,
         lookAtZ: 0,
         snowDensity: 1,
         snowSpeed: 0.01,
@@ -88,10 +88,10 @@ export default class AnimateCamera {
       },
       {
         x: -192,
-        y: 410,
+        y: 420,
         z: 210,
         lookAtX: -192,
-        lookAtY: 410,
+        lookAtY: 420,
         lookAtZ: 0,
         snowDensity: 0,
         snowSpeed: 0.009,
@@ -110,6 +110,7 @@ export default class AnimateCamera {
     }
 
     this.animateScroll();
+    this.setParrallaxAnimation();
   }
   setDebug() {
     this.debugFolder.add(this.parameters, "transitionDuration", 0, 5, 0.1);
@@ -223,11 +224,16 @@ export default class AnimateCamera {
         this.currentSection < this.cameraPositions.length - 1
       ) {
         this.listen = false;
+        this.experience.mouse.easing = false;
+        this.experience.mouse.delta = 0;
+        this.experience.mouse.deltaScroll = 0;
         this.currentSection++;
-        console.log(this.currentSection);
 
         setTimeout(() => {
+          this.experience.mouse.deltaScroll = 0;
+          this.experience.mouse.delta = 0;
           this.listen = true;
+          this.experience.mouse.easing = true;
         }, this.parameters.transitionDuration * 1000);
       } else if (
         this.scrollY > -(this.currentSection - 1) * 50 - 30 &&
@@ -235,10 +241,16 @@ export default class AnimateCamera {
         this.currentSection > 0
       ) {
         this.listen = false;
+        this.experience.mouse.easing = false;
+        this.experience.mouse.delta = 0;
+        this.experience.mouse.deltaScroll = 0;
         this.currentSection--;
 
         setTimeout(() => {
+          this.experience.mouse.deltaScroll = 0;
+          this.experience.mouse.delta = 0;
           this.listen = true;
+          this.experience.mouse.easing = true;
         }, this.parameters.transitionDuration * 1000);
       }
 
@@ -289,6 +301,7 @@ export default class AnimateCamera {
         switch (this.currentSection) {
           case 5:
             this.experience.world.text.topDivTimeline.restart();
+            this.parrallaxTimeline.restart();
 
             break;
           case 6:
@@ -300,16 +313,27 @@ export default class AnimateCamera {
       }
     }
   }
+  setParrallaxAnimation() {
+    this.parrallaxTimeline = gsap.timeline({ paused: true });
+    this.parrallaxTimeline.to(this.cameraGroup.position, {
+      duration: this.parameters.transitionDuration,
+      ease: "power4.out",
+      x: 0,
+      y: 0,
+    });
+  }
   parallax() {
-    // this.mouseXY = this.experience.mouse.mouseXY;
-    // this.deltaTime = this.experience.time.delta;
-    // this.cameraGroup.position.x +=
-    //   (this.mouseXY.x * this.parameters.parallaxAmplitude -
-    //     this.cameraGroup.position.x) *
-    //   this.parameters.parallaxSmoothing;
-    // this.cameraGroup.position.y +=
-    //   (this.mouseXY.y * this.parameters.parallaxAmplitude -
-    //     this.cameraGroup.position.y) *
-    //   this.parameters.parallaxSmoothing;
+    if (this.currentSection < 5) {
+      this.mouseXY = this.experience.mouse.mouseXY;
+      this.deltaTime = this.experience.time.delta;
+      this.cameraGroup.position.x +=
+        (this.mouseXY.x * this.parameters.parallaxAmplitude -
+          this.cameraGroup.position.x) *
+        this.parameters.parallaxSmoothing;
+      this.cameraGroup.position.y +=
+        (this.mouseXY.y * this.parameters.parallaxAmplitude -
+          this.cameraGroup.position.y) *
+        this.parameters.parallaxSmoothing;
+    }
   }
 }

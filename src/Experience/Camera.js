@@ -23,7 +23,7 @@ export default class Camera {
     //debug
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("🎥 Camera");
-      // this.debugFolder.close();
+      this.debugFolder.close();
     }
 
     this.setInstance();

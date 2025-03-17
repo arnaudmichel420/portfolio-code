@@ -1,7 +1,9 @@
 /**
  * Compress image to ktx2 :
  *
- *  toktx --t2 --genmipmap --upper_left_maps_to_s0t0 --uastc 4 --uastc_rdo_l static/textures/arbre-preCompress-png-4.0.ktx2 static/textures/arbre.png
+ *  toktx --t2 --genmipmap --upper_left_maps_to_s0t0 --uastc 1 --uastc_rdo_l static/lut/Neutral-512.ktx2 static/lut/Neutral-512.png
+ * toktx --t2 --genmipmap --upper_left_maps_to_s0t0 --uastc 1 --uastc_rdo_l --zcmp 19 static/lut/Neutral-512-compress.ktx2 static/lut/Neutral-512.ktx2
+ktxsc --zcmp 19 static/lut/Neutral-512.ktx2
  */
 export default [
   {
@@ -67,7 +69,7 @@ export default [
   {
     name: "lut1",
     type: "ktx2",
-    path: "lut/standard.ktx2",
+    path: "/lut/standard.ktx2",
   },
   {
     name: "bouquetinModel",

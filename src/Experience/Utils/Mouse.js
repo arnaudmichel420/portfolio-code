@@ -14,8 +14,9 @@ export default class Mouse extends EventEmitter {
     this.deltaScroll = 0;
     this.delta = 0;
     this.dampingFactor = { x: 0.001 };
-    this.mobileScrollSensitivity = { x: 0.5 };
+    this.mobileScrollSensitivity = { x: 1 };
     this.target = 0;
+    this.easing = true;
 
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("🖱️ Mouse Event");
@@ -34,7 +35,7 @@ export default class Mouse extends EventEmitter {
         .add(this.dampingFactor, "x", 0.0001, 0.005, 0.0001)
         .name("dampingFactor");
       this.debugFolder
-        .add(this.mobileScrollSensitivity, "x", 0.0001, 1, 0.0001)
+        .add(this.mobileScrollSensitivity, "x", 0.0001, 5, 0.0001)
         .name("mobileScrollSensitivity");
     }
   }
@@ -73,7 +74,7 @@ export default class Mouse extends EventEmitter {
     });
   }
   scrollEasing() {
-    if (!this.experience.world.overlay.active) {
+    if (!this.experience.world.overlay.active && this.easing) {
       this.deltaTime = this.experience.time.delta;
       this.deltaScroll += this.delta;
       this.delta = 0;
