@@ -27,12 +27,12 @@ export default [
   {
     name: "mountainTexture",
     type: "texture",
-    path: "textures/mountain.webp",
+    path: "textures/mountain-95.webp",
   },
   {
     name: "refugeTexture",
     type: "texture",
-    path: "textures/refuge.webp",
+    path: "textures/refuge-95.webp",
   },
   {
     name: "treesTexture",
@@ -42,7 +42,7 @@ export default [
   {
     name: "propsTexture",
     type: "texture",
-    path: "textures/props.webp",
+    path: "textures/props-95.webp",
   },
   {
     name: "heightMap",
@@ -82,7 +82,7 @@ export default [
   {
     name: "animalsTexture",
     type: "texture",
-    path: "textures/animals.webp",
+    path: "textures/animals-95.webp",
   },
   {
     name: "foxModel",

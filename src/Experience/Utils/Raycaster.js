@@ -18,10 +18,10 @@ export default class Raycaster extends EventEmitter {
     this.objectToTest = this.experience.world.objectToTest;
 
     this.pages = [
-      { name: "panel", url: "./projects/massage-sportif-annecy.html" },
-      { name: "fox", url: "./projects/gamejam.html" },
-      { name: "bouquetin", url: "./projects/project-3.html" },
-      { name: "alien", url: "./projects/project-4.html" },
+      { name: "panel", url: "./projects/massage-sportif-annecy" },
+      { name: "fox", url: "./projects/gamejam" },
+      { name: "bouquetin", url: null },
+      { name: "alien", url: null },
     ];
   }
   setRaycaster() {
@@ -42,13 +42,25 @@ export default class Raycaster extends EventEmitter {
         (item) => item.uuid == this.currentIntersect.object.uuid
       );
       const page = this.pages.find((item) => item.name == result.name);
-      //scroll
-      const savedScroll = {};
-      savedScroll.scrollY = this.experience.animateCamera.scrollY;
-      savedScroll.currentSection = this.experience.animateCamera.currentSection;
-      sessionStorage.setItem("scroll", JSON.stringify(savedScroll));
-      // go to page project
-      window.location.assign(page.url);
+      if (!page.url) {
+        const intersectPosition = this.currentIntersect.point;
+
+        this.experience.world.text.message3D.position.set(
+          intersectPosition.x,
+          intersectPosition.y,
+          intersectPosition.z
+        );
+        this.experience.world.text.messageTimeline.play();
+      } else {
+        //scroll
+        const savedScroll = {};
+        savedScroll.scrollY = this.experience.animateCamera.scrollY;
+        savedScroll.currentSection =
+          this.experience.animateCamera.currentSection;
+        sessionStorage.setItem("scroll", JSON.stringify(savedScroll));
+        // go to page project
+        window.location.assign(page.url);
+      }
     }
   }
 }

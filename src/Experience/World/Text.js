@@ -1,4 +1,3 @@
-import * as THREE from "three";
 import { CSS2DObject } from "three/examples/jsm/Addons.js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,13 +13,15 @@ export default class Text {
     this.debug = this.experience.debug;
 
     this.parameters = {};
-
+    this.messageTimeline = gsap.timeline({ paused: true });
+    this.topDivTimeline = gsap.timeline({ paused: true });
+    this.mainDivTimeline = gsap.timeline({ paused: true });
     this.setText();
   }
 
   setText() {
     const topDiv = document.createElement("div");
-    topDiv.classList.add("topDiv");
+    // topDiv.classList.add("topDiv");
     topDiv.innerHTML = `<div class="topDiv">
       <img src="/icons/arrow.svg" alt="" width="100px" />
       <p>
@@ -42,8 +43,7 @@ export default class Text {
         <div class="box2">
           <div>
             I'm transitioning careers and pursuing a Bachelor's in Web
-            Development, specializing in front-end. I'm looking for a 2-month
-            internship starting in April 2025 and an apprenticeship starting in
+            Development, specializing in front-end. I'm looking for an apprenticeship starting in
             September.
           </div>
           <div>
@@ -76,21 +76,28 @@ export default class Text {
         <a href="./projects/massage-sportif-annecy.html">Discover all projects</a>
       </div>`;
 
-    const topDiv3D = new CSS2DObject(topDiv);
-    topDiv3D.position.set(-192, 400, 200);
-    const mainDiv3D = new CSS2DObject(mainDiv);
-    mainDiv3D.position.set(-192, 410, 200);
+    const message = document.createElement("div");
+    message.innerHTML = `<div class="message"><p>No project here yet ... Maybe yours ?</p></div>`;
 
-    this.scene.add(topDiv3D);
-    this.scene.add(mainDiv3D);
+    this.topDiv3D = new CSS2DObject(topDiv);
+    this.topDiv3D.position.set(-192, 400, 200);
+    this.mainDiv3D = new CSS2DObject(mainDiv);
+    this.mainDiv3D.position.set(-192, 410, 200);
+    this.message3D = new CSS2DObject(message);
+    this.message3D.position.set(0, -100, 0);
+
+    this.scene.add(this.topDiv3D);
+    this.scene.add(this.mainDiv3D);
+    this.scene.add(this.message3D);
+
+    //wait for element to exist
+    setTimeout(() => {
+      this.setMessageAnimation();
+      this.setCVAnimation();
+    }, 500);
   }
-  setAnimation() {
-    this.currentSection = this.experience.animateCamera.currentSection;
-
-    let topDiv = gsap.timeline({});
-    let mainDiv = gsap.timeline({});
-
-    topDiv
+  setCVAnimation() {
+    this.topDivTimeline
       .fromTo(
         ".topDiv",
         {
@@ -121,7 +128,7 @@ export default class Text {
         "<"
       );
 
-    mainDiv
+    this.mainDivTimeline
       .fromTo(
         ".bottom",
         {
@@ -210,19 +217,23 @@ export default class Text {
         },
         "<"
       );
-
-    switch (this.currentSection) {
-      case 5:
-        topDiv.play();
-        mainDiv.pause();
-        break;
-      case 6:
-        mainDiv.play();
-        topDiv.pause();
-        break;
-
-      default:
-        break;
-    }
+  }
+  setMessageAnimation() {
+    this.messageTimeline.fromTo(
+      ".message",
+      {
+        scale: 0,
+      },
+      {
+        duration: 1.5,
+        ease: "elastic.out(1,0.3)",
+        scale: 1,
+        onComplete: () => {
+          gsap.delayedCall(2, () => {
+            this.messageTimeline.reverse();
+          });
+        },
+      }
+    );
   }
 }

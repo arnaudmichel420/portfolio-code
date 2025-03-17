@@ -193,7 +193,6 @@ export default class AnimateCamera {
       }
 
       //animate
-
       this.camera.position.set(
         this.camera.position.x - this.deltaScroll * 0.0001 * this.deltaX,
         this.camera.position.y - this.deltaScroll * 0.0001 * this.deltaY,
@@ -211,8 +210,7 @@ export default class AnimateCamera {
       this.cameraLookAt.y -= this.deltaScroll * 0.0001 * this.deltaLookAtY;
       this.cameraLookAt.z -= this.deltaScroll * 0.0001 * this.deltaLookAtZ;
 
-      // //snow
-
+      //snow
       this.snow.uSnowDensity.value -=
         this.deltaScroll * 0.0001 * this.deltaSnowDensity;
       this.snow.uSnowSpeed.value -=
@@ -261,11 +259,13 @@ export default class AnimateCamera {
           y: this.cameraPositions[this.currentSection].lookAtY,
           z: this.cameraPositions[this.currentSection].lookAtZ,
           onUpdate: () => {
-            this.camera.lookAt(
-              this.cameraLookAt.x,
-              this.cameraLookAt.y,
-              this.cameraLookAt.z
-            );
+            requestAnimationFrame(() => {
+              this.camera.lookAt(
+                this.cameraLookAt.x,
+                this.cameraLookAt.y,
+                this.cameraLookAt.z
+              );
+            });
           },
         });
         //snow
@@ -286,8 +286,14 @@ export default class AnimateCamera {
         });
 
         //launch text animation
-        if (this.currentSection > 4) {
-          this.experience.world.text.setAnimation(this.currentSection);
+        switch (this.currentSection) {
+          case 5:
+            this.experience.world.text.topDivTimeline.restart();
+
+            break;
+          case 6:
+            this.experience.world.text.mainDivTimeline.restart();
+            break;
         }
         //launch sky animation
         this.experience.world.nightSky.setAnimation(this.currentSection);

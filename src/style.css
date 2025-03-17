@@ -411,4 +411,23 @@ body {
   .topDiv img {
     margin-bottom: 150px;
   }
+}
+.message {
+  width: 300px;
+  height: 100px;
+  border-radius: 20px;
+  color: #f1f1f1;
+  background-color: #101010;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  border: #f1f1f1 2px solid;
+}
+.message p {
+  font-family: "Brooklyn";
+  font-weight: 400;
+  font-size: 24px;
+  text-align: center;
+  line-height: 40px;
 }/*# sourceMappingURL=style.css.map */
