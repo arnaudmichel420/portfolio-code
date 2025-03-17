@@ -20,15 +20,6 @@ export default {
         project2: "src/projects/gamejam.html",
       },
     },
-    resolve: {
-      alias: {
-        "/index": "src/index.html",
-        "/projects/massage-sportif-annecy":
-          "src/projects/massage-sportif-annecy.html",
-        "/projects/gamejam": "src/projects/gamejam.html",
-      },
-    },
-    // assetsInclude: ["**/*.html"],
   },
   plugins: [
     restart({ restart: ["../static/**"] }), // Restart server on static file change
