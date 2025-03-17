@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./projectsStyle.css" />
+    <link rel="stylesheet" href="../projectsStyle.css" />
     <title>Gamejam | Godot</title>
     <link rel="shortcut icon" href="picto/montagne.png" type="image/x-icon" />
   </head>
@@ -31,11 +31,9 @@
             <p>Projects ✚</p>
             <ul>
               <li>
-                <a href="./massage-sportif-annecy.html"
-                  >Massage Annecy Sportif</a
-                >
+                <a href="../massage-sportif-annecy">Massage Annecy Sportif</a>
               </li>
-              <li><a href="./gamejam.html">Gamejam | Godot</a></li>
+              <li><a href="../gamejam">Gamejam | Godot</a></li>
               <!-- <li><a href="./project-3.html">Project 3</a></li>
               <li><a href="./project-4.html">Project 4</a></li>
               <li><a href="./project-5.html">Project 5</a></li> -->
@@ -149,14 +147,14 @@
     </main>
     <footer>
       <nav>
-        <a href="./massage-sportif-annecy.html">
+        <a href="../massage-sportif-annecy">
           <div class="backArrow backArrowFooterLeft">
             <div></div>
             <div></div>
           </div>
           <p>Previous Project</p>
         </a>
-        <a href="./massage-sportif-annecy.html" style="display: none">
+        <a href="../massage-sportif-annecy" style="display: none">
           <p>Previous Project</p>
           <div class="backArrow backArrowFooterRight">
             <div></div>
@@ -165,17 +163,17 @@
         </a>
       </nav>
     </footer>
-    <script type="module" src="./scriptProject.js"></script>
+    <script type="module" src="../scriptProject.js"></script>
     <script>
       function navBack() {
         const navigateHome = { navigate: true };
         sessionStorage.setItem("home", JSON.stringify(navigateHome));
-        window.location.assign("./../index.html");
+        window.location.assign("../../");
       }
       function navHome() {
         const navigateHome = { navigate: false };
         sessionStorage.setItem("home", JSON.stringify(navigateHome));
-        window.location.assign("./../index.html");
+        window.location.assign("../../");
       }
     </script>
   </body>

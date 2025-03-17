@@ -18,7 +18,7 @@ export default class Raycaster extends EventEmitter {
     this.objectToTest = this.experience.world.objectToTest;
 
     this.pages = [
-      { name: "panel", url: "./projects/massage-sportif-annecy.html" },
+      { name: "panel", url: "./projects/massage-sportif-annecy" },
       { name: "fox", url: "./projects/gamejam.html" },
       { name: "bouquetin", url: null },
       { name: "alien", url: null },

@@ -15,7 +15,7 @@ export default {
     sourcemap: true, // Add sourcemap
     rollupOptions: {
       input: {
-        home: "src/index.html",
+        home: "src/",
         project1: "src/projects/massage-sportif-annecy.html",
         project2: "src/projects/gamejam.html",
       },
