@@ -1,4 +1,4 @@
-import * as THREE from "three";
+import gsap from "gsap";
 import Experience from "./Experience.js";
 
 export default class Restore {
@@ -13,21 +13,19 @@ export default class Restore {
     this.experience.animateCamera.previousSection =
       this.data.currentSection - 1;
 
-    const transitionDuration =
-      this.experience.animateCamera.parameters.transitionDuration;
-    this.experience.animateCamera.parameters.transitionDuration = 0;
     this.experience.animateCamera.animateScroll();
-    this.experience.world.overlay.mesh.position.set(
-      this.experience.camera.instance.position.x,
-      this.experience.camera.instance.position.y,
-      this.experience.camera.instance.position.z
-    );
-
-    //put back the default value
-    setTimeout(() => {
-      this.experience.animateCamera.parameters.transitionDuration =
-        transitionDuration;
-    }, 500);
+    //move overlay with camera
+    gsap.to(this.experience.world.overlay.mesh.position, {
+      duration: this.experience.animateCamera.parameters.transitionDuration,
+      ease: "power4.out",
+      onUpdate: () => {
+        this.experience.world.overlay.mesh.position.set(
+          this.experience.camera.instance.position.x,
+          this.experience.camera.instance.position.y,
+          this.experience.camera.instance.position.z
+        );
+      },
+    });
 
     this.experience.world.overlay.removeLoading();
     this.experience.world.overlay.loadingBar.click();
