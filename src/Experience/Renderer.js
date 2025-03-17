@@ -36,12 +36,12 @@ export default class Renderer {
     this.parameters.bloomLuminanceThreshold = 1.1;
     this.parameters.bloomLuminanceSmoothing = 0.1;
     this.parameters.outlineBlendFunction = BlendFunction.ADD;
-    this.parameters.outlineEdgeStrength = 10;
-    this.parameters.outlinePulseSpeed = 1;
-    this.parameters.outlineVisibleEdgeColor = "#FFFFFF";
+    this.parameters.outlineEdgeStrength = 3;
+    this.parameters.outlinePulseSpeed = 0.5;
+    this.parameters.outlineVisibleEdgeColor = "#ff5900";
     this.parameters.outlineHiddenEdgeColor = "#FFFFFF";
     this.parameters.colorBlendFunction = BlendFunction.NORMAL;
-    this.parameters.colorBrightness = 0;
+    this.parameters.colorBrightness = 0.05;
     this.parameters.colorContrast = 0;
     this.parameters.hueBlendFunction = BlendFunction.NORMAL;
     this.parameters.colorHue = 0;
@@ -54,7 +54,7 @@ export default class Renderer {
 
     if (this.debug.active) {
       this.debugFolder = this.debug.ui.addFolder("📺 Renderer");
-      // this.debugFolder.close();
+      this.debugFolder.close();
       this.setDebug();
     }
 

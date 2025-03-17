@@ -16,21 +16,21 @@ export default class Grass {
     this.parameters.blades = 200000;
     this.parameters.uOffset = 0.2;
     this.parameters.uLength = 1;
-    this.parameters.uChunkSize = 100;
-    this.parameters.uGrassOffsetX = -80;
-    this.parameters.uGrassOffsetZ = -95;
+    this.parameters.uChunkSize = 125;
+    this.parameters.uGrassOffsetX = -85;
+    this.parameters.uGrassOffsetZ = -125;
     this.parameters.uGridSize = 250;
     this.parameters.uHeightMapStrenght = 72.5;
-    this.parameters.uBladesTopColor1 = "#54ce12";
-    this.parameters.uBladesTopColor2 = "#212f13";
+    this.parameters.uBladesTopColor1 = "#10b22b";
+    this.parameters.uBladesTopColor2 = "#3d9900";
     this.parameters.uBladesBottomColor = "#0b2d06";
     this.parameters.uBladesShadowColor = "#000000";
     this.parameters.uBladesLightColor = "#FF0000";
-    this.parameters.uShadowOpacity = 0.25;
-    this.parameters.uLightOpacity = 0.35;
+    this.parameters.uShadowOpacity = 0.3;
+    this.parameters.uLightOpacity = 0.4;
     this.parameters.uColorOffset = 0.5;
     this.parameters.uPerlinSize = 0.1;
-    this.parameters.uPerlinFrequency = 0.0002;
+    this.parameters.uPerlinFrequency = 0.0003;
     this.parameters.uGrassMapOffsetX = -0.0001;
     this.parameters.uGrassMapOffsetZ = 0.0032;
 
@@ -226,9 +226,9 @@ export default class Grass {
     const positions = new Float32Array(this.parameters.blades * 3 * 3);
 
     for (let i = 0; i < this.parameters.blades; i++) {
-      const positionX = (Math.random() - 0.5) * this.parameters.uChunkSize;
+      const positionX = (Math.random() - 0.5) * this.parameters.uChunkSize + 10;
 
-      const positionZ = (Math.random() - 0.5) * this.parameters.uChunkSize;
+      const positionZ = (Math.random() - 0.5) * this.parameters.uChunkSize - 10;
 
       const positionY = 0;
 

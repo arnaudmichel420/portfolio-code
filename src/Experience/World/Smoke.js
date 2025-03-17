@@ -15,7 +15,7 @@ export default class Smoke {
     this.parameters.color = "#ffbf66";
     this.parameters.perlinSizeX = 0.5;
     this.parameters.perlinSizeY = 0.25;
-    this.parameters.twistFrequency = 0.125;
+    this.parameters.twistFrequency = 0.11;
 
     this.setSmoke();
 
@@ -58,19 +58,19 @@ export default class Smoke {
       .add(this.mesh.position, "x")
       .min(-500)
       .max(500)
-      .step(1)
+      .step(0.1)
       .name("positionX");
     this.debugFolder
       .add(this.mesh.position, "y")
       .min(-500)
       .max(500)
-      .step(1)
+      .step(0.1)
       .name("positionY");
     this.debugFolder
       .add(this.mesh.position, "z")
       .min(-500)
       .max(500)
-      .step(1)
+      .step(0.1)
       .name("positionZ");
     this.debugFolder
       .add(this.mesh.rotation, "y")
@@ -92,25 +92,26 @@ export default class Smoke {
 
     this.material = new THREE.ShaderMaterial({
       uniforms: {
-        uTime: { value: 0 },
+        uTime: new THREE.Uniform(0),
         uPerlinNoise: new THREE.Uniform(this.perlinNoise),
         uColor: { value: new THREE.Color(this.parameters.color) },
-        uPerlinSizeX: { value: this.parameters.perlinSizeX },
-        uPerlinSizeY: { value: this.parameters.perlinSizeY },
-        uTwistFrequency: { value: this.parameters.twistFrequency },
+        uPerlinSizeX: new THREE.Uniform(this.parameters.perlinSizeX),
+        uPerlinSizeY: new THREE.Uniform(this.parameters.perlinSizeY),
+        uTwistFrequency: new THREE.Uniform(this.parameters.twistFrequency),
       },
       vertexShader: smokeVertexShader,
       fragmentShader: smokeFragmentShader,
-      // side: THREE.DoubleSide,
+      side: THREE.DoubleSide,
       transparent: true,
       depthWrite: false,
     });
 
     this.geometry = new THREE.PlaneGeometry(1, 1, 16, 64);
     this.geometry.translate(0, 0.5, 0);
-    this.geometry.scale(2, 12, 2);
+    this.geometry.scale(1, 12, 1);
     this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.position.set(-109.5, 78, 58);
+    this.mesh.position.set(-109.7, 78, 58.5);
+    this.mesh.rotation.set(0, 0, 0);
     this.scene.add(this.mesh);
   }
   elapsedTime() {

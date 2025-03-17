@@ -67,7 +67,7 @@ export default class Text {
           </div>
           <div>
             <span>Framework / Libraries :</span>
-            <p>THREEJS / Looking to learn more</p>
+            <p>THREEJS / SYMFONY / VUE</p>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default class Text {
     this.topDiv3D = new CSS2DObject(topDiv);
     this.topDiv3D.position.set(-192, 400, 200);
     this.mainDiv3D = new CSS2DObject(mainDiv);
-    this.mainDiv3D.position.set(-192, 410, 200);
+    this.mainDiv3D.position.set(-192, 420, 200);
     this.message3D = new CSS2DObject(message);
     this.message3D.position.set(0, -100, 0);
 

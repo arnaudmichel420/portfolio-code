@@ -12,14 +12,14 @@ export default class Snow {
     this.time = this.experience.time;
 
     this.parameters = {};
-    this.parameters.snow = 10000;
+    this.parameters.snow = 12000;
     this.parameters.size = 5;
     this.parameters.snowSpeed = 0.005;
     this.parameters.snowRangeX = 150;
-    this.parameters.snowRangeY = 70;
+    this.parameters.snowRangeY = 80;
     this.parameters.snowRangeZ = 100;
     this.parameters.snowOffsetX = -75;
-    this.parameters.snowOffsetY = -40;
+    this.parameters.snowOffsetY = -30;
     this.parameters.snowOffsetZ = -75;
     this.parameters.snowDensity = 0;
 
@@ -154,22 +154,21 @@ export default class Snow {
       blending: THREE.AdditiveBlending,
       vertexColors: true,
       uniforms: {
-        uTime: { value: 0 },
-        uSize: {
-          value:
-            this.parameters.size *
-            this.experience.renderer.instance.getPixelRatio(),
-        },
+        uTime: new THREE.Uniform(0),
+        uSize: new THREE.Uniform(
+          this.parameters.size *
+            this.experience.renderer.instance.getPixelRatio()
+        ),
         uSnowTexture: new THREE.Uniform(this.snowTexture),
-        uSnow: { value: this.parameters.snow },
-        uSnowSpeed: { value: this.parameters.snowSpeed },
-        uSnowRangeX: { value: this.parameters.snowRangeX },
-        uSnowRangeY: { value: this.parameters.snowRangeY },
-        uSnowRangeZ: { value: this.parameters.snowRangeZ },
-        uSnowOffsetX: { value: this.parameters.snowOffsetX },
-        uSnowOffsetY: { value: this.parameters.snowOffsetY },
-        uSnowOffsetZ: { value: this.parameters.snowOffsetZ },
-        uSnowDensity: { value: this.parameters.snowDensity },
+        uSnow: new THREE.Uniform(this.parameters.snow),
+        uSnowSpeed: new THREE.Uniform(this.parameters.snowSpeed),
+        uSnowRangeX: new THREE.Uniform(this.parameters.snowRangeX),
+        uSnowRangeY: new THREE.Uniform(this.parameters.snowRangeY),
+        uSnowRangeZ: new THREE.Uniform(this.parameters.snowRangeZ),
+        uSnowOffsetX: new THREE.Uniform(this.parameters.snowOffsetX),
+        uSnowOffsetY: new THREE.Uniform(this.parameters.snowOffsetY),
+        uSnowOffsetZ: new THREE.Uniform(this.parameters.snowOffsetZ),
+        uSnowDensity: new THREE.Uniform(this.parameters.snowDensity),
       },
       fragmentShader: snowFragmentShader,
       vertexShader: snowVertexShader,

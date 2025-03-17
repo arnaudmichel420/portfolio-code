@@ -21,7 +21,7 @@ export default class Fireflies {
     this.parameters.offsetX = 82;
     this.parameters.offsetY = 2;
     this.parameters.offsetZ = 101;
-    this.parameters.uColor = "#fff7c2";
+    this.parameters.uColor = "#ffee80";
     this.parameters.uDotRange = 0.0161;
 
     this.setFireflies();

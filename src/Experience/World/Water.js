@@ -12,12 +12,12 @@ export default class Water {
     this.time = this.experience.time;
 
     this.parameters = {};
-    this.parameters.colorWater = "#5762ff";
-    this.parameters.colorRipple = "#8f96ff";
-    this.parameters.rippleSize = 37;
+    this.parameters.colorWater = "#3d6eff";
+    this.parameters.colorRipple = "#9ea5ff";
+    this.parameters.rippleSize = 34.7;
     this.parameters.rippleFrequency = 0.0004;
     this.parameters.rippleStep = 0.995;
-    this.parameters.waterTransparency = 0.8;
+    this.parameters.waterTransparency = 0.323;
 
     this.setWater();
 
@@ -102,14 +102,16 @@ export default class Water {
     this.geometry = new THREE.PlaneGeometry(30, 20, 128, 128);
     this.material = new THREE.ShaderMaterial({
       uniforms: {
-        uTime: { value: 0 },
+        uTime: new THREE.Uniform(0),
         uPerlinNoise: new THREE.Uniform(this.perlinNoise),
         uColorWater: { value: new THREE.Color(this.parameters.colorWater) },
         uColorRipple: { value: new THREE.Color(this.parameters.colorRipple) },
-        uRippleSize: { value: this.parameters.rippleSize },
-        uRippleFrequency: { value: this.parameters.rippleFrequency },
-        uRippleStep: { value: this.parameters.rippleStep },
-        uWaterTransparency: { value: this.parameters.waterTransparency },
+        uRippleSize: new THREE.Uniform(this.parameters.rippleSize),
+        uRippleFrequency: new THREE.Uniform(this.parameters.rippleFrequency),
+        uRippleStep: new THREE.Uniform(this.parameters.rippleStep),
+        uWaterTransparency: new THREE.Uniform(
+          this.parameters.waterTransparency
+        ),
       },
       fragmentShader: waterFragmentShader,
       vertexShader: waterVertexShader,
