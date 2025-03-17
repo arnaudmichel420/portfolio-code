@@ -14,7 +14,7 @@ export default class Mouse extends EventEmitter {
     this.deltaScroll = 0;
     this.delta = 0;
     this.dampingFactor = { x: 0.001 };
-    this.mobileScrollSensitivity = { x: 1 };
+    this.mobileScrollSensitivity = { x: 1.5 };
     this.target = 0;
     this.easing = true;
 

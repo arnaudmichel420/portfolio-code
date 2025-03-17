@@ -10,9 +10,9 @@ export default class Snow {
     this.scene = this.experience.scene;
     this.debug = this.experience.debug;
     this.time = this.experience.time;
+    this.phone = this.experience.phone;
 
     this.parameters = {};
-    this.parameters.snow = 12000;
     this.parameters.size = 5;
     this.parameters.snowSpeed = 0.005;
     this.parameters.snowRangeX = 150;
@@ -23,6 +23,11 @@ export default class Snow {
     this.parameters.snowOffsetZ = -75;
     this.parameters.snowDensity = 0;
 
+    if (this.phone.active) {
+      this.parameters.snow = 4000;
+      this.parameters.snowRangeX = 90;
+      this.parameters.snowOffsetX = -44;
+    }
     this.setSnow();
 
     if (this.debug.active) {

@@ -8,6 +8,7 @@ export default class Grass {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.debug = this.experience.debug;
+    this.phone = this.experience.phone;
     this.time = this.experience.time;
     this.world = this.experience.world;
     this.geometry = null;
@@ -33,6 +34,13 @@ export default class Grass {
     this.parameters.uPerlinFrequency = 0.0003;
     this.parameters.uGrassMapOffsetX = -0.0001;
     this.parameters.uGrassMapOffsetZ = 0.0032;
+
+    if (this.phone.active) {
+      this.parameters.blades = 70000;
+      this.parameters.uChunkSize = 100;
+      this.parameters.uGrassOffsetX = -80;
+      this.parameters.uGrassOffsetZ = -89;
+    }
 
     this.setGrass();
 
