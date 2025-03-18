@@ -13,6 +13,7 @@ export default class Snow {
     this.phone = this.experience.phone;
 
     this.parameters = {};
+    this.parameters.snow = 12000;
     this.parameters.size = 5;
     this.parameters.snowSpeed = 0.005;
     this.parameters.snowRangeX = 150;
