@@ -77,6 +77,10 @@ body {
   height: 100vh;
   width: 100vw;
 }
+.loading-bar svg {
+  width: 400px;
+  height: 150px;
+}
 .loading-bar svg path {
   stroke: white;
   stroke-width: 15px;

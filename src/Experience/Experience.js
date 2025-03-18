@@ -6,6 +6,7 @@ import Renderer from "./Renderer.js";
 import World from "./World/World.js";
 import Ressources from "./Utils/Ressources.js";
 import sources from "./sources.js";
+import sourcesPhone from "./sourcesPhone.js";
 import Debug from "./Utils/Debug.js";
 import Mouse from "./Utils/Mouse.js";
 import Raycaster from "./Utils/Raycaster.js";
@@ -34,7 +35,12 @@ export default class Experience {
     this.scene = new THREE.Scene();
     this.camera = new Camera();
     this.renderer = new Renderer();
-    this.ressources = new Ressources(sources);
+    if (this.phone.active) {
+      this.ressources = new Ressources(sourcesPhone);
+    } else {
+      this.ressources = new Ressources(sources);
+    }
+
     this.world = new World();
     this.mouse = new Mouse();
     this.raycaster = new Raycaster();
@@ -53,7 +59,9 @@ export default class Experience {
     });
     this.time.on("tick", () => {
       this.update();
-      this.parallax();
+      if (!this.phone?.active) {
+        this.parallax();
+      }
       this.scrollEasing();
       this.elapsedTime();
     });

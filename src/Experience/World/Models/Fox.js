@@ -7,10 +7,21 @@ export default class Fox {
     this.scene = this.experience.scene;
     this.ressources = this.experience.ressources;
     this.debug = this.experience.debug;
+    this.phone = this.experience.phone;
     this.time = this.experience.time;
     this.hightlight = this.experience.world.models.hightlight;
     this.objectToTestUUID = this.experience.world.objectToTestUUID;
     this.objectToTest = this.experience.world.objectToTest;
+
+    this.parameters = {};
+    this.parameters.x = 75;
+    this.parameters.y = 2.3;
+    this.parameters.z = 126;
+
+    if (this.phone.active) {
+      this.parameters.x = 73;
+      this.parameters.z = 129;
+    }
 
     //debug
     if (this.debug.active) {
@@ -38,7 +49,11 @@ export default class Fox {
       }
     });
 
-    this.model.position.set(75, 2.3, 126);
+    this.model.position.set(
+      this.parameters.x,
+      this.parameters.y,
+      this.parameters.z
+    );
 
     this.scene.add(this.model);
     this.hightlight.push(this.model.children[0].children[0]);

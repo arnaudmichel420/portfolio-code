@@ -82,11 +82,15 @@ body {
   align-items: center;
   height: 100vh;
   width: 100vw;
-  svg path {
-    stroke: white;
-    stroke-width: 15px;
-    stroke-dasharray: 1400px;
-    stroke-dashoffset: 1400px;
+  svg {
+    width: 400px;
+    height: 150px;
+    path {
+      stroke: white;
+      stroke-width: 15px;
+      stroke-dasharray: 1400px;
+      stroke-dashoffset: 1400px;
+    }
   }
   h2 {
     color: white;

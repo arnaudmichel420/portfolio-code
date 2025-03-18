@@ -21,7 +21,7 @@ export default class Text {
 
   setText() {
     const topDiv = document.createElement("div");
-    // topDiv.classList.add("topDiv");
+    topDiv.classList.add("topDiv");
     topDiv.innerHTML = `<div class="topDiv">
       <img src="/icons/arrow.svg" alt="" width="100px" />
       <p>
@@ -73,16 +73,16 @@ export default class Text {
       </div>
       <div class="bottom">
         <p>Did you miss some of the projects ?</p>
-        <a href="./projects/massage-sportif-annecy.html">Discover all projects</a>
+        <a href="./projects/massage-sportif-annecy/">Discover all projects</a>
       </div>`;
 
     const message = document.createElement("div");
     message.innerHTML = `<div class="message"><p>No project here yet ... Maybe yours ?</p></div>`;
 
     this.topDiv3D = new CSS2DObject(topDiv);
-    this.topDiv3D.position.set(-192, 400, 200);
+    this.topDiv3D.position.set(-198, 400, 200);
     this.mainDiv3D = new CSS2DObject(mainDiv);
-    this.mainDiv3D.position.set(-192, 420, 200);
+    this.mainDiv3D.position.set(-198, 420, 200);
     this.message3D = new CSS2DObject(message);
     this.message3D.position.set(0, -100, 0);
 
