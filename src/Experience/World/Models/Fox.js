@@ -14,14 +14,10 @@ export default class Fox {
     this.objectToTest = this.experience.world.objectToTest;
 
     this.parameters = {};
-    this.parameters.x = 75;
-    this.parameters.y = 2.3;
-    this.parameters.z = 126;
 
-    if (this.phone.active) {
-      this.parameters.x = 73;
-      this.parameters.z = 129;
-    }
+    this.parameters.x = 73;
+    this.parameters.y = 2.3;
+    this.parameters.z = 129;
 
     //debug
     if (this.debug.active) {

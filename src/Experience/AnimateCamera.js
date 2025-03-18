@@ -44,10 +44,10 @@ export default class AnimateCamera {
         snowSize: 5,
       },
       {
-        x: -88,
+        x: -98,
         y: 66,
         z: 97,
-        lookAtX: -200,
+        lookAtX: -140,
         lookAtY: 105,
         lookAtZ: -300,
         snowDensity: 0,
