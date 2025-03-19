@@ -15,7 +15,7 @@ export default class NightSky {
     this.parameters.mieCoefficient = 0.005;
     this.parameters.mieDirectionalG = 0.7;
     this.parameters.sunPositionX = 0.3;
-    this.parameters.sunPositionY = -0.038;
+    this.parameters.sunPositionY = -0.0313;
     this.parameters.sunPositionZ = -0.95;
     this.parameters.toneMappingExposure = 1.75;
 
