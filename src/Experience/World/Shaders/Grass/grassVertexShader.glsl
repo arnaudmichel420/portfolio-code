@@ -56,7 +56,7 @@ void main()
     //store elevation before offset
     vElevation = newPosition.y;
 
-    // rotate blades to camera
+    //rotate blades to camera
     float angle = atan(newCenter.x - cameraPosition.x, newCenter.y - cameraPosition.z);
     newPosition.xz = getRotatePivot2d(newPosition.xz, angle, newCenter.xy);
 
@@ -80,14 +80,3 @@ void main()
 
     vUv = uvScaleWithOffset;
 }
-
-// -74.9296 m
-// 126.808 m
-// 200.01 m
-
-// 250.0
-
-
-// -88.1168 m
-// 139.223 m
-// 413.659 m

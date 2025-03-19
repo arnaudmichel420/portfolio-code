@@ -354,13 +354,11 @@ export default class AnimateCamera {
           y: this.cameraPositions[this.currentSection].lookAtY,
           z: this.cameraPositions[this.currentSection].lookAtZ,
           onUpdate: () => {
-            requestAnimationFrame(() => {
-              this.camera.lookAt(
-                this.cameraLookAt.x,
-                this.cameraLookAt.y,
-                this.cameraLookAt.z
-              );
-            });
+            this.camera.lookAt(
+              this.cameraLookAt.x,
+              this.cameraLookAt.y,
+              this.cameraLookAt.z
+            );
           },
         });
         //snow
