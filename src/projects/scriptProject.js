@@ -186,38 +186,49 @@ menuOpenT
 
 menuOpenT.pause();
 
-let count = 0;
+let menuStatus = false;
 const burger = document.querySelector(".burger");
 const extend = document.querySelector(".extend");
 
 document.querySelector("html").addEventListener("click", (event) => {
   if (
-    count % 2 != 0 &&
+    menuStatus === true &&
     !document.querySelector("header").contains(event.target)
   ) {
-    burger.click();
-    if (
-      countExtend % 2 != 0 &&
-      (getComputedStyle(extend).display === "none") == false
-    ) {
-      extend.click();
-    }
+    handleBurgerAnimation();
+    // if (
+    //   extendStatus === true &&
+    //   (getComputedStyle(extend).display === "none") == false
+    // ) {
+    //   extend.click();
+    // }
   }
 });
 burger.addEventListener("click", () => {
-  if (count % 2 === 0) {
-    burgerOpenT.play();
-    menuOpenT.play();
-    count++;
-  } else {
-    burgerOpenT.reverse();
-    menuOpenT.reverse();
-    count++;
-    if (!countExtend % 2 === 0) {
-      extend.click();
-    }
-  }
+  handleBurgerAnimation();
 });
+
+function handleBurgerAnimation() {
+  if (menuStatus === false) {
+    burgerOpenT.timeScale(1.5).restart();
+    menuOpenT.timeScale(1.5).restart();
+    menuStatus = true;
+  } else if (extendStatus === true && menuStatus === true) {
+    extendOpenT.eventCallback("onReverseComplete", () => {
+      burgerOpenT.timeScale(2).reverse();
+      menuOpenT.timeScale(2).reverse();
+      menuStatus = false;
+      extendStatus = false;
+
+      extendOpenT.eventCallback("onReverseComplete", null);
+    });
+    extendOpenT.timeScale(1.5).reverse();
+  } else {
+    burgerOpenT.timeScale(1.5).reverse();
+    menuOpenT.timeScale(1.5).reverse();
+    menuStatus = false;
+  }
+}
 
 extendOpenT.to(".extend ul", {
   duration: 0,
@@ -271,14 +282,14 @@ extendOpenT
 
 extendOpenT.pause();
 
-let countExtend = 0;
+let extendStatus = false;
 extend.addEventListener("click", () => {
-  if (countExtend % 2 === 0) {
-    extendOpenT.play();
-    countExtend++;
+  if (extendStatus === false) {
+    extendOpenT.timeScale(1).play();
+    extendStatus = true;
   } else {
-    extendOpenT.reverse();
-    countExtend++;
+    extendOpenT.timeScale(1.5).reverse();
+    extendStatus = false;
   }
 });
 
