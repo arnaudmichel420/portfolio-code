@@ -90,7 +90,7 @@ header .menu {
   height: fit-content;
   width: 100%;
   padding: 1rem 0;
-  background-color: #3569b3;
+  background: linear-gradient(180deg, rgb(16, 16, 16) 10%, rgb(23, 50, 120) 90%);
 }
 header .menu ul {
   display: flex;
@@ -109,6 +109,10 @@ header .menu ul li {
   list-style: none;
   cursor: pointer;
 }
+header .menu ul li a {
+  transition: color 300ms ease;
+  will-change: color;
+}
 header .menu ul li p {
   margin-bottom: 1rem;
 }
@@ -121,18 +125,21 @@ header .menu ul li ul {
   box-shadow: 0;
 }
 header .menu ul li ul li:hover a {
-  color: #101010;
+  color: #a4abbe;
+}
+header .menu ul li ul .active {
+  color: #a4abbe;
+  cursor: default;
 }
 header .menu ul li:hover p,
 header .menu ul li:hover .hover {
-  color: #101010;
+  color: #a4abbe;
 }
 header nav {
   position: relative;
   z-index: 1;
-  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
   height: 5rem;
-  background-color: #3569b3;
+  background: linear-gradient(0deg, rgb(16, 16, 16) 0%, rgb(23, 50, 120) 90%);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -144,12 +151,18 @@ header nav a {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+header nav a:hover .backArrowHeader div {
+  background-color: #a4abbe;
 }
 header nav .backArrowHeader div {
   background-color: #f1f1f1;
   height: 0.3rem;
   border-radius: 0.3rem;
   transform-origin: left center;
+  transition: background-color 300ms ease;
+  will-change: background-color;
 }
 header nav .backArrowHeader div:first-child {
   margin-bottom: -0.4rem;
@@ -164,10 +177,16 @@ header nav .burger {
   justify-content: center;
   align-items: center;
   width: 3.5rem;
+  cursor: pointer;
+}
+header nav .burger:hover div {
+  background-color: #a4abbe;
 }
 header nav .burger div {
   background-color: #f1f1f1;
   border-radius: 0.3rem;
+  transition: background-color 300ms ease;
+  will-change: background-color;
 }
 
 main {
@@ -203,10 +222,13 @@ main .section1 .leftPart ul li {
   font-family: "Brooklyn";
   font-weight: 400;
   margin-bottom: 0.5rem;
-  text-align: justify;
   line-height: 1.5rem;
 }
-main .section1 .leftPart ul li:nth-child(odd) {
+main .section1 .leftPart ul li ul li {
+  padding-left: 16px;
+  list-style: disc;
+}
+main .section1 .leftPart ul .titleList {
   font-size: 1.5rem;
   text-transform: uppercase;
   margin-bottom: 1rem;
@@ -227,6 +249,11 @@ main .section2 .leftPart {
   background-size: cover;
   background-position: center;
 }
+main .section2 .box {
+  border-top: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;
+  border-right: 1px solid #f1f1f1;
+}
 main .section2 .rightPart {
   width: 50%;
   display: flex;
@@ -246,11 +273,13 @@ main .section2 .rightPart h3 {
 }
 main .section2 .rightPart p {
   padding: 0 6rem 0 2rem;
-  text-align: justify;
   line-height: 1.5rem;
 }
 main .section2 .rightPart ul {
   padding: 0 6rem 0 4rem;
+}
+main .section2 .rightPart ul li {
+  padding: 0.3rem 0 0.3rem 0;
 }
 main .section3 {
   display: flex;
@@ -275,7 +304,6 @@ main .section3 .leftPart h2 {
 }
 main .section3 .leftPart p {
   padding: 0 2rem 0 6rem;
-  text-align: justify;
   line-height: 1.5rem;
 }
 main .section3 .rightPart {
@@ -312,7 +340,7 @@ main .section4 div:nth-child(3) {
 }
 
 footer {
-  background-color: #3569b3;
+  background: linear-gradient(180deg, rgb(16, 16, 16) 0%, rgb(23, 50, 120) 90%);
   height: 5rem;
   width: 100%;
   display: flex;

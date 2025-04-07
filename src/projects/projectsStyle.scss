@@ -59,6 +59,7 @@
 $mainColor: #3569b3;
 $blackColor: #101010;
 $whiteColor: #f1f1f1;
+$linkHover: #a4abbe;
 
 html {
   font-size: 16px;
@@ -95,7 +96,11 @@ header {
     height: fit-content;
     width: 100%;
     padding: 1rem 0;
-    background-color: $mainColor;
+    background: linear-gradient(
+      180deg,
+      rgba(16, 16, 16, 1) 10%,
+      rgb(23 50 120) 90%
+    );
 
     ul {
       display: flex;
@@ -112,7 +117,10 @@ header {
       li {
         list-style: none;
         cursor: pointer;
-
+        a {
+          transition: color 300ms ease;
+          will-change: color;
+        }
         p {
           margin-bottom: 1rem;
         }
@@ -124,22 +132,30 @@ header {
           opacity: 0;
           box-shadow: 0;
           li:hover a {
-            color: $blackColor;
+            color: $linkHover;
+          }
+          .active {
+            color: $linkHover;
+            cursor: default;
           }
         }
       }
       li:hover p,
       li:hover .hover {
-        color: $blackColor;
+        color: $linkHover;
       }
     }
   }
   nav {
     position: relative;
     z-index: 1;
-    box-shadow: 0 0 1rem 0 rgba($color: #000000, $alpha: 0.1);
+    // box-shadow: 0px 5px 1rem 5px rgba(0, 0, 0, 0.4);
     height: 5rem;
-    background-color: $mainColor;
+    background: linear-gradient(
+      0deg,
+      rgba(16, 16, 16, 1) 0%,
+      rgb(23 50 120) 90%
+    );
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -150,6 +166,10 @@ header {
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
+      &:hover .backArrowHeader div {
+        background-color: $linkHover;
+      }
     }
     .backArrowHeader {
       div {
@@ -157,6 +177,8 @@ header {
         height: 0.3rem;
         border-radius: 0.3rem;
         transform-origin: left center;
+        transition: background-color 300ms ease;
+        will-change: background-color;
         &:first-child {
           margin-bottom: -0.4rem;
         }
@@ -172,9 +194,16 @@ header {
       justify-content: center;
       align-items: center;
       width: 3.5rem;
+      cursor: pointer;
+
+      &:hover div {
+        background-color: $linkHover;
+      }
       div {
         background-color: $whiteColor;
         border-radius: 0.3rem;
+        transition: background-color 300ms ease;
+        will-change: background-color;
       }
     }
   }
@@ -209,10 +238,13 @@ main {
           font-family: "Brooklyn";
           font-weight: 400;
           margin-bottom: 0.5rem;
-          text-align: justify;
           line-height: 1.5rem;
+          ul li {
+            padding-left: 16px;
+            list-style: disc;
+          }
         }
-        li:nth-child(odd) {
+        .titleList {
           font-size: 1.5rem;
           text-transform: uppercase;
           margin-bottom: 1rem;
@@ -235,6 +267,11 @@ main {
       background-size: cover;
       background-position: center;
     }
+    .box {
+      border-top: 1px solid $whiteColor;
+      border-bottom: 1px solid $whiteColor;
+      border-right: 1px solid $whiteColor;
+    }
     .rightPart {
       width: 50%;
       display: flex;
@@ -253,11 +290,14 @@ main {
       }
       p {
         padding: 0 6rem 0 2rem;
-        text-align: justify;
+
         line-height: 1.5rem;
       }
       ul {
         padding: 0 6rem 0 4rem;
+        li {
+          padding: 0.3rem 0 0.3rem 0;
+        }
       }
     }
   }
@@ -282,7 +322,7 @@ main {
       }
       p {
         padding: 0 2rem 0 6rem;
-        text-align: justify;
+
         line-height: 1.5rem;
       }
     }
@@ -323,7 +363,11 @@ main {
   }
 }
 footer {
-  background-color: $mainColor;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 16, 16, 1) 0%,
+    rgb(23 50 120) 90%
+  );
   height: 5rem;
   width: 100%;
   display: flex;

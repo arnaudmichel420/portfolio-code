@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../projectsStyle.css" />
+    <title>Cinema</title>
+    <link
+      rel="shortcut icon"
+      href="../../picto/montagne.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a onclick="navBack()">
+          <div class="backArrowHeader">
+            <div></div>
+            <div></div>
+          </div>
+        </a>
+        <div class="burger">
+          <div class="child-1"></div>
+          <div class="child-2"></div>
+          <div class="child-3"></div>
+        </div>
+      </nav>
+      <div class="menu">
+        <ul>
+          <li class="li-first">
+            <a onclick="navHome()" class="hover">Home</a>
+          </li>
+          <li class="li-first extend">
+            <p>Projects ✚</p>
+            <ul>
+              <li>
+                <a href="./massage-sportif-annecy">Massage Annecy Sportif</a>
+              </li>
+              <li><a href="./gamejam">Gamejam | Godot</a></li>
+              <li><a href="./cinema" class="active">Cinema</a></li>
+            </ul>
+          </li>
+          <li class="li-first">
+            <a href="mailto:arnaud.michel420@gmail.com" class="hover"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <section class="section1">
+        <div class="leftPart">
+          <h1>Cinema</h1>
+
+          <ul>
+            <li class="titleList">Field :</li>
+            <li>Full stack</li>
+            <li class="titleList">Brief :</li>
+            <li>
+              The goal of the project is to develop a web platform that allows
+              users to reserve cinema tickets for screenings online. The project
+              will include :
+            </li>
+            <li>
+              <ul>
+                <li>
+                  A front-office accessible to the public for viewing films and
+                  booking tickets while log-in.
+                </li>
+                <li>
+                  A back-office reserved for administrators to manage films,
+                  screenings and track reservations.
+                </li>
+                <li>
+                  An API with a CRUD enabling the two clients to interact with
+                  the database.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="rightPart"
+          style="background-image: url(/images/cinema/mockup-cinema.webp)"
+        ></div>
+      </section>
+      <section class="section2">
+        <div
+          class="leftPart box"
+          style="
+            background-image: url(/images/cinema/schema.png);
+            background-position: center;
+          "
+        ></div>
+        <div class="rightPart">
+          <h2>Architecture</h2>
+          <p>We have an MVC (Model View Controller) architecture :</p>
+          <ul>
+            <li>
+              On the database side, I opted for MySQL because it's the one I'm
+              the most comfortable with.
+            </li>
+            <li>
+              On the server side, I'm using the Sequalize ORM to simplify SQL
+              queries by simply manipulating JavaScript objects. The server is
+              in Node.js because I didn't know Symfony at the time.
+            </li>
+            <li>
+              On the client side, I'm using Vue 3, which is one of the easiest
+              thick clients to learn. The client and server talk to each other
+              using an API.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="section3">
+        <div class="leftPart">
+          <h2>Process :</h2>
+          <p>
+            Since the database schematics were provided, I started by creating
+            the models with it and the migrations which you have to do manually
+            on Sequalize. Then I used my wireframe to know which routes I needed
+            to create on every page. I make sure to use middleware on the routes
+            that need users to be log-in or have admin roles. I tried my routes
+            with Postman and replicated them in a class on the front to be
+            easily accessible everywhere on the code.
+          </p>
+
+          <p>
+            On the client side, I used Vue component to display movies and
+            screenings, recovered with an automatic API request with the current
+            day. Once the customer chooses his screening, he is taken to the
+            booking page, where he can select a seat and visualize the ones
+            already taken. When the booking is completed the customer is taken
+            to his account where he can see all his previous reservations and
+            the ones coming which are cancellable.
+          </p>
+          <p>
+            Finally, I created a back office for the staff to add new movies and
+            screenings, to make things easier I coded a custom select component
+            with a filtering input to reduce errors and improve efficiency.
+          </p>
+        </div>
+        <div
+          class="rightPart"
+          style="
+            background-image: url(/images/cinema/wireframe.webp);
+            background-position: bottom;
+          "
+        ></div>
+      </section>
+      <section class="section4">
+        <div style="background-image: url(/images/cinema/cinema2.webp)"></div>
+        <div style="background-image: url(/images/cinema/cinema1.webp)"></div>
+        <div style="background-image: url(/images/cinema/cinema3.webp)"></div>
+      </section>
+    </main>
+    <footer>
+      <nav>
+        <a href="./gamejam">
+          <div class="backArrow backArrowFooterLeft">
+            <div></div>
+            <div></div>
+          </div>
+          <p>Previous Project</p>
+        </a>
+        <a href="./massage-sportif-annecy" style="display: none">
+          <p>Previous Project</p>
+          <div class="backArrow backArrowFooterRight">
+            <div></div>
+            <div></div>
+          </div>
+        </a>
+      </nav>
+    </footer>
+    <script type="module" src="../scriptProject.js"></script>
+    <script>
+      function navBack() {
+        const navigateHome = { navigate: true };
+        sessionStorage.setItem("home", JSON.stringify(navigateHome));
+        window.location.assign("../../");
+      }
+      function navHome() {
+        const navigateHome = { navigate: false };
+        sessionStorage.setItem("home", JSON.stringify(navigateHome));
+        window.location.assign("../../");
+      }
+    </script>
+  </body>
+</html>
