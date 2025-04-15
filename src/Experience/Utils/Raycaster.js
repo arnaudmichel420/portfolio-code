@@ -20,7 +20,7 @@ export default class Raycaster extends EventEmitter {
     this.pages = [
       { name: "panel", url: "./projects/massage-sportif-annecy" },
       { name: "fox", url: "./projects/gamejam" },
-      { name: "bouquetin", url: null },
+      { name: "bouquetin", url: "./projects/cinema" },
       { name: "alien", url: null },
     ];
   }
