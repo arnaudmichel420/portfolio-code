@@ -3,6 +3,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 //Create Timeline
 
+let getBodyHeight = (function () {
+  const body = document.body;
+  const observer = new ResizeObserver((entries) => {
+    for (let entry of entries) {
+      document.documentElement.style.setProperty(
+        "--bodyHeight",
+        `${entry.contentRect.height}px`
+      );
+    }
+  });
+
+  observer.observe(body);
+})();
+
 let arrowHeaderT = gsap.timeline({
   scrollTrigger: {
     trigger: "header",

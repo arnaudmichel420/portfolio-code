@@ -1,3 +1,4 @@
+/* font */
 @font-face {
   font-family: "Brooklyn";
   src: url("/fonts/Brooklyn/Brooklyn-Normal.woff2") format("woff2");
@@ -52,6 +53,15 @@
   font-weight: 500;
   font-style: normal;
 }
+
+/* main color */
+:root {
+  --mainColor: #3569b3;
+  --blackColor: #101010;
+  --whiteColor: #f1f1f1;
+  --linkHover: #a4abbe;
+}
+
 html {
   font-size: 16px;
   overflow-x: hidden;
@@ -60,333 +70,365 @@ html {
 * {
   margin: 0;
   padding: 0;
-  color: #f1f1f1;
+  color: var(--whiteColor);
   font-family: "Poppins";
   font-weight: 400;
   font-size: 1rem;
 }
 
 body {
-  background-color: #101010;
+  background-color: var(--blackColor);
 }
-
 a,
 a:visited,
 a:focus,
 a:active {
-  color: #f1f1f1;
+  color: var(--whiteColor);
   text-decoration: none;
+}
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--bodyHeight);
+  opacity: 20%;
+  background-image: url("/picto/grain.svg");
+  z-index: 10;
+  pointer-events: none;
 }
 
 header {
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-header .menu {
-  display: flex;
-  justify-content: center;
-  height: -moz-fit-content;
-  height: fit-content;
-  width: 100%;
-  padding: 1rem 0;
-  background: linear-gradient(180deg, rgb(16, 16, 16) 10%, rgb(23, 50, 120) 90%);
-}
-header .menu ul {
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-  font-family: "Brooklyn";
-  font-weight: 400;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  text-align: center;
-}
-header .menu ul .extend {
-  cursor: pointer;
-}
-header .menu ul li {
-  list-style: none;
-  cursor: pointer;
-}
-header .menu ul li a {
-  transition: color 300ms ease;
-  will-change: color;
-}
-header .menu ul li p {
-  margin-bottom: 1rem;
-}
-header .menu ul li ul {
-  width: 100vw;
-  gap: 0;
-  padding: 0;
-  visibility: hidden;
-  opacity: 0;
-  box-shadow: 0;
-}
-header .menu ul li ul li:hover a {
-  color: #a4abbe;
-}
-header .menu ul li ul .active {
-  color: #a4abbe;
-  cursor: default;
-}
-header .menu ul li:hover p,
-header .menu ul li:hover .hover {
-  color: #a4abbe;
-}
-header nav {
-  position: relative;
-  z-index: 1;
-  height: 5rem;
-  background: linear-gradient(0deg, rgb(16, 16, 16) 0%, rgb(23, 50, 120) 90%);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 3rem;
-}
-header nav a {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-header nav a:hover .backArrowHeader div {
-  background-color: #a4abbe;
-}
-header nav .backArrowHeader div {
-  background-color: #f1f1f1;
-  height: 0.3rem;
-  border-radius: 0.3rem;
-  transform-origin: left center;
-  transition: background-color 300ms ease;
-  will-change: background-color;
-}
-header nav .backArrowHeader div:first-child {
-  margin-bottom: -0.4rem;
-}
-header nav .backArrowHeader div:last-child {
-  margin-top: -0.4rem;
-}
-header nav .burger {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 3.5rem;
-  cursor: pointer;
-}
-header nav .burger:hover div {
-  background-color: #a4abbe;
-}
-header nav .burger div {
-  background-color: #f1f1f1;
-  border-radius: 0.3rem;
-  transition: background-color 300ms ease;
-  will-change: background-color;
-}
 
+  .menu {
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+    width: 100%;
+    padding: 1rem 0;
+    background: linear-gradient(
+      180deg,
+      rgba(16, 16, 16, 1) 10%,
+      rgb(23 50 120) 90%
+    );
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      font-family: "Brooklyn";
+      font-weight: 400;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      text-align: center;
+      .extend {
+        cursor: pointer;
+      }
+      li {
+        list-style: none;
+        cursor: pointer;
+        a {
+          transition: color 300ms ease;
+          will-change: color;
+        }
+        p {
+          margin-bottom: 1rem;
+        }
+        ul {
+          width: 100vw;
+          gap: 0;
+          padding: 0;
+          visibility: hidden;
+          opacity: 0;
+          box-shadow: 0;
+          li:hover a {
+            color: var(--linkHover);
+          }
+          .active {
+            color: var(--linkHover);
+            cursor: default;
+          }
+        }
+      }
+      li:hover p,
+      li:hover .hover {
+        color: var(--linkHover);
+      }
+    }
+  }
+  nav {
+    position: relative;
+    z-index: 1;
+    height: 5rem;
+    background: linear-gradient(
+      0deg,
+      rgba(16, 16, 16, 1) 0%,
+      rgb(23 50 120) 90%
+    );
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+    a {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &:hover .backArrowHeader div {
+        background-color: var(--linkHover);
+      }
+    }
+    .backArrowHeader {
+      div {
+        background-color: var(--whiteColor);
+        height: 0.3rem;
+        border-radius: 0.3rem;
+        transform-origin: left center;
+        transition: background-color 300ms ease;
+        will-change: background-color;
+        &:first-child {
+          margin-bottom: -0.4rem;
+        }
+        &:last-child {
+          margin-top: -0.4rem;
+        }
+      }
+    }
+    .burger {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 3.5rem;
+      cursor: pointer;
+
+      &:hover div {
+        background-color: var(--linkHover);
+      }
+      div {
+        background-color: var(--whiteColor);
+        border-radius: 0.3rem;
+        transition: background-color 300ms ease;
+        will-change: background-color;
+      }
+    }
+  }
+}
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-main .section1 {
-  display: flex;
-  margin: 6rem 0;
-  padding: 0 6rem;
-}
-main .section1 .leftPart {
-  width: 40%;
-}
-main .section1 .leftPart h1 {
-  position: relative;
-  z-index: 10;
-  font-family: "Vonca";
-  font-weight: 400;
-  font-size: 6rem;
-  text-wrap: nowrap;
-  margin-bottom: 1rem;
-  text-decoration: underline;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 10px;
-}
-main .section1 .leftPart ul {
-  padding-right: 2rem;
-}
-main .section1 .leftPart ul li {
-  list-style: none;
-  font-family: "Brooklyn";
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-  line-height: 1.5rem;
-}
-main .section1 .leftPart ul li ul li {
-  padding-left: 16px;
-  list-style: disc;
-}
-main .section1 .leftPart ul .titleList {
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-main .section1 .rightPart {
-  width: 60%;
-  min-height: 500px;
-  background-size: cover;
-  background-position: center;
-}
-main .section2 {
-  display: flex;
-  width: 100%;
-}
-main .section2 .leftPart {
-  width: 50%;
-  min-height: 500px;
-  background-size: cover;
-  background-position: center;
-}
-main .section2 .box {
-  border-top: 1px solid #f1f1f1;
-  border-bottom: 1px solid #f1f1f1;
-  border-right: 1px solid #f1f1f1;
-}
-main .section2 .rightPart {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-}
-main .section2 .rightPart h2,
-main .section2 .rightPart h3 {
-  list-style: none;
-  font-family: "Brooklyn";
-  font-weight: 400;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  padding: 0 6rem 0 2rem;
-  margin-bottom: 0.5rem;
-}
-main .section2 .rightPart p {
-  padding: 0 6rem 0 2rem;
-  line-height: 1.5rem;
-}
-main .section2 .rightPart ul {
-  padding: 0 6rem 0 4rem;
-}
-main .section2 .rightPart ul li {
-  padding: 0.3rem 0 0.3rem 0;
-}
-main .section3 {
-  display: flex;
-  margin-bottom: 6rem;
-  width: 100%;
-}
-main .section3 .leftPart {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-}
-main .section3 .leftPart h2 {
-  list-style: none;
-  font-family: "Brooklyn";
-  font-weight: 400;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  padding: 0 2rem 0 6rem;
-  margin-bottom: 0.5rem;
-}
-main .section3 .leftPart p {
-  padding: 0 2rem 0 6rem;
-  line-height: 1.5rem;
-}
-main .section3 .rightPart {
-  width: 50%;
-  min-height: 500px;
-  background-size: cover;
-  background-position: center;
-}
-main .section4 {
-  width: 100%;
-  height: 500px;
-  display: flex;
-}
-main .section4 div {
-  flex: 1;
-  transition: all 300ms ease;
-  background-size: cover;
-  background-position: center;
-}
-main .section4 div:hover, main .section4 div:active {
-  flex: 2;
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 1rem 1rem rgba(0, 0, 0, 0.5);
-}
-main .section4 div:nth-child(1) {
-  background-color: #5187d2;
-}
-main .section4 div:nth-child(2) {
-  background-color: #194c94;
-}
-main .section4 div:nth-child(3) {
-  background-color: #4c8de7;
-}
+  .section1 {
+    display: flex;
+    margin: 6rem 0;
+    padding: 0 6rem;
+    .leftPart {
+      width: 40%;
 
+      h1 {
+        position: relative;
+        z-index: 10;
+        font-family: "Vonca";
+        font-weight: 400;
+        font-size: 6rem;
+        text-wrap: nowrap;
+        margin-bottom: 1rem;
+        text-decoration: underline;
+        text-decoration-thickness: 3px;
+        text-underline-offset: 10px;
+      }
+      ul {
+        padding-right: 2rem;
+        li {
+          list-style: none;
+          font-family: "Brooklyn";
+          font-weight: 400;
+          margin-bottom: 0.5rem;
+          line-height: 1.5rem;
+          ul li {
+            padding-left: 16px;
+            list-style: disc;
+          }
+        }
+        .titleList {
+          font-size: 1.5rem;
+          text-transform: uppercase;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+    .rightPart {
+      width: 60%;
+      min-height: 500px;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+  .section2 {
+    display: flex;
+    width: 100%;
+    .leftPart {
+      width: 50%;
+      min-height: 500px;
+      background-size: cover;
+      background-position: center;
+    }
+    .box {
+      border-top: 1px solid var(--whiteColor);
+      border-bottom: 1px solid var(--whiteColor);
+      border-right: 1px solid var(--whiteColor);
+    }
+    .rightPart {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      h2,
+      h3 {
+        list-style: none;
+        font-family: "Brooklyn";
+        font-weight: 400;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        padding: 0 6rem 0 2rem;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        padding: 0 6rem 0 2rem;
+
+        line-height: 1.5rem;
+      }
+      ul {
+        padding: 0 6rem 0 4rem;
+        li {
+          padding: 0.3rem 0 0.3rem 0;
+        }
+      }
+    }
+  }
+  .section3 {
+    display: flex;
+    margin-bottom: 6rem;
+    width: 100%;
+    .leftPart {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      h2 {
+        list-style: none;
+        font-family: "Brooklyn";
+        font-weight: 400;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        padding: 0 2rem 0 6rem;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        padding: 0 2rem 0 6rem;
+
+        line-height: 1.5rem;
+      }
+    }
+    .rightPart {
+      width: 50%;
+      min-height: 500px;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+  .section4 {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    div {
+      flex: 1;
+      transition: all 300ms ease;
+      background-size: cover;
+      background-position: center;
+      &:hover,
+      &:active {
+        flex: 2;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 0 1rem 1rem #0000007f;
+      }
+
+      &:nth-child(1) {
+        background-color: #5187d2;
+      }
+      &:nth-child(2) {
+        background-color: #194c94;
+      }
+      &:nth-child(3) {
+        background-color: #4c8de7;
+      }
+    }
+  }
+}
 footer {
-  background: linear-gradient(180deg, rgb(16, 16, 16) 0%, rgb(23, 50, 120) 90%);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 16, 16, 1) 0%,
+    rgb(23 50 120) 90%
+  );
   height: 5rem;
   width: 100%;
   display: flex;
   align-items: center;
   position: relative;
   z-index: 10;
-}
-footer nav {
-  width: 100%;
-  padding: 0 3rem;
-  display: flex;
-  justify-content: space-between;
-}
-footer nav a {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-footer nav a .backArrow div {
-  background-color: #f1f1f1;
-  height: 0.3rem;
-  border-radius: 0.4rem;
-  transform-origin: left center;
-}
-footer nav a .backArrow div:first-child {
-  margin-bottom: -0.4rem;
-}
-footer nav a .backArrow div:last-child {
-  margin-top: -0.4rem;
-}
-footer nav a:last-child .backArrow div {
-  transform-origin: right center;
-}
-footer nav a:last-child .backArrow div:first-child {
-  margin-bottom: -0.4rem;
-}
-footer nav a:last-child .backArrow div:last-child {
-  margin-top: -0.4rem;
-}
-footer nav p {
-  line-height: 1;
-  font-family: "Brooklyn";
-  font-weight: 500;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.07rem;
+  nav {
+    width: 100%;
+    padding: 0 3rem;
+    display: flex;
+    justify-content: space-between;
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      .backArrow {
+        div {
+          background-color: var(--whiteColor);
+          height: 0.3rem;
+          border-radius: 0.4rem;
+          transform-origin: left center;
+          &:first-child {
+            margin-bottom: -0.4rem;
+          }
+          &:last-child {
+            margin-top: -0.4rem;
+          }
+        }
+      }
+      &:last-child .backArrow div {
+        transform-origin: right center;
+        &:first-child {
+          margin-bottom: -0.4rem;
+        }
+        &:last-child {
+          margin-top: -0.4rem;
+        }
+      }
+    }
+    p {
+      line-height: 1;
+      font-family: "Brooklyn";
+      font-weight: 500;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07rem;
+    }
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -395,6 +437,7 @@ footer nav p {
     text-wrap: wrap;
   }
 }
+
 @media screen and (max-width: 767px) {
   html {
     font-size: 15px;
@@ -402,76 +445,80 @@ footer nav p {
   header nav {
     padding: 0 2rem;
   }
-  main .section1 {
-    flex-direction: column;
-    width: 90%;
-    padding: 0;
-    gap: 2rem;
-  }
-  main .section1 .leftPart {
-    width: 100%;
-    padding: 0;
-  }
-  main .section1 .leftPart h1 {
-    text-wrap: wrap;
-    text-align: center;
-  }
-  main .section1 .leftPart ul {
-    padding: 0;
-    width: 100%;
-  }
-  main .section1 .rightPart {
-    width: 100%;
-  }
-  main .section2 {
-    flex-direction: column-reverse;
-    align-items: center;
-    gap: 2rem;
-    width: 100%;
-    margin-bottom: 2rem;
-  }
-  main .section2 .leftPart {
-    width: 100%;
-  }
-  main .section2 .rightPart {
-    width: 90%;
-  }
-  main .section2 .rightPart p,
-  main .section2 .rightPart h2 {
-    padding: 0;
-  }
-  main .section2 .rightPart h2 {
-    text-align: center;
-  }
-  main .section3 {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    width: 100%;
-  }
-  main .section3 .rightPart {
-    width: 100%;
-  }
-  main .section3 .leftPart {
-    width: 90%;
-  }
-  main .section3 .leftPart p,
-  main .section3 .leftPart h2 {
-    padding: 0;
-  }
-  main .section3 .leftPart h2 {
-    text-align: center;
+  main {
+    .section1 {
+      flex-direction: column;
+      width: 90%;
+      padding: 0;
+      gap: 2rem;
+      .leftPart {
+        width: 100%;
+        padding: 0;
+        h1 {
+          text-wrap: wrap;
+          text-align: center;
+        }
+        ul {
+          padding: 0;
+          width: 100%;
+        }
+      }
+      .rightPart {
+        width: 100%;
+      }
+    }
+    .section2 {
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+      margin-bottom: 2rem;
+      .leftPart {
+        width: 100%;
+      }
+      .rightPart {
+        width: 90%;
+        p,
+        h2 {
+          padding: 0;
+        }
+        h2 {
+          text-align: center;
+        }
+      }
+    }
+    .section3 {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+      .rightPart {
+        width: 100%;
+      }
+      .leftPart {
+        width: 90%;
+        p,
+        h2 {
+          padding: 0;
+        }
+        h2 {
+          text-align: center;
+        }
+      }
+    }
   }
   .section4 {
     flex-direction: column;
   }
   footer nav {
     padding: 0 2rem;
+    a {
+      &:last-child {
+        text-align: end;
+      }
+      p {
+        font-size: 1.2rem;
+      }
+    }
   }
-  footer nav a:last-child {
-    text-align: end;
-  }
-  footer nav a p {
-    font-size: 1.2rem;
-  }
-}/*# sourceMappingURL=projectsStyle.css.map */
+}

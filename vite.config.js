@@ -18,7 +18,7 @@ export default {
         home: "/index.html",
         project1: "src/projects/gamejam/index.html",
         project2: "src/projects/massage-sportif-annecy/index.html",
-        project2: "src/projects/cinema/index.html",
+        project3: "src/projects/cinema/index.html",
       },
     },
   },
