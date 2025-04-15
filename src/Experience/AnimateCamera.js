@@ -9,6 +9,7 @@ export default class AnimateCamera {
     this.camera = this.experience.camera.instance;
     this.canvas = this.experience.canvas;
     this.debug = this.experience.debug;
+    this.phone = this.experience.phone;
 
     this.cameraLookAt = this.experience.camera.cameraLookAt;
     this.snow = this.experience.world.snow.material.uniforms;
@@ -43,10 +44,10 @@ export default class AnimateCamera {
         snowSize: 5,
       },
       {
-        x: -88,
+        x: -98,
         y: 66,
         z: 97,
-        lookAtX: -200,
+        lookAtX: -140,
         lookAtY: 105,
         lookAtZ: -300,
         snowDensity: 0,
@@ -65,10 +66,10 @@ export default class AnimateCamera {
         snowSize: 5,
       },
       {
-        x: -192,
+        x: -198,
         y: 332,
         z: 210,
-        lookAtX: -192,
+        lookAtX: -198,
         lookAtY: 344,
         lookAtZ: 0,
         snowDensity: 1,
@@ -76,10 +77,10 @@ export default class AnimateCamera {
         snowSize: 10,
       },
       {
-        x: -192,
+        x: -198,
         y: 400,
         z: 210,
-        lookAtX: -192,
+        lookAtX: -198,
         lookAtY: 400,
         lookAtZ: 0,
         snowDensity: 0.5,
@@ -87,10 +88,10 @@ export default class AnimateCamera {
         snowSize: 1,
       },
       {
-        x: -192,
+        x: -198,
         y: 420,
         z: 210,
-        lookAtX: -192,
+        lookAtX: -198,
         lookAtY: 420,
         lookAtZ: 0,
         snowDensity: 0,
@@ -107,6 +108,88 @@ export default class AnimateCamera {
       this.debugFolder = this.debug.ui.addFolder("🎬 Camera Animation");
       this.debugFolder.close();
       this.setDebug();
+    }
+
+    if (this.phone.active) {
+      this.cameraPositions = [
+        {
+          x: 90,
+          y: 7.7,
+          z: 123,
+          lookAtX: -131,
+          lookAtY: -20.7,
+          lookAtZ: -300,
+          snowDensity: 0,
+          snowSpeed: 0.005,
+          snowSize: 5,
+        },
+        {
+          x: 0,
+          y: 20,
+          z: 124,
+          lookAtX: -66.5,
+          lookAtY: 16,
+          lookAtZ: -300,
+          snowDensity: 0,
+          snowSpeed: 0.005,
+          snowSize: 5,
+        },
+        {
+          x: -101,
+          y: 66,
+          z: 97,
+          lookAtX: -16,
+          lookAtY: 105,
+          lookAtZ: -300,
+          snowDensity: 0,
+          snowSpeed: 0.008,
+          snowSize: 5,
+        },
+        {
+          x: -172,
+          y: 219,
+          z: 117,
+          lookAtX: -190,
+          lookAtY: 183,
+          lookAtZ: -300,
+          snowDensity: 0.5,
+          snowSpeed: 0.008,
+          snowSize: 5,
+        },
+        {
+          x: -198,
+          y: 332,
+          z: 210,
+          lookAtX: -198,
+          lookAtY: 344,
+          lookAtZ: 0,
+          snowDensity: 1,
+          snowSpeed: 0.01,
+          snowSize: 10,
+        },
+        {
+          x: -198,
+          y: 400,
+          z: 210,
+          lookAtX: -198,
+          lookAtY: 400,
+          lookAtZ: 0,
+          snowDensity: 0.5,
+          snowSpeed: 0.009,
+          snowSize: 1,
+        },
+        {
+          x: -198,
+          y: 420,
+          z: 210,
+          lookAtX: -198,
+          lookAtY: 420,
+          lookAtZ: 0,
+          snowDensity: 0,
+          snowSpeed: 0.009,
+          snowSize: 1,
+        },
+      ];
     }
 
     this.animateScroll();
@@ -271,13 +354,11 @@ export default class AnimateCamera {
           y: this.cameraPositions[this.currentSection].lookAtY,
           z: this.cameraPositions[this.currentSection].lookAtZ,
           onUpdate: () => {
-            requestAnimationFrame(() => {
-              this.camera.lookAt(
-                this.cameraLookAt.x,
-                this.cameraLookAt.y,
-                this.cameraLookAt.z
-              );
-            });
+            this.camera.lookAt(
+              this.cameraLookAt.x,
+              this.cameraLookAt.y,
+              this.cameraLookAt.z
+            );
           },
         });
         //snow

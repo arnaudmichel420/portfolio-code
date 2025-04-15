@@ -83,21 +83,41 @@ body {
   align-items: center;
   height: 100vh;
   width: 100vw;
-  svg path {
-    stroke: white;
-    stroke-width: 15px;
-    stroke-dasharray: 1400px;
-    stroke-dashoffset: 1400px;
-  }
-  h2 {
-    color: white;
-    position: absolute;
-    font-family: "Brooklyn";
-    font-weight: 400;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
 }
+.loading-bar svg {
+  width: 400px;
+  height: 150px;
+}
+svg path {
+  stroke: white;
+  stroke-width: 15px;
+  stroke-dasharray: 1400px;
+  stroke-dashoffset: 1400px;
+}
+h2 {
+  color: white;
+  position: absolute;
+  font-family: "Brooklyn";
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.loading-bar svg path {
+  stroke: white;
+  stroke-width: 15px;
+  stroke-dasharray: 1400px;
+  stroke-dashoffset: 1400px;
+}
+.loading-bar h2 {
+  color: white;
+  position: absolute;
+  font-family: "Brooklyn";
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 .scrollUi {
   width: 50px;
   height: 75px;

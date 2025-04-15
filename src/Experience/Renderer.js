@@ -10,9 +10,9 @@ import {
   SMAAPreset,
   OutlineEffect,
   BlendFunction,
-  BrightnessContrastEffect,
-  HueSaturationEffect,
-  ToneMappingEffect,
+  // BrightnessContrastEffect,
+  // HueSaturationEffect,
+  // ToneMappingEffect,
   ToneMappingMode,
   LUT3DEffect,
   LookupTexture,
@@ -137,93 +137,93 @@ export default class Renderer {
       .onChange((value) => {
         this.outlineEffect.hiddenEdgeColor.set(new THREE.Color(value));
       });
-    this.colorFolder = this.debugFolder.addFolder("Color");
-    this.colorFolder.close();
-    this.colorFolder
-      .add(this.parameters, "colorBlendFunction", Object.keys(BlendFunction))
-      .onChange((value) => {
-        this.colorEffect.blendMode.blendFunction = BlendFunction[value];
-      });
-    this.colorFolder
-      .add(this.parameters, "colorBrightness")
-      .min(-1)
-      .max(1)
-      .step(0.01)
-      .onChange(() => {
-        this.colorEffect.brightness = this.parameters.colorBrightness;
-      });
-    this.colorFolder
-      .add(this.parameters, "colorContrast")
-      .min(-1)
-      .max(1)
-      .step(0.01)
-      .onChange(() => {
-        this.colorEffect.contrast = this.parameters.colorContrast;
-      });
-    this.colorFolder
-      .add(this.parameters, "hueBlendFunction", Object.keys(BlendFunction))
-      .onChange((value) => {
-        this.hueSaturationEffect.blendMode.blendFunction = BlendFunction[value];
-      });
-    this.colorFolder
-      .add(this.parameters, "colorHue")
-      .min(-1)
-      .max(1)
-      .step(0.001)
-      .onChange(() => {
-        this.hueSaturationEffect.hue = this.parameters.colorHue;
-      });
-    this.colorFolder
-      .add(this.parameters, "colorSaturation")
-      .min(-1)
-      .max(1)
-      .step(0.001)
-      .onChange(() => {
-        this.hueSaturationEffect.saturation = this.parameters.colorSaturation;
-      });
-    this.toneMappingFolder = this.debugFolder.addFolder("ToneMapping");
-    this.toneMappingFolder.close();
-    this.toneMappingFolder
-      .add(
-        this.parameters,
-        "toneMappingBlendFunction",
-        Object.keys(BlendFunction)
-      )
-      .onChange((value) => {
-        this.toneMappingEffect.blendMode.blendFunction = BlendFunction[value];
-      });
-    this.toneMappingFolder
-      .add(this.parameters, "toneMappingMode", Object.keys(ToneMappingMode))
-      .onChange((value) => {
-        this.toneMappingEffect.mode = ToneMappingMode[value];
-      });
-    this.toneMappingFolder
-      .add(this.parameters, "toneMappingWhitePoint")
-      .min(0)
-      .max(20)
-      .step(0.001)
-      .onChange(() => {
-        this.toneMappingEffect.whitePoint =
-          this.parameters.toneMappingWhitePoint;
-      });
-    this.toneMappingFolder
-      .add(this.parameters, "toneMappingMiddleGrey")
-      .min(0)
-      .max(20)
-      .step(0.001)
-      .onChange(() => {
-        this.toneMappingEffect.middleGrey =
-          this.parameters.toneMappingMiddleGrey;
-      });
-    this.toneMappingFolder
-      .add(this.parameters, "toneMappingMaxLuminance")
-      .min(0)
-      .max(20)
-      .step(0.001)
-      .onChange(() => {
-        this.toneMappingEffect.maxLuminance =
-          this.parameters.toneMappingMaxLuminance;
-      });
+    // this.colorFolder = this.debugFolder.addFolder("Color");
+    // this.colorFolder.close();
+    // this.colorFolder
+    //   .add(this.parameters, "colorBlendFunction", Object.keys(BlendFunction))
+    //   .onChange((value) => {
+    //     this.colorEffect.blendMode.blendFunction = BlendFunction[value];
+    //   });
+    // this.colorFolder
+    //   .add(this.parameters, "colorBrightness")
+    //   .min(-1)
+    //   .max(1)
+    //   .step(0.01)
+    //   .onChange(() => {
+    //     this.colorEffect.brightness = this.parameters.colorBrightness;
+    //   });
+    // this.colorFolder
+    //   .add(this.parameters, "colorContrast")
+    //   .min(-1)
+    //   .max(1)
+    //   .step(0.01)
+    //   .onChange(() => {
+    //     this.colorEffect.contrast = this.parameters.colorContrast;
+    //   });
+    // this.colorFolder
+    //   .add(this.parameters, "hueBlendFunction", Object.keys(BlendFunction))
+    //   .onChange((value) => {
+    //     this.hueSaturationEffect.blendMode.blendFunction = BlendFunction[value];
+    //   });
+    // this.colorFolder
+    //   .add(this.parameters, "colorHue")
+    //   .min(-1)
+    //   .max(1)
+    //   .step(0.001)
+    //   .onChange(() => {
+    //     this.hueSaturationEffect.hue = this.parameters.colorHue;
+    //   });
+    // this.colorFolder
+    //   .add(this.parameters, "colorSaturation")
+    //   .min(-1)
+    //   .max(1)
+    //   .step(0.001)
+    //   .onChange(() => {
+    //     this.hueSaturationEffect.saturation = this.parameters.colorSaturation;
+    //   });
+    // this.toneMappingFolder = this.debugFolder.addFolder("ToneMapping");
+    // this.toneMappingFolder.close();
+    // this.toneMappingFolder
+    //   .add(
+    //     this.parameters,
+    //     "toneMappingBlendFunction",
+    //     Object.keys(BlendFunction)
+    //   )
+    //   .onChange((value) => {
+    //     this.toneMappingEffect.blendMode.blendFunction = BlendFunction[value];
+    //   });
+    // this.toneMappingFolder
+    //   .add(this.parameters, "toneMappingMode", Object.keys(ToneMappingMode))
+    //   .onChange((value) => {
+    //     this.toneMappingEffect.mode = ToneMappingMode[value];
+    //   });
+    // this.toneMappingFolder
+    //   .add(this.parameters, "toneMappingWhitePoint")
+    //   .min(0)
+    //   .max(20)
+    //   .step(0.001)
+    //   .onChange(() => {
+    //     this.toneMappingEffect.whitePoint =
+    //       this.parameters.toneMappingWhitePoint;
+    //   });
+    // this.toneMappingFolder
+    //   .add(this.parameters, "toneMappingMiddleGrey")
+    //   .min(0)
+    //   .max(20)
+    //   .step(0.001)
+    //   .onChange(() => {
+    //     this.toneMappingEffect.middleGrey =
+    //       this.parameters.toneMappingMiddleGrey;
+    //   });
+    // this.toneMappingFolder
+    //   .add(this.parameters, "toneMappingMaxLuminance")
+    //   .min(0)
+    //   .max(20)
+    //   .step(0.001)
+    //   .onChange(() => {
+    //     this.toneMappingEffect.maxLuminance =
+    //       this.parameters.toneMappingMaxLuminance;
+    //   });
   }
   setInstance() {
     this.instance = new THREE.WebGLRenderer({
@@ -256,38 +256,38 @@ export default class Renderer {
     const renderPass = new RenderPass(this.scene, this.camera.instance);
 
     //Tone mapping
-    this.toneMappingEffect = new ToneMappingEffect({
-      blendFunction: this.parameters.toneMappingBlendFunction,
-      mode: this.parameters.toneMappingMode,
-      adaptive: false,
-      resolution: 256,
-      whitePoint: this.parameters.toneMappingWhitePoint,
-      middleGrey: this.parameters.toneMappingMiddleGrey,
-      maxLuminance: this.parameters.toneMappingMaxLuminance,
-    });
+    // this.toneMappingEffect = new ToneMappingEffect({
+    //   blendFunction: this.parameters.toneMappingBlendFunction,
+    //   mode: this.parameters.toneMappingMode,
+    //   adaptive: false,
+    //   resolution: 256,
+    //   whitePoint: this.parameters.toneMappingWhitePoint,
+    //   middleGrey: this.parameters.toneMappingMiddleGrey,
+    //   maxLuminance: this.parameters.toneMappingMaxLuminance,
+    // });
 
-    this.toneMappingPass = new EffectPass(
-      this.camera.instance,
-      this.toneMappingEffect
-    );
+    // this.toneMappingPass = new EffectPass(
+    //   this.camera.instance,
+    //   this.toneMappingEffect
+    // );
 
     //Color correction
-    this.colorEffect = new BrightnessContrastEffect({
-      blendFunction: this.parameters.colorBlendFunction,
-      brightness: this.parameters.colorBrightness,
-      contrast: this.parameters.colorContrast,
-    });
-    this.colorPass = new EffectPass(this.camera.instance, this.colorEffect);
+    // this.colorEffect = new BrightnessContrastEffect({
+    //   blendFunction: this.parameters.colorBlendFunction,
+    //   brightness: this.parameters.colorBrightness,
+    //   contrast: this.parameters.colorContrast,
+    // });
+    // this.colorPass = new EffectPass(this.camera.instance, this.colorEffect);
 
-    this.hueSaturationEffect = new HueSaturationEffect({
-      blendFunction: this.parameters.hueBlendFunction,
-      hue: this.parameters.colorHue,
-      saturation: this.parameters.colorSaturation,
-    });
-    this.huePass = new EffectPass(
-      this.camera.instance,
-      this.hueSaturationEffect
-    );
+    // this.hueSaturationEffect = new HueSaturationEffect({
+    //   blendFunction: this.parameters.hueBlendFunction,
+    //   hue: this.parameters.colorHue,
+    //   saturation: this.parameters.colorSaturation,
+    // });
+    // this.huePass = new EffectPass(
+    //   this.camera.instance,
+    //   this.hueSaturationEffect
+    // );
 
     //Anti-aliasing
     const smaaEffect = new SMAAEffect({
@@ -333,9 +333,9 @@ export default class Renderer {
   addPass() {
     this.composer.addPass(this.bloomPass);
     this.composer.addPass(this.outlinePass);
-    this.composer.addPass(this.colorPass);
-    this.composer.addPass(this.huePass);
-    this.composer.addPass(this.toneMappingPass);
+    // this.composer.addPass(this.colorPass);
+    // this.composer.addPass(this.huePass);
+    // this.composer.addPass(this.toneMappingPass);
     this.composer.addPass(this.lutPass);
     this.composer.addPass(this.smaaPass);
   }
