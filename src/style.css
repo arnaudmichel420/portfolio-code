@@ -54,6 +54,7 @@
 }
 
 /* main color */
+
 :root {
   --mainColor: #3569b3;
   --blackColor: #101010;
@@ -83,41 +84,21 @@ body {
   align-items: center;
   height: 100vh;
   width: 100vw;
+  svg path {
+    stroke: white;
+    stroke-width: 15px;
+    stroke-dasharray: 1400px;
+    stroke-dashoffset: 1400px;
+  }
+  h2 {
+    color: white;
+    position: absolute;
+    font-family: "Brooklyn";
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
 }
-.loading-bar svg {
-  width: 400px;
-  height: 150px;
-}
-svg path {
-  stroke: white;
-  stroke-width: 15px;
-  stroke-dasharray: 1400px;
-  stroke-dashoffset: 1400px;
-}
-h2 {
-  color: white;
-  position: absolute;
-  font-family: "Brooklyn";
-  font-weight: 400;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.loading-bar svg path {
-  stroke: white;
-  stroke-width: 15px;
-  stroke-dasharray: 1400px;
-  stroke-dashoffset: 1400px;
-}
-.loading-bar h2 {
-  color: white;
-  position: absolute;
-  font-family: "Brooklyn";
-  font-weight: 400;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
 .scrollUi {
   width: 50px;
   height: 75px;
@@ -125,15 +106,15 @@ h2 {
   position: absolute;
   left: calc(50% - 25px);
   bottom: 0;
-  border: 2px solid var(--whiteColor);
+  border: 2px solid #ffffff;
   border-radius: 20px;
   background-color: transparent;
-  color: var(--whiteColor);
+  color: #ffffff;
   opacity: 0;
   &::after {
     content: "";
     position: absolute;
-    background-color: var(--whiteColor);
+    background-color: #ffffff;
     width: 10px;
     height: 20px;
     border-radius: 20px;
@@ -144,7 +125,7 @@ h2 {
     width: 25px;
     height: 4px;
     border-radius: 5px;
-    background-color: var(--whiteColor);
+    background-color: #ffffff;
     position: absolute;
     margin: -20px 0 0 3px;
     transform: rotate(-30deg);
@@ -154,7 +135,7 @@ h2 {
     width: 25px;
     height: 4px;
     border-radius: 5px;
-    background-color: var(--whiteColor);
+    background-color: #ffffff;
     position: absolute;
     margin: -20px 0 0 22px;
     transform: rotate(30deg);
